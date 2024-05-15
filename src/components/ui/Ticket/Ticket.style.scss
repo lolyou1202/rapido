@@ -5,7 +5,24 @@
 	&-head {
 		position: relative;
 		display: flex;
+		align-items: center;
+		justify-content: center;
 		height: 64px;
+		p {
+			font-size: 14px;
+			line-height: 16px;
+			color: var(--white);
+			text-transform: uppercase;
+			user-select: none;
+		}
+		svg {
+			position: absolute;
+			top: 50%;
+			right: 20px;
+			transform: translateY(-50%);
+			stroke: var(--white);
+			cursor: pointer;
+		}
 		&::after {
 			content: '';
 			position: absolute;
@@ -117,5 +134,24 @@
 				background-color: var(--pink);
 			}
 		}
+	}
+	&.winner {
+		& > span {
+			background: var(--gradient);
+		}
+	}
+	&-main {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		padding: 24px 16px 16px 16px;
+	}
+	&-rule {
+		display: flex;
+		flex-direction: column;
+		font-size: 14px;
+		line-height: 16px;
+		color: var(--white);
+		user-select: none;
 	}
 }

@@ -19,10 +19,11 @@
 		}
 	}
 	&-label {
-		font-weight: 700;
 		font-size: 14px;
 		line-height: 16px;
 		color: var(--white);
+		text-transform: uppercase;
+		user-select: none;
 	}
 	&.action {
 		background-color: var(--dark);
