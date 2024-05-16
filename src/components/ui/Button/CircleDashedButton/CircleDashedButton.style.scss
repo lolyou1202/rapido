@@ -1,0 +1,46 @@
+.circleDashedButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	background-color: transparent;
+	border-radius: 100%;
+	width: 48px;
+	height: 48px;
+	transition: all 0.2s ease-in-out;
+	&.default {
+		border: 2px dashed var(--gray);
+		cursor: pointer;
+		&:hover {
+			background-color: var(--shadow);
+		}
+	}
+	&.action {
+		border: 2px dashed var(--pink);
+	}
+	&.coin {
+		border: none;
+		.circleDashedButton-label {
+			color: var(--black);
+		}
+	}
+	&:disabled {
+		pointer-events: none;
+	}
+	&-coin {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+	&-label {
+		position: relative;
+		z-index: 1;
+		font-size: 14px;
+		line-height: 16px;
+		color: var(--white);
+		text-transform: uppercase;
+		user-select: none;
+		transition: all 0.2s ease-in-out;
+	}
+}

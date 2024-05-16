@@ -1,0 +1,44 @@
+.ticket__field {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	&-header {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+	&-name {
+		flex-shrink: 0;
+		font-size: 14px;
+		line-height: 16px;
+		color: var(--white);
+		user-select: none;
+		& + div {
+			position: relative;
+		}
+	}
+	&-check {
+		position: absolute;
+		transform: translateY(-50%);
+		stroke: var(--pink);
+		opacity: 0;
+		&.show {
+			opacity: 1;
+		}
+	}
+	&-cross {
+		position: absolute;
+		transform: translateY(-50%);
+		stroke: var(--pink);
+		opacity: 0;
+		&.show {
+			opacity: 1;
+		}
+	}
+	&-grid {
+		display: grid;
+		grid-template-columns: repeat(5, 48px);
+		gap: 16px;
+		justify-content: space-between;
+	}
+}

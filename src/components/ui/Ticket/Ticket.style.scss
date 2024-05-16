@@ -1,13 +1,21 @@
 .ticket {
 	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 368px;
+	height: 586px;
+	background-color: var(--dark);
+	border-radius: 12px;
 	overflow: hidden;
+	transition: all 0.2s ease-in-out;
 	&-head {
 		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		height: 64px;
+		height: 66px;
+		border-bottom: 2px dashed var(--shadow);
 		p {
 			font-size: 14px;
 			line-height: 16px;
@@ -15,13 +23,24 @@
 			text-transform: uppercase;
 			user-select: none;
 		}
-		svg {
+		span {
+			display: flex;
 			position: absolute;
 			top: 50%;
-			right: 20px;
+			right: 24px;
 			transform: translateY(-50%);
-			stroke: var(--white);
+			opacity: 0;
 			cursor: pointer;
+			transition: all 0.2s ease-in-out;
+			svg {
+				stroke: var(--shadow);
+				transition: all 0.2s ease-in-out;
+			}
+			&:hover {
+				svg {
+					stroke: var(--white);
+				}
+			}
 		}
 		&::after {
 			content: '';
@@ -50,15 +69,13 @@
 			transition: all 0.2s ease-in-out;
 		}
 	}
-	&-main {
-		height: 512px;
-	}
 	& > span {
 		display: flex;
 		flex-direction: column;
 		background-color: var(--dark);
-		border: 2px solid transparent;
-		border-radius: 12px;
+		width: calc(100% - 4px);
+		height: calc(100% - 4px);
+		border-radius: 10px;
 		transition: all 0.2s ease-in-out;
 		&::after {
 			content: '';
@@ -87,30 +104,12 @@
 			transition: all 0.2s ease-in-out;
 		}
 	}
-	&::after {
-		content: '';
-		position: absolute;
-		left: 0;
-		top: 65px;
-		z-index: 2;
-		width: 100%;
-		height: 2px;
-		background-color: var(--shadow);
-		mask-image: linear-gradient(
-			90deg,
-			transparent 4px,
-			transparent 0px,
-			black 0px,
-			black 0px
-		);
-		mask-repeat: repeat;
-		mask-size: 14px;
-	}
 	&:hover {
-		& > span {
-			border: 2px solid var(--shadow);
-		}
+		background-color: var(--shadow);
 		.ticket-head {
+			span {
+				opacity: 1;
+			}
 			&::after {
 				background-color: var(--shadow);
 			}
@@ -120,13 +119,9 @@
 		}
 	}
 	&.action {
-		& > span {
-			border: 2px solid var(--pink);
-		}
-		&::after {
-			background-color: var(--pink);
-		}
+		background-color: var(--pink);
 		.ticket-head {
+			border-bottom: 2px dashed var(--pink);
 			&::after {
 				background-color: var(--pink);
 			}
@@ -153,5 +148,12 @@
 		line-height: 16px;
 		color: var(--white);
 		user-select: none;
+	}
+	&-buttons {
+		display: flex;
+		gap: 16px;
+		button {
+			width: 100%;
+		}
 	}
 }

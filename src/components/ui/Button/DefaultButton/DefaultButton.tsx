@@ -3,18 +3,24 @@ import classNames from 'classnames'
 
 export const DefaultButton = ({
 	action,
+	disabled,
 	icon,
 	label,
 	onClick,
 }: {
-	action: boolean
-	icon: React.ReactNode
-	label: string
-	onClick: () => void
+	action?: boolean
+	disabled?: boolean
+	icon?: React.ReactNode
+	label?: string
+	onClick?: () => void
 }) => {
-	const headerButtonCN = classNames('defaultButton', { action: action })
+	const defaultButtonCN = classNames('defaultButton', { action: action })
 	return (
-		<button className={headerButtonCN} onClick={onClick}>
+		<button
+			className={defaultButtonCN}
+			disabled={disabled}
+			onClick={onClick}
+		>
 			<span className='defaultButton-icon'>{icon}</span>
 			<p className='defaultButton-label'>{label}</p>
 		</button>

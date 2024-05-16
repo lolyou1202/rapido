@@ -1,4 +1,35 @@
 .defaultButton {
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	height: 48px;
+	background-color: var(--shadow);
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+	&-icon {
+		display: flex;
+	}
+	&-label {
+		font-size: 14px;
+		line-height: 16px;
+		color: var(--white);
+		text-transform: uppercase;
+		user-select: none;
+	}
+	&:hover {
+		background-color: var(--gray);
+	}
+	&:disabled {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+	&.action {
+		background-color: var(--pink);
+		&:hover {
+			background-color: var(--pink-dark);
+		}
+	}
 }

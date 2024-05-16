@@ -1,7 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
+import ticket from './slices/ticketSlice'
 
 export const store = configureStore({
-	reducer: {},
+	reducer: {
+		ticket,
+	},
 })
 
 export type AppDispatch = typeof store.dispatch

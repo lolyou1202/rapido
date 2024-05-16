@@ -1,10 +1,10 @@
 export const Cross = ({
 	size = 16,
-	stroke,
+	color,
 	className,
 }: {
 	size?: number
-	stroke?: string
+	color?: string
 	className?: string
 }) => {
 	return (
@@ -18,7 +18,7 @@ export const Cross = ({
 		>
 			<path
 				d='M4 12L8 8M8 8L12 4M8 8L12 12M8 8L4 4'
-				stroke={stroke}
+				stroke={color}
 				strokeWidth='2'
 				strokeLinecap='round'
 				strokeLinejoin='round'
