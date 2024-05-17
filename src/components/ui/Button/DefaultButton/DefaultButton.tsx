@@ -6,23 +6,27 @@ export const DefaultButton = ({
 	disabled,
 	icon,
 	label,
+	className,
 	onClick,
 }: {
 	action?: boolean
 	disabled?: boolean
 	icon?: React.ReactNode
 	label?: string
+	className?: string
 	onClick?: () => void
 }) => {
-	const defaultButtonCN = classNames('defaultButton', { action: action })
+	const defaultButtonCN = classNames('defaultButton', className, {
+		action: action,
+	})
 	return (
 		<button
 			className={defaultButtonCN}
 			disabled={disabled}
 			onClick={onClick}
 		>
-			<span className='defaultButton-icon'>{icon}</span>
-			<p className='defaultButton-label'>{label}</p>
+			{icon && <span className='defaultButton-icon'>{icon}</span>}
+			{label && <p className='defaultButton-label'>{label}</p>}
 		</button>
 	)
 }

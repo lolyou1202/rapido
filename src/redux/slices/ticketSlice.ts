@@ -1,17 +1,17 @@
 import {
+	NUM_ADD_TICKETS,
 	NUM_CELLS_LARGE_FIELD,
 	NUM_CELLS_SMALL_FIELD,
 	NUM_DEFAULT_TICKET_IN_LIST,
 	NUM_SELECTED_CELLS_LARGE_FIELD,
 	NUM_SELECTED_CELLS_SMALL_FIELD,
 } from '../../constants/settings'
+import { fillCellsList } from '../../hooks/fillCellsList'
+import { getEmptyTicket } from '../../hooks/getEmptyTicket'
+import { getRandomNums } from '../../hooks/getRandomNums'
 import {
 	CellNum,
 	FieldId,
-	FieldLabel,
-	FieldLength,
-	FieldState,
-	FieldVariant,
 	TicketId,
 	TicketState,
 } from '../../types/ticketTypes'
@@ -21,108 +21,45 @@ export interface InitialState {
 	ticketsList: TicketState[]
 }
 
-const getEmptyField = ({
-	idField,
-	variantField,
-	labelField,
-	lengthField,
-}: {
-	idField: FieldId
-	variantField: FieldVariant
-	labelField: FieldLabel
-	lengthField: FieldLength
-}): FieldState => {
-	return {
-		variantField,
-		idField,
-		labelField,
-		numSelectedCellsField: 0,
-		isCorrectField: false,
-		cellsListField: [...Array(lengthField)].map((_, index) => ({
-			numCell: index + 1,
-			variantCell: 'default',
-		})),
-	}
-}
-
-const getEmptyTicket = ({ idTicket }: { idTicket: number }): TicketState => {
-	return {
-		idTicket,
-		isWinTicket: false,
-		isCorrectTicket: false,
-		fieldsListTicket: [
-			getEmptyField({
-				idField: 0,
-				variantField: 'large',
-				labelField: 'Поле 1',
-				lengthField: NUM_CELLS_LARGE_FIELD,
-			}),
-			getEmptyField({
-				idField: 1,
-				variantField: 'small',
-				labelField: 'Поле 2',
-				lengthField: NUM_CELLS_SMALL_FIELD,
-			}),
-		],
-	}
-}
+const randomTicketsIdList = getRandomNums({
+	min: 1000,
+	max: 9999,
+	numberRandom: NUM_DEFAULT_TICKET_IN_LIST,
+})
 
 const initialState: InitialState = {
-	ticketsList: [...Array(NUM_DEFAULT_TICKET_IN_LIST)].map((_, index) =>
-		getEmptyTicket({ idTicket: index })
-	),
+	ticketsList: randomTicketsIdList.map(id => {
+		return getEmptyTicket({ idTicket: id })
+	}),
+}
+
+const correctTicket = ({
+	state,
+	idTicket,
+}: {
+	state: InitialState
+	idTicket: TicketId
+}) => {
+	ticketSlice.caseReducers.setCorrectTicket(state, {
+		type: 'setCorrectedField',
+		payload: { idTicket },
+	})
 }
 
 const ticketSlice = createSlice({
 	name: 'ticket',
 	initialState,
 	reducers: {
-		setVariantCell: (
-			state,
-			{
-				payload,
-			}: PayloadAction<{
-				idTicket: TicketId
-				idField: FieldId
-				numCell: CellNum
-			}>
-		) => {
-			const { idTicket, idField, numCell } = payload
-
-			const indexTicket = state.ticketsList.findIndex(
-				index => index.idTicket === idTicket
-			)
-
-			const variantCell =
-				state.ticketsList[indexTicket].fieldsListTicket[idField]
-					.cellsListField[numCell].variantCell
-
-			switch (variantCell) {
-				case 'default':
-					state.ticketsList[indexTicket].fieldsListTicket[
-						idField
-					].cellsListField[numCell].variantCell = 'coin'
-					break
-				case 'coin':
-					state.ticketsList[indexTicket].fieldsListTicket[
-						idField
-					].cellsListField[numCell].variantCell = 'default'
-					break
-			}
-
-			ticketSlice.caseReducers.setCorrectedField(state, {
-				type: 'setCorrectedField',
-				payload: { idTicket },
-			})
-		},
-		setCorrectedField: (
+		setCorrectTicket: (
 			state,
 			{ payload }: PayloadAction<{ idTicket: TicketId }>
 		) => {
 			const { idTicket } = payload
-			const ticket = state.ticketsList[idTicket]
+			const ticket = state.ticketsList.find(
+				ticket => ticket.idTicket === idTicket
+			)!
 
-			for (const field of ticket.fieldsListTicket) {
+			ticket.fieldsListTicket.forEach(field => {
 				const selectedCells = field.cellsListField.reduce(
 					(selectedCells, curentCell) => {
 						if (curentCell.variantCell === 'coin') {
@@ -144,33 +81,136 @@ const ticketSlice = createSlice({
 						field.isCorrectField =
 							selectedCells === NUM_SELECTED_CELLS_SMALL_FIELD
 				}
-			}
-			ticket.isCorrectTicket = ticket.fieldsListTicket.reduce(
+			})
+
+			const isCorrectTicket = ticket.fieldsListTicket.reduce(
 				(isCorrectField, field) => {
 					return field.isCorrectField && isCorrectField
 				},
 				true
 			)
+
+			ticket.isCorrectTicket = isCorrectTicket
 		},
-		setClearTicket: (
+		setVariantCell: (
+			state,
+			{
+				payload,
+			}: PayloadAction<{
+				idTicket: TicketId
+				idField: FieldId
+				numCell: CellNum
+			}>
+		) => {
+			const { idTicket, idField, numCell } = payload
+			const ticket = state.ticketsList.find(
+				ticket => ticket.idTicket === idTicket
+			)!
+
+			const curentCell =
+				ticket.fieldsListTicket[idField].cellsListField[numCell]
+
+			switch (curentCell.variantCell) {
+				case 'default':
+					curentCell.variantCell = 'coin'
+					break
+				case 'coin':
+					curentCell.variantCell = 'default'
+					break
+			}
+
+			correctTicket({ state, idTicket })
+		},
+		clearTicket: (
 			state,
 			{ payload }: PayloadAction<{ idTicket: TicketId }>
 		) => {
 			const { idTicket } = payload
-			const ticket = state.ticketsList[idTicket]
+			const ticket = state.ticketsList.find(
+				ticket => ticket.idTicket === idTicket
+			)!
 
-			for (const field of ticket.fieldsListTicket) {
+			ticket.fieldsListTicket.forEach(field => {
 				field.cellsListField.map(cell => (cell.variantCell = 'default'))
 				field.isCorrectField = false
 				field.numSelectedCellsField = 0
-			}
+			})
 
 			ticket.isCorrectTicket = false
 			ticket.isWinTicket = false
+		},
+		randomFillTicket: (
+			state,
+			{ payload }: PayloadAction<{ idTicket: TicketId }>
+		) => {
+			const { idTicket } = payload
+			const ticket = state.ticketsList.find(
+				ticket => ticket.idTicket === idTicket
+			)!
+
+			ticket.fieldsListTicket.forEach(field => {
+				switch (field.variantField) {
+					case 'large':
+						const randomNumsListLargeField = getRandomNums({
+							min: 1,
+							max: NUM_CELLS_LARGE_FIELD,
+							numberRandom: NUM_SELECTED_CELLS_LARGE_FIELD,
+						})
+						fillCellsList({
+							cellsList: field.cellsListField,
+							randomNumsList: randomNumsListLargeField,
+						})
+						break
+					case 'small':
+						const randomNumsListSmallField = getRandomNums({
+							min: 1,
+							max: NUM_CELLS_SMALL_FIELD,
+							numberRandom: NUM_SELECTED_CELLS_SMALL_FIELD,
+						})
+						fillCellsList({
+							cellsList: field.cellsListField,
+							randomNumsList: randomNumsListSmallField,
+						})
+						break
+				}
+			})
+
+			correctTicket({ state, idTicket })
+		},
+		deleteTicket: (
+			state,
+			{ payload }: PayloadAction<{ idTicket: TicketId }>
+		) => {
+			const { idTicket } = payload
+
+			const filteredTicketList = state.ticketsList.filter(
+				ticket => ticket.idTicket !== idTicket
+			)
+			state.ticketsList = filteredTicketList
+		},
+		addTickets: state => {
+			const randomTicketsIdList = getRandomNums({
+				min: 1000,
+				max: 9999,
+				numberRandom: NUM_ADD_TICKETS,
+			})
+
+			const newEmptyTikets = randomTicketsIdList.map(id => {
+				return getEmptyTicket({ idTicket: id })
+			})
+
+			state.ticketsList.push(...newEmptyTikets)
 		},
 	},
 })
 
 const { actions, reducer } = ticketSlice
-export const { setVariantCell, setCorrectedField, setClearTicket } = actions
+export const {
+	setVariantCell,
+	setCorrectTicket,
+	clearTicket,
+	randomFillTicket,
+	deleteTicket,
+	addTickets,
+} = actions
 export default reducer

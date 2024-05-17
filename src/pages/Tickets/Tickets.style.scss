@@ -1,0 +1,102 @@
+.game {
+	&-layout {
+		position: relative;
+		display: grid;
+		grid-template-columns: 2fr 1fr;
+		gap: 16px;
+		& > span {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			padding-bottom: 16px;
+		}
+	}
+	&-ticketList {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 16px;
+	}
+	&__sidebar {
+		position: sticky;
+		top: 80px;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+}
+.sidebar__container {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding: 16px;
+	background-color: var(--dark);
+	border-radius: 12px;
+	&-buttons {
+		display: flex;
+		gap: 16px;
+		button {
+			width: 100%;
+		}
+	}
+	&-descriptionRow {
+		display: flex;
+		width: 100%;
+		p {
+			&:last-child {
+				padding-left: 6px;
+			}
+			&:first-child {
+				padding-right: 6px;
+			}
+		}
+		span {
+			position: relative;
+			width: 100%;
+			overflow: hidden;
+			&::after {
+				content: '.....................................................';
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 6px;
+				flex-shrink: 0;
+				font-size: 14px;
+				line-height: 0px;
+				letter-spacing: 2px;
+				color: var(--shadow);
+				text-transform: uppercase;
+				user-select: none;
+			}
+		}
+	}
+	&-controlRow {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		& > span {
+			display: grid;
+			grid-template-columns: repeat(3, 32px);
+			grid-template-rows: 32px;
+			gap: 4px;
+			align-items: center;
+			button {
+				height: 100%;
+			}
+			p {
+				display: flex;
+				justify-content: center;
+			}
+		}
+	}
+	p {
+		flex-shrink: 0;
+		font-size: 14px;
+		line-height: 16px;
+		color: var(--white);
+		user-select: none;
+	}
+	& + button {
+		width: 100%;
+	}
+}

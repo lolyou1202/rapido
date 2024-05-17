@@ -8,7 +8,9 @@ import {
 } from '../../../types/ticketTypes'
 import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
 import {
-	setClearTicket,
+	clearTicket,
+	deleteTicket,
+	randomFillTicket,
 	setVariantCell,
 } from '../../../redux/slices/ticketSlice'
 import { TicketField } from './TicketField/TicketField'
@@ -31,18 +33,29 @@ export const Ticket = ({ ticketState }: { ticketState: TicketState }) => {
 
 	const dispatch = useAppDispatch()
 
+	const handleClickCell = ({ idTicket }: { idTicket: TicketId }) => {
+		return ({
+			numCell,
+			idField,
+		}: {
+			numCell: CellNum
+			idField: FieldId
+		}) => {
+			dispatch(setVariantCell({ idTicket, numCell, idField }))
+		}
+	}
+	const handleClickClearButton = () => {
+		dispatch(clearTicket({ idTicket }))
+	}
+	const handleClickRandomButton = () => {
+		dispatch(randomFillTicket({ idTicket }))
+	}
+	const handleClickDeleteButton = () => {
+		dispatch(deleteTicket({ idTicket }))
+	}
 	const isSelectedCells = isSelectedCellsInField({
 		fieldsListTicket,
 	})
-
-	const handleClickCell =
-		({ idTicket }: { idTicket: TicketId }) =>
-		({ numCell, idField }: { numCell: CellNum; idField: FieldId }) =>
-			dispatch(setVariantCell({ idTicket, numCell, idField }))
-
-	const handleClickClearButton = () => {
-		dispatch(setClearTicket({ idTicket }))
-	}
 	const ticketCN = classNames('ticket', {
 		action: isCorrectTicket,
 		winner: isWinTicket,
@@ -53,7 +66,7 @@ export const Ticket = ({ ticketState }: { ticketState: TicketState }) => {
 			<span>
 				<div className='ticket-head'>
 					<p>Заполните билет</p>
-					<span>
+					<span onClick={handleClickDeleteButton}>
 						<Cross />
 					</span>
 				</div>
@@ -80,6 +93,7 @@ export const Ticket = ({ ticketState }: { ticketState: TicketState }) => {
 							action={false}
 							label='Случайно'
 							icon={<Dice color={white} />}
+							onClick={handleClickRandomButton}
 						/>
 						<DefaultButton
 							action={false}
