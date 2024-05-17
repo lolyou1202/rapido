@@ -1,0 +1,7 @@
+export const NUM_DEFAULT_TICKET_IN_LIST = 4
+
+export const NUM_CELLS_LARGE_FIELD = 20
+export const NUM_CELLS_SMALL_FIELD = 4
+
+export const NUM_SELECTED_CELLS_LARGE_FIELD = 8
+export const NUM_SELECTED_CELLS_SMALL_FIELD = 1

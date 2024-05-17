@@ -1,49 +1,94 @@
 import './TicketField.style.scss'
 import classNames from 'classnames'
-import { FieldNum, FieldState } from '../../../../redux/slices/ticketSlice'
+import {
+	CellNum,
+	FieldCellsList,
+	FieldCorrected,
+	FieldId,
+	FieldLabel,
+	FieldNumSelectedCells,
+	FieldVariant,
+} from '../../../../types/ticketTypes'
 import { Check } from '../../../icons/Check'
 import { Cross } from '../../../icons/Cross'
 import { CircleDashedButton } from '../../Button/CircleDashedButton/CircleDashedButton'
 import { ProgressBar } from '../ProgressBar/ProgressBar'
+import { NUM_SELECTED_CELLS_LARGE_FIELD } from '../../../../constants/settings'
 
 export const TicketField = ({
-	label,
-	fieldState,
-	fieldNum = 'large',
+	idField,
+	variantField,
+	labelField,
+	numSelectedCellsField,
+	isCorrectField,
+	cellsListField,
+	onClickCell,
 }: {
-	label: string
-	fieldState: FieldState
-	fieldNum?: FieldNum
+	idField?: FieldId
+	variantField: FieldVariant
+	labelField: FieldLabel
+	numSelectedCellsField?: FieldNumSelectedCells
+	isCorrectField?: FieldCorrected
+	cellsListField: FieldCellsList
+	onClickCell?: ({
+		numCell,
+		idField,
+	}: {
+		numCell: CellNum
+		idField: FieldId
+	}) => void
 }) => {
-	const { cells, isCorrect, numSelectedCells } = fieldState
-
 	const checkCN = classNames('ticket__field-check', {
-		show: isCorrect,
+		show: isCorrectField,
 	})
 
-	const crossCN = classNames('ticket__field-cross', {
-		show:
-			(fieldNum === 'large' && !isCorrect && isCorrect !== null) ||
-			(fieldNum === 'small' && !isCorrect && isCorrect !== null),
-	})
+	const crossCN = classNames(
+		'ticket__field-cross',
+		numSelectedCellsField && {
+			show:
+				(variantField === 'large' &&
+					!isCorrectField &&
+					numSelectedCellsField > NUM_SELECTED_CELLS_LARGE_FIELD) ||
+				(variantField === 'small' &&
+					!isCorrectField &&
+					numSelectedCellsField !== 0),
+		}
+	)
 
 	return (
 		<div className='ticket__field'>
 			<div className='ticket__field-header'>
-				<p className='ticket__field-name'>{label}</p>
+				<p className='ticket__field-name'>{labelField}</p>
 				<div>
 					<Check className={checkCN} />
 					<Cross className={crossCN} />
 				</div>
-				{fieldNum === 'large' && numSelectedCells < 8 && (
-					<ProgressBar progress={numSelectedCells} length={8} />
-				)}
+				{numSelectedCellsField !== undefined
+					? variantField === 'large' &&
+					  numSelectedCellsField <
+							NUM_SELECTED_CELLS_LARGE_FIELD && (
+							<ProgressBar
+								progress={numSelectedCellsField}
+								length={NUM_SELECTED_CELLS_LARGE_FIELD}
+							/>
+					  )
+					: undefined}
 			</div>
 			<div className='ticket__field-grid'>
-				{cells.map(cell => (
+				{cellsListField.map(cell => (
 					<CircleDashedButton
-						key={cell.index}
-						label={`${cell.index}`}
+						key={cell.numCell}
+						label={`${cell.numCell}`}
+						variant={cell.variantCell}
+						onClick={
+							onClickCell && idField !== undefined
+								? () =>
+										onClickCell({
+											numCell: cell.numCell - 1,
+											idField,
+										})
+								: undefined
+						}
 					/>
 				))}
 			</div>

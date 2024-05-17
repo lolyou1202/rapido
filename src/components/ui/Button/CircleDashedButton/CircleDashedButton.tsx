@@ -1,20 +1,20 @@
 import './CircleDashedButton.style.scss'
-import { CellVariant } from '../../../../types/ticket'
 import classNames from 'classnames'
+import { CellVariant } from '../../../../types/ticketTypes'
 import { Coin } from '../../../icons/Coin'
 
 export const CircleDashedButton = ({
-	state = 'default',
+	variant = 'default',
 	disabled = false,
 	label,
 	onClick,
 }: {
-	state?: CellVariant
+	variant?: CellVariant
 	disabled?: boolean
 	label?: string
 	onClick?: () => void
 }) => {
-	const circleDashedButtonCN = classNames('circleDashedButton', state)
+	const circleDashedButtonCN = classNames('circleDashedButton', variant)
 	return (
 		<button
 			className={circleDashedButtonCN}
@@ -22,7 +22,7 @@ export const CircleDashedButton = ({
 			onClick={onClick}
 		>
 			<p className='circleDashedButton-label'>{label}</p>
-			{state === 'coin' && <Coin className='circleDashedButton-coin' />}
+			{variant === 'coin' && <Coin className='circleDashedButton-coin' />}
 		</button>
 	)
 }

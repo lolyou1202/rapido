@@ -1,18 +1,51 @@
 import './Ticket.style.scss'
 import classNames from 'classnames'
-import { TicketState } from '../../../redux/slices/ticketSlice'
+import {
+	CellNum,
+	FieldId,
+	TicketId,
+	TicketState,
+} from '../../../types/ticketTypes'
+import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
+import {
+	setClearTicket,
+	setVariantCell,
+} from '../../../redux/slices/ticketSlice'
+import { TicketField } from './TicketField/TicketField'
+import { DefaultButton } from '../Button/DefaultButton/DefaultButton'
 import { Cross } from '../../icons/Cross'
 import { Dice } from '../../icons/Dice'
-import { DefaultButton } from '../Button/DefaultButton/DefaultButton'
 import { Clear } from '../../icons/Clear'
-import { TicketField } from './TicketField/TicketField'
+import {
+	NUM_SELECTED_CELLS_LARGE_FIELD,
+	NUM_SELECTED_CELLS_SMALL_FIELD,
+} from '../../../constants/settings'
+import { colorTokens } from '../../../constants/colorTokens'
+import { isSelectedCellsInField } from '../../../hooks/isSelectedCellsInField'
+
+const { white } = colorTokens
 
 export const Ticket = ({ ticketState }: { ticketState: TicketState }) => {
-	const { isWin, isCorrect, fieldsState } = ticketState
+	const { idTicket, isCorrectTicket, isWinTicket, fieldsListTicket } =
+		ticketState
 
+	const dispatch = useAppDispatch()
+
+	const isSelectedCells = isSelectedCellsInField({
+		fieldsListTicket,
+	})
+
+	const handleClickCell =
+		({ idTicket }: { idTicket: TicketId }) =>
+		({ numCell, idField }: { numCell: CellNum; idField: FieldId }) =>
+			dispatch(setVariantCell({ idTicket, numCell, idField }))
+
+	const handleClickClearButton = () => {
+		dispatch(setClearTicket({ idTicket }))
+	}
 	const ticketCN = classNames('ticket', {
-		action: isCorrect,
-		winner: isWin,
+		action: isCorrectTicket,
+		winner: isWinTicket,
 	})
 
 	return (
@@ -26,30 +59,34 @@ export const Ticket = ({ ticketState }: { ticketState: TicketState }) => {
 				</div>
 				<div className='ticket-main'>
 					<p className='ticket-rule'>
-						<span>Выберите 8 чисел в первом поле</span>
-						<span>и 1 число во втором поле</span>
+						<span>
+							Выберите {NUM_SELECTED_CELLS_LARGE_FIELD} чисел в
+							первом поле
+						</span>
+						<span>
+							и {NUM_SELECTED_CELLS_SMALL_FIELD} число во втором
+							поле
+						</span>
 					</p>
-					<TicketField
-						label='Поле 1'
-						fieldNum='large'
-						fieldState={fieldsState.first}
-					/>
-					<TicketField
-						label='Поле 2'
-						fieldNum='small'
-						fieldState={fieldsState.second}
-					/>
+					{fieldsListTicket.map(field => (
+						<TicketField
+							key={field.idField}
+							{...field}
+							onClickCell={handleClickCell({ idTicket })}
+						/>
+					))}
 					<div className='ticket-buttons'>
 						<DefaultButton
 							action={false}
-							icon={<Dice color='var(--white)' />}
 							label='Случайно'
+							icon={<Dice color={white} />}
 						/>
 						<DefaultButton
 							action={false}
-							disabled
-							icon={<Clear color='var(--white)' />}
+							disabled={!isSelectedCells}
 							label='Очистить'
+							icon={<Clear color={white} />}
+							onClick={handleClickClearButton}
 						/>
 					</div>
 				</div>
