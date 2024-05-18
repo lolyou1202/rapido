@@ -5,8 +5,7 @@ import { Ticket } from '../../components/ui/Ticket/Ticket'
 import { DefaultButton } from '../../components/ui/Button/DefaultButton/DefaultButton'
 import { Add } from '../../components/icons/Add'
 import { addTickets } from '../../redux/slices/ticketSlice'
-import { Minus } from '../../components/icons/Minus'
-import { Plus } from '../../components/icons/Plus'
+import { SidebarControls } from '../../components/features/SidebarControls/SidebarControls'
 
 const { white } = colorTokens
 
@@ -16,7 +15,7 @@ export const Tickets = () => {
 	const dispatch = useAppDispatch()
 
 	const handleClickAddTicketsButton = () => {
-		dispatch(addTickets())
+		dispatch(addTickets({ countToAdd: 'default' }))
 	}
 
 	return (
@@ -35,44 +34,8 @@ export const Tickets = () => {
 				/>
 			</span>
 			<span>
-				<div className='game__sidebar'>
-					<div className='sidebar__container'>
-						<div className='sidebar__container-controlRow'>
-							<p>Случайно заполнить</p>
-							<span>
-								<DefaultButton
-									action={false}
-									disabled={true}
-									icon={<Minus color={white} />}
-									onClick={() => {}}
-								/>
-								<p>12</p>
-								<DefaultButton
-									action={false}
-									disabled={false}
-									icon={<Plus color={white} />}
-									onClick={() => {}}
-								/>
-							</span>
-						</div>
-						<div className='sidebar__container-descriptionRow'>
-							<p>Заполненных билетов</p>
-							<span></span>
-							<p>1</p>
-						</div>
-						<div className='sidebar__container-buttons'>
-							<DefaultButton
-								action={false}
-								label='Заполнить'
-								onClick={() => {}}
-							/>
-							<DefaultButton
-								action={false}
-								label='Очистить все'
-								onClick={() => {}}
-							/>
-						</div>
-					</div>
+				<div className='game-sidebar'>
+					<SidebarControls ticketsList={ticketsList} />
 					<DefaultButton
 						action
 						label='Выпустить тираж'

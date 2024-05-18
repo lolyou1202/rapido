@@ -1,0 +1,22 @@
+.sidebar-controlRow {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	& > span {
+		display: grid;
+		grid-template-columns: repeat(3, 32px);
+		grid-template-rows: 32px;
+		gap: 4px;
+		align-items: center;
+		button {
+			height: 100%;
+		}
+	}
+	p {
+		text-align: center;
+		user-select: none;
+		font-size: 14px;
+		line-height: 16px;
+		color: var(--white);
+	}
+}
