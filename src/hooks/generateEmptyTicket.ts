@@ -3,9 +3,9 @@ import {
 	NUM_CELLS_SMALL_FIELD,
 } from '../constants/settings'
 import { TicketState } from '../types/ticketTypes'
-import { getEmptyField } from './getEmptyField'
+import { generateEmptyField } from './generateEmptyField'
 
-export const getEmptyTicket = ({
+export const generateEmptyTicket = ({
 	idTicket,
 }: {
 	idTicket: number
@@ -15,13 +15,13 @@ export const getEmptyTicket = ({
 		isWinTicket: false,
 		isCorrectTicket: false,
 		fieldsListTicket: [
-			getEmptyField({
+			generateEmptyField({
 				idField: 0,
 				variantField: 'large',
 				labelField: 'Поле 1',
 				lengthField: NUM_CELLS_LARGE_FIELD,
 			}),
-			getEmptyField({
+			generateEmptyField({
 				idField: 1,
 				variantField: 'small',
 				labelField: 'Поле 2',

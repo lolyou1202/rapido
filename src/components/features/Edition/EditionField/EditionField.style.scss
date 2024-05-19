@@ -1,0 +1,17 @@
+.edition__field {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	&-title {
+		font-size: 14px;
+		line-height: 16px;
+		color: var(--white);
+		text-transform: uppercase;
+		user-select: none;
+	}
+	&-content {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+}

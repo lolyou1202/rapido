@@ -11,6 +11,10 @@ import {
 	clearAllTickets,
 	randomFillSeveralTickets,
 } from '../../../redux/slices/ticketSlice'
+import {
+	NUM_MAX_FILL_TICKETS,
+	NUM_MIN_FILL_TICKETS,
+} from '../../../constants/settings'
 
 export const SidebarControls = ({
 	ticketsList,
@@ -38,34 +42,35 @@ export const SidebarControls = ({
 	}
 
 	return (
-		<SidebarContainer className='sidebar-controls'>
-			<>
-				<SidebarControlRow
-					description='Случайно заполнить'
-					countToFill={countToFill}
-					minAdd={1}
-					maxAdd={10}
-					onClickMinus={handleClickMinus}
-					onClickPlus={handleClickPlus}
+		<SidebarContainer
+			classNameContainerRoot='sidebar-controls'
+			classNameContainerContent='controls-content'
+		>
+			<SidebarControlRow
+				description='Случайно заполнить'
+				countToFill={countToFill}
+				minAdd={NUM_MIN_FILL_TICKETS}
+				maxAdd={NUM_MAX_FILL_TICKETS}
+				onClickMinus={handleClickMinus}
+				onClickPlus={handleClickPlus}
+			/>
+			<SidebarDescriptionRow
+				description='Заполненных билетов'
+				count={numCorrectTicket}
+			/>
+			<div className='sidebar__container-buttons'>
+				<DefaultButton
+					action={false}
+					label='Заполнить'
+					onClick={handleClickFillTicketsButton}
 				/>
-				<SidebarDescriptionRow
-					description='Заполненных билетов'
-					count={numCorrectTicket}
+				<DefaultButton
+					action={false}
+					disabled={numCorrectTicket === 0}
+					label='Очистить все'
+					onClick={handleClickClearAllTicketsButton}
 				/>
-				<div className='sidebar__container-buttons'>
-					<DefaultButton
-						action={false}
-						label='Заполнить'
-						onClick={handleClickFillTicketsButton}
-					/>
-					<DefaultButton
-						action={false}
-						disabled={numCorrectTicket === 0}
-						label='Очистить все'
-						onClick={handleClickClearAllTicketsButton}
-					/>
-				</div>
-			</>
+			</div>
 		</SidebarContainer>
 	)
 }

@@ -1,4 +1,4 @@
-export const getRandomNums = ({
+export const generateRandomNums = ({
 	min,
 	max,
 	numberRandom,

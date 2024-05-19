@@ -1,6 +1,6 @@
 import { TicketState } from '../types/ticketTypes'
 
-export const getIdUncorrectTickets = ({
+export const findIdUncorrectTickets = ({
 	ticketsList,
 }: {
 	ticketsList: TicketState[]

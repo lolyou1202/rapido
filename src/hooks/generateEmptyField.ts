@@ -6,7 +6,7 @@ import {
 	FieldVariant,
 } from '../types/ticketTypes'
 
-export const getEmptyField = ({
+export const generateEmptyField = ({
 	idField,
 	variantField,
 	labelField,

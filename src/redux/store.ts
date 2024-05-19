@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import ticket from './slices/ticketSlice'
+import game from './slices/game'
 
 export const store = configureStore({
 	reducer: {
 		ticket,
+		game,
 	},
 })
 

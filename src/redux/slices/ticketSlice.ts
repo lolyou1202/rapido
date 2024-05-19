@@ -7,22 +7,31 @@ import {
 	NUM_SELECTED_CELLS_SMALL_FIELD,
 } from '../../constants/settings'
 import { fillCellsList } from '../../hooks/fillCellsList'
-import { getEmptyTicket } from '../../hooks/getEmptyTicket'
-import { getIdUncorrectTickets } from '../../hooks/getIdUncorrectTickets'
-import { getRandomNums } from '../../hooks/getRandomNums'
+import { generateEmptyTicket } from '../../hooks/generateEmptyTicket'
+import { findIdUncorrectTickets } from '../../hooks/findIdUncorrectTickets'
+import { generateRandomNums } from '../../hooks/generateRandomNums'
 import {
 	CellNum,
 	FieldId,
+	FieldVariant,
 	TicketId,
 	TicketState,
 } from '../../types/ticketTypes'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { correctTicketReducer } from '../reducers/correctTicketReducer'
+import { clearTicketReducer } from '../reducers/clearTicketReducer'
+import { addTicketsReducer } from '../reducers/addTicketsReducer'
+import { randomFillTicketReducer } from '../reducers/randomFillTicketReducer'
 
 export interface InitialState {
 	ticketsList: TicketState[]
+	droppedNums: {
+		variantField: FieldVariant
+		cellsListField: number[]
+	}[]
 }
 
-const defaultRandomTicketsIdList = getRandomNums({
+const defaultRandomTicketsIdList = generateRandomNums({
 	min: 1000,
 	max: 9999,
 	numberRandom: NUM_DEFAULT_TICKET_IN_LIST,
@@ -30,60 +39,12 @@ const defaultRandomTicketsIdList = getRandomNums({
 
 const initialState: InitialState = {
 	ticketsList: defaultRandomTicketsIdList.map(id => {
-		return getEmptyTicket({ idTicket: id })
+		return generateEmptyTicket({ idTicket: id })
 	}),
+	droppedNums: [],
 }
 
-const correctTicketReducer = ({
-	state,
-	idTicket,
-}: {
-	state: InitialState
-	idTicket: TicketId
-}) => {
-	ticketSlice.caseReducers.setCorrectTicket(state, {
-		type: 'setCorrectedField',
-		payload: { idTicket },
-	})
-}
-const clearTicketReducer = ({
-	state,
-	idTicket,
-}: {
-	state: InitialState
-	idTicket: TicketId
-}) => {
-	ticketSlice.caseReducers.clearTicket(state, {
-		type: 'clearTicket',
-		payload: { idTicket: idTicket },
-	})
-}
-const randomFillTicketReducer = ({
-	state,
-	idTicket,
-}: {
-	state: InitialState
-	idTicket: TicketId
-}) => {
-	ticketSlice.caseReducers.randomFillTicket(state, {
-		type: 'randomFillTicket',
-		payload: { idTicket: idTicket },
-	})
-}
-const addTicketsReducer = ({
-	state,
-	countToAdd,
-}: {
-	state: InitialState
-	countToAdd: number
-}) => {
-	ticketSlice.caseReducers.addTickets(state, {
-		type: 'addTickets',
-		payload: { countToAdd },
-	})
-}
-
-const ticketSlice = createSlice({
+export const ticketSlice = createSlice({
 	name: 'ticket',
 	initialState,
 	reducers: {
@@ -188,7 +149,7 @@ const ticketSlice = createSlice({
 			ticket.fieldsListTicket.forEach(field => {
 				switch (field.variantField) {
 					case 'large':
-						const randomNumsListLargeField = getRandomNums({
+						const randomNumsListLargeField = generateRandomNums({
 							min: 1,
 							max: NUM_CELLS_LARGE_FIELD,
 							numberRandom: NUM_SELECTED_CELLS_LARGE_FIELD,
@@ -202,7 +163,7 @@ const ticketSlice = createSlice({
 						})
 						break
 					case 'small':
-						const randomNumsListSmallField = getRandomNums({
+						const randomNumsListSmallField = generateRandomNums({
 							min: 1,
 							max: NUM_CELLS_SMALL_FIELD,
 							numberRandom: NUM_SELECTED_CELLS_SMALL_FIELD,
@@ -237,7 +198,7 @@ const ticketSlice = createSlice({
 		) => {
 			const { countToAdd } = payload
 
-			const randomTicketsIdList = getRandomNums({
+			const randomTicketsIdList = generateRandomNums({
 				min: 1000,
 				max: 9999,
 				numberRandom:
@@ -250,7 +211,7 @@ const ticketSlice = createSlice({
 			})
 
 			const newEmptyTikets = randomTicketsIdList.map(id => {
-				return getEmptyTicket({ idTicket: id })
+				return generateEmptyTicket({ idTicket: id })
 			})
 
 			state.ticketsList.push(...newEmptyTikets)
@@ -269,7 +230,7 @@ const ticketSlice = createSlice({
 		) => {
 			const { countToFill } = payload
 
-			let idList = getIdUncorrectTickets({
+			let idList = findIdUncorrectTickets({
 				ticketsList: state.ticketsList,
 			})
 
@@ -278,7 +239,7 @@ const ticketSlice = createSlice({
 					state,
 					countToAdd: countToFill - idList.length,
 				})
-				idList = getIdUncorrectTickets({
+				idList = findIdUncorrectTickets({
 					ticketsList: state.ticketsList,
 				})
 			} else {

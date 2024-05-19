@@ -5,25 +5,25 @@ import {
 	FieldId,
 	TicketId,
 	TicketState,
-} from '../../../types/ticketTypes'
-import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
+} from '../../../../types/ticketTypes'
+import { useAppDispatch } from '../../../../redux/hooks/useAppRedux'
 import {
 	clearTicket,
 	deleteTicket,
 	randomFillTicket,
 	setVariantCell,
-} from '../../../redux/slices/ticketSlice'
-import { TicketField } from './TicketField/TicketField'
-import { DefaultButton } from '../Button/DefaultButton/DefaultButton'
-import { Cross } from '../../icons/Cross'
-import { Dice } from '../../icons/Dice'
-import { Clear } from '../../icons/Clear'
+} from '../../../../redux/slices/ticketSlice'
+import { TicketField } from '../TicketField/TicketField'
+import { DefaultButton } from '../../Button/DefaultButton/DefaultButton'
+import { Cross } from '../../../icons/Cross'
+import { Dice } from '../../../icons/Dice'
+import { Clear } from '../../../icons/Clear'
 import {
 	NUM_SELECTED_CELLS_LARGE_FIELD,
 	NUM_SELECTED_CELLS_SMALL_FIELD,
-} from '../../../constants/settings'
-import { colorTokens } from '../../../constants/colorTokens'
-import { isSelectedCellsInField } from '../../../hooks/isSelectedCellsInField'
+} from '../../../../constants/settings'
+import { colorTokens } from '../../../../constants/colorTokens'
+import { isSelectedCellsInField } from '../../../../hooks/isSelectedCellsInField'
 
 const { white } = colorTokens
 

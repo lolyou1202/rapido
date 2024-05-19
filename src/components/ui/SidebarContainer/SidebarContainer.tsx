@@ -4,17 +4,26 @@ import classNames from 'classnames'
 export const SidebarContainer = ({
 	title,
 	children,
-	className,
+	classNameContainerRoot,
+	classNameContainerContent,
 }: {
 	title?: string
-	className?: string
+	classNameContainerRoot?: string
+	classNameContainerContent?: string
 	children?: React.ReactNode
 }) => {
-	const containerCN = classNames('sidebar__container', className)
+	const containerRootCN = classNames(
+		'sidebar__container',
+		classNameContainerRoot
+	)
+	const containerContentCN = classNames(
+		'sidebar__container-content',
+		classNameContainerContent
+	)
 	return (
-		<div className={containerCN}>
+		<div className={containerRootCN}>
 			{title && <p className='sidebar__container-title'>{title}</p>}
-			<div className='sidebar__container-content'>{children}</div>
+			<div className={containerContentCN}>{children}</div>
 		</div>
 	)
 }
