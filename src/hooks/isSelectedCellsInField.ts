@@ -1,11 +1,11 @@
-import { TicketFieldsList } from '../types/ticketTypes'
+import { TicketFields } from '../types/ticketTypes'
 
 export const isSelectedCellsInField = ({
-	fieldsListTicket,
+	fieldsTicket,
 }: {
-	fieldsListTicket: TicketFieldsList
+	fieldsTicket: TicketFields
 }) => {
-	return fieldsListTicket.reduce((isSelected, field) => {
+	return Object.values(fieldsTicket).reduce((isSelected, field) => {
 		return isSelected || field.numSelectedCellsField > 0
 	}, false)
 }

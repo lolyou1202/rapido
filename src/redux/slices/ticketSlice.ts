@@ -1,9 +1,9 @@
 import {
 	NUM_ADD_TICKETS,
-	NUM_CELLS_LARGE_FIELD,
-	NUM_CELLS_SMALL_FIELD,
-	NUM_SELECTED_CELLS_LARGE_FIELD,
-	NUM_SELECTED_CELLS_SMALL_FIELD,
+	NUM_CELLS_FIRST_FIELD,
+	NUM_CELLS_SECOND_FIELD,
+	NUM_SELECTED_CELLS_FIRST_FIELD,
+	NUM_SELECTED_CELLS_SECOND_FIELD,
 } from '../../constants/settings'
 import { fillCellsList } from '../../hooks/fillCellsList'
 import { generateEmptyTicket } from '../../hooks/generateEmptyTicket'
@@ -11,7 +11,6 @@ import { findIdUncorrectTickets } from '../../hooks/findIdUncorrectTickets'
 import { generateRandomNums } from '../../hooks/generateRandomNums'
 import {
 	CellNum,
-	FieldId,
 	FieldVariant,
 	TicketId,
 	TicketState,
@@ -25,17 +24,12 @@ import { generateDefaultTicketsIdList } from '../../hooks/generateDefaultTickets
 
 export interface InitialState {
 	ticketsList: TicketState[]
-	droppedNums: {
-		variantField: FieldVariant
-		cellsListField: number[]
-	}[]
 }
 
 const initialState: InitialState = {
-	ticketsList: generateDefaultTicketsIdList.map(id => {
-		return generateEmptyTicket({ idTicket: id })
-	}),
-	droppedNums: [],
+	ticketsList: generateDefaultTicketsIdList.map(id =>
+		generateEmptyTicket({ idTicket: id })
+	),
 }
 
 export const ticketSlice = createSlice({
@@ -51,7 +45,7 @@ export const ticketSlice = createSlice({
 				ticket => ticket.idTicket === idTicket
 			)!
 
-			ticket.fieldsListTicket.forEach(field => {
+			Object.values(ticket.fieldsTicket).forEach(field => {
 				const selectedCells = field.cellsListField.reduce(
 					(selectedCells, curentCell) => {
 						if (curentCell.variantCell === 'coin') {
@@ -65,17 +59,17 @@ export const ticketSlice = createSlice({
 				field.numSelectedCellsField = selectedCells
 
 				switch (field.variantField) {
-					case 'large':
+					case 'first':
 						field.isCorrectField =
-							selectedCells === NUM_SELECTED_CELLS_LARGE_FIELD
+							selectedCells === NUM_SELECTED_CELLS_FIRST_FIELD
 						break
-					case 'small':
+					case 'second':
 						field.isCorrectField =
-							selectedCells === NUM_SELECTED_CELLS_SMALL_FIELD
+							selectedCells === NUM_SELECTED_CELLS_SECOND_FIELD
 				}
 			})
 
-			const isCorrectTicket = ticket.fieldsListTicket.reduce(
+			const isCorrectTicket = Object.values(ticket.fieldsTicket).reduce(
 				(isCorrectField, field) => {
 					return field.isCorrectField && isCorrectField
 				},
@@ -90,17 +84,17 @@ export const ticketSlice = createSlice({
 				payload,
 			}: PayloadAction<{
 				idTicket: TicketId
-				idField: FieldId
+				variantField: FieldVariant
 				numCell: CellNum
 			}>
 		) => {
-			const { idTicket, idField, numCell } = payload
+			const { idTicket, variantField, numCell } = payload
 			const ticket = state.ticketsList.find(
 				ticket => ticket.idTicket === idTicket
 			)!
 
 			const curentCell =
-				ticket.fieldsListTicket[idField].cellsListField[numCell]
+				ticket.fieldsTicket[variantField].cellsListField[numCell]
 
 			switch (curentCell.variantCell) {
 				case 'default':
@@ -122,7 +116,7 @@ export const ticketSlice = createSlice({
 				ticket => ticket.idTicket === idTicket
 			)!
 
-			ticket.fieldsListTicket.forEach(field => {
+			Object.values(ticket.fieldsTicket).forEach(field => {
 				field.cellsListField.map(cell => (cell.variantCell = 'default'))
 				field.isCorrectField = false
 				field.numSelectedCellsField = 0
@@ -140,30 +134,24 @@ export const ticketSlice = createSlice({
 				ticket => ticket.idTicket === idTicket
 			)!
 
-			ticket.fieldsListTicket.forEach(field => {
+			Object.values(ticket.fieldsTicket).forEach(field => {
 				switch (field.variantField) {
-					case 'large':
+					case 'first':
 						const randomNumsListLargeField = generateRandomNums({
 							min: 1,
-							max: NUM_CELLS_LARGE_FIELD,
-							numberRandom: NUM_SELECTED_CELLS_LARGE_FIELD,
-							currentList: state.ticketsList.map(
-								ticket => ticket.idTicket
-							),
+							max: NUM_CELLS_FIRST_FIELD,
+							numberRandom: NUM_SELECTED_CELLS_FIRST_FIELD,
 						})
 						fillCellsList({
 							cellsList: field.cellsListField,
 							randomNumsList: randomNumsListLargeField,
 						})
 						break
-					case 'small':
+					case 'second':
 						const randomNumsListSmallField = generateRandomNums({
 							min: 1,
-							max: NUM_CELLS_SMALL_FIELD,
-							numberRandom: NUM_SELECTED_CELLS_SMALL_FIELD,
-							currentList: state.ticketsList.map(
-								ticket => ticket.idTicket
-							),
+							max: NUM_CELLS_SECOND_FIELD,
+							numberRandom: NUM_SELECTED_CELLS_SECOND_FIELD,
 						})
 						fillCellsList({
 							cellsList: field.cellsListField,

@@ -1,7 +1,6 @@
 .sliderRules {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	width: calc(100% - );
 	&-demo {
 		display: flex;
 		justify-content: flex-end;

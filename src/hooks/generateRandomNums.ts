@@ -14,8 +14,10 @@ export const generateRandomNums = ({
 	while (numbersSet.size < numberRandom) {
 		const newRandomNum = Math.floor(Math.random() * (max - min + 1)) + min
 
-		if (!currentList?.includes(newRandomNum)) {
-			numbersSet.add(newRandomNum)
+		if (currentList) {
+			if (!currentList.includes(newRandomNum)) {
+				numbersSet.add(newRandomNum)
+			}
 		} else {
 			numbersSet.add(newRandomNum)
 		}

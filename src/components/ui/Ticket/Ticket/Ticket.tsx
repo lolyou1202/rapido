@@ -2,7 +2,7 @@ import './Ticket.style.scss'
 import classNames from 'classnames'
 import {
 	CellNum,
-	FieldId,
+	FieldVariant,
 	TicketId,
 	TicketState,
 } from '../../../../types/ticketTypes'
@@ -19,8 +19,8 @@ import { Cross } from '../../../icons/Cross'
 import { Dice } from '../../../icons/Dice'
 import { Clear } from '../../../icons/Clear'
 import {
-	NUM_SELECTED_CELLS_LARGE_FIELD,
-	NUM_SELECTED_CELLS_SMALL_FIELD,
+	NUM_SELECTED_CELLS_FIRST_FIELD,
+	NUM_SELECTED_CELLS_SECOND_FIELD,
 } from '../../../../constants/settings'
 import { colorTokens } from '../../../../constants/colorTokens'
 import { isSelectedCellsInField } from '../../../../hooks/isSelectedCellsInField'
@@ -28,20 +28,19 @@ import { isSelectedCellsInField } from '../../../../hooks/isSelectedCellsInField
 const { white } = colorTokens
 
 export const Ticket = ({ ticketState }: { ticketState: TicketState }) => {
-	const { idTicket, isCorrectTicket, isWinTicket, fieldsListTicket } =
-		ticketState
+	const { idTicket, isCorrectTicket, isWinTicket, fieldsTicket } = ticketState
 
 	const dispatch = useAppDispatch()
 
 	const handleClickCell = ({ idTicket }: { idTicket: TicketId }) => {
 		return ({
 			numCell,
-			idField,
+			variantField,
 		}: {
 			numCell: CellNum
-			idField: FieldId
+			variantField: FieldVariant
 		}) => {
-			dispatch(setVariantCell({ idTicket, numCell, idField }))
+			dispatch(setVariantCell({ idTicket, numCell, variantField }))
 		}
 	}
 	const handleClickClearButton = () => {
@@ -54,7 +53,7 @@ export const Ticket = ({ ticketState }: { ticketState: TicketState }) => {
 		dispatch(deleteTicket({ idTicket }))
 	}
 	const isSelectedCells = isSelectedCellsInField({
-		fieldsListTicket,
+		fieldsTicket,
 	})
 	const ticketCN = classNames('ticket', {
 		action: isCorrectTicket,
@@ -73,17 +72,17 @@ export const Ticket = ({ ticketState }: { ticketState: TicketState }) => {
 				<div className='ticket-main'>
 					<p className='ticket-rule'>
 						<span>
-							Выберите {NUM_SELECTED_CELLS_LARGE_FIELD} чисел в
+							Выберите {NUM_SELECTED_CELLS_FIRST_FIELD} чисел в
 							первом поле
 						</span>
 						<span>
-							и {NUM_SELECTED_CELLS_SMALL_FIELD} число во втором
+							и {NUM_SELECTED_CELLS_SECOND_FIELD} число во втором
 							поле
 						</span>
 					</p>
-					{fieldsListTicket.map(field => (
+					{Object.values(fieldsTicket).map(field => (
 						<TicketField
-							key={field.idField}
+							key={field.variantField}
 							{...field}
 							onClickCell={handleClickCell({ idTicket })}
 						/>

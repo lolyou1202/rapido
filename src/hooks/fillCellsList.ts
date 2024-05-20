@@ -1,4 +1,4 @@
-import { CellState } from "../types/ticketTypes"
+import { CellState } from '../types/ticketTypes'
 
 export const fillCellsList = ({
 	cellsList,

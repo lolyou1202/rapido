@@ -4,7 +4,6 @@ import {
 	CellNum,
 	FieldCellsList,
 	FieldCorrected,
-	FieldId,
 	FieldLabel,
 	FieldNumSelectedCells,
 	FieldVariant,
@@ -13,10 +12,9 @@ import { Check } from '../../../icons/Check'
 import { Cross } from '../../../icons/Cross'
 import { CircleDashedButton } from '../../Button/CircleDashedButton/CircleDashedButton'
 import { ProgressBar } from '../ProgressBar/ProgressBar'
-import { NUM_SELECTED_CELLS_LARGE_FIELD } from '../../../../constants/settings'
+import { NUM_SELECTED_CELLS_FIRST_FIELD } from '../../../../constants/settings'
 
 export const TicketField = ({
-	idField,
 	variantField,
 	labelField,
 	numSelectedCellsField,
@@ -24,7 +22,6 @@ export const TicketField = ({
 	cellsListField,
 	onClickCell,
 }: {
-	idField?: FieldId
 	variantField: FieldVariant
 	labelField: FieldLabel
 	numSelectedCellsField?: FieldNumSelectedCells
@@ -32,10 +29,10 @@ export const TicketField = ({
 	cellsListField: FieldCellsList
 	onClickCell?: ({
 		numCell,
-		idField,
+		variantField,
 	}: {
 		numCell: CellNum
-		idField: FieldId
+		variantField: FieldVariant
 	}) => void
 }) => {
 	const checkCN = classNames('ticket__field-check', {
@@ -46,10 +43,10 @@ export const TicketField = ({
 		'ticket__field-cross',
 		numSelectedCellsField && {
 			show:
-				(variantField === 'large' &&
+				(variantField === 'first' &&
 					!isCorrectField &&
-					numSelectedCellsField > NUM_SELECTED_CELLS_LARGE_FIELD) ||
-				(variantField === 'small' &&
+					numSelectedCellsField > NUM_SELECTED_CELLS_FIRST_FIELD) ||
+				(variantField === 'second' &&
 					!isCorrectField &&
 					numSelectedCellsField !== 0),
 		}
@@ -64,12 +61,12 @@ export const TicketField = ({
 					<Cross className={crossCN} />
 				</div>
 				{numSelectedCellsField !== undefined
-					? variantField === 'large' &&
+					? variantField === 'first' &&
 					  numSelectedCellsField <
-							NUM_SELECTED_CELLS_LARGE_FIELD && (
+							NUM_SELECTED_CELLS_FIRST_FIELD && (
 							<ProgressBar
 								progress={numSelectedCellsField}
-								length={NUM_SELECTED_CELLS_LARGE_FIELD}
+								length={NUM_SELECTED_CELLS_FIRST_FIELD}
 							/>
 					  )
 					: undefined}
@@ -81,11 +78,11 @@ export const TicketField = ({
 						label={`${cell.numCell}`}
 						variant={cell.variantCell}
 						onClick={
-							onClickCell && idField !== undefined
+							onClickCell
 								? () =>
 										onClickCell({
 											numCell: cell.numCell - 1,
-											idField,
+											variantField,
 										})
 								: undefined
 						}

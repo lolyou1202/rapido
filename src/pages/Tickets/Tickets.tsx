@@ -7,7 +7,8 @@ import { Add } from '../../components/icons/Add'
 import { addTickets } from '../../redux/slices/ticketSlice'
 import { SidebarControls } from '../../components/features/SidebarControls/SidebarControls'
 import { Edition } from '../../components/features/Edition/Edition'
-import { setGameStage } from '../../redux/slices/game'
+import { setGameStage } from '../../redux/slices/gameSlice'
+import { createEdition } from '../../redux/slices/editionSlice'
 
 const { white } = colorTokens
 
@@ -22,6 +23,7 @@ export const Tickets = () => {
 	}
 	const handleClickIssueEditionButton = () => {
 		dispatch(setGameStage({ gameStage: 'viewResults' }))
+		dispatch(createEdition({ ticketsList }))
 	}
 	const handleClickReplayButton = () => {
 		dispatch(setGameStage({ gameStage: 'fillTickets' }))

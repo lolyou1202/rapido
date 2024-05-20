@@ -1,5 +1,5 @@
-import { TicketId } from "../../types/ticketTypes"
-import { InitialState, ticketSlice } from "../slices/ticketSlice"
+import { TicketId } from '../../types/ticketTypes'
+import { InitialState, ticketSlice } from '../slices/ticketSlice'
 
 export const correctTicketReducer = ({
 	state,

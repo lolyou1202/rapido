@@ -1,5 +1,4 @@
 import {
-	FieldId,
 	FieldLabel,
 	FieldLength,
 	FieldState,
@@ -7,19 +6,16 @@ import {
 } from '../types/ticketTypes'
 
 export const generateEmptyField = ({
-	idField,
 	variantField,
 	labelField,
 	lengthField,
 }: {
-	idField: FieldId
 	variantField: FieldVariant
 	labelField: FieldLabel
 	lengthField: FieldLength
 }): FieldState => {
 	return {
 		variantField,
-		idField,
 		labelField,
 		numSelectedCellsField: 0,
 		isCorrectField: false,

@@ -3,6 +3,7 @@
 	border-radius: 12px;
 	&-root {
 		padding-bottom: 56px !important;
+		width: calc(100% - 64px - 64px);
 	}
 	&-navigationButton {
 		position: absolute;
