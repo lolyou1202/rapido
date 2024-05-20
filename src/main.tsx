@@ -6,7 +6,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import App from './App.tsx'
 import { Tickets } from './pages/Tickets/Tickets.tsx'
 import { Archive } from './pages/Archive.tsx'
-import { Rules } from './pages/Rules.tsx'
+import { Rules } from './pages/Rules/Rules.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<Provider store={store}>

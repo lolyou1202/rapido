@@ -1,0 +1,48 @@
+.sliderRules {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	width: calc(100% - );
+	&-demo {
+		display: flex;
+		justify-content: flex-end;
+		& > span {
+			padding: 16px;
+			background-color: var(--black);
+			border-radius: 16px;
+		}
+	}
+	&__step {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		& > span {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 16px;
+			width: 360px;
+			& > span {
+				display: flex;
+				gap: 8px;
+			}
+		}
+		&-title {
+			text-align: center;
+			font-size: 16px;
+			line-height: 16px;
+			color: var(--white);
+			text-transform: uppercase;
+			user-select: none;
+		}
+		&-description {
+			text-align: center;
+			font-size: 14px;
+			line-height: 20px;
+			color: var(--light);
+			user-select: none;
+		}
+		button {
+			width: 200px;
+		}
+	}
+}

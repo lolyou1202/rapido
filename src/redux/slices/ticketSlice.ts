@@ -2,7 +2,6 @@ import {
 	NUM_ADD_TICKETS,
 	NUM_CELLS_LARGE_FIELD,
 	NUM_CELLS_SMALL_FIELD,
-	NUM_DEFAULT_TICKET_IN_LIST,
 	NUM_SELECTED_CELLS_LARGE_FIELD,
 	NUM_SELECTED_CELLS_SMALL_FIELD,
 } from '../../constants/settings'
@@ -22,6 +21,7 @@ import { correctTicketReducer } from '../reducers/correctTicketReducer'
 import { clearTicketReducer } from '../reducers/clearTicketReducer'
 import { addTicketsReducer } from '../reducers/addTicketsReducer'
 import { randomFillTicketReducer } from '../reducers/randomFillTicketReducer'
+import { generateDefaultTicketsIdList } from '../../hooks/generateDefaultTicketsIdList'
 
 export interface InitialState {
 	ticketsList: TicketState[]
@@ -31,14 +31,8 @@ export interface InitialState {
 	}[]
 }
 
-const defaultRandomTicketsIdList = generateRandomNums({
-	min: 1000,
-	max: 9999,
-	numberRandom: NUM_DEFAULT_TICKET_IN_LIST,
-})
-
 const initialState: InitialState = {
-	ticketsList: defaultRandomTicketsIdList.map(id => {
+	ticketsList: generateDefaultTicketsIdList.map(id => {
 		return generateEmptyTicket({ idTicket: id })
 	}),
 	droppedNums: [],

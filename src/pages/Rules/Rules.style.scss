@@ -1,0 +1,23 @@
+.rules {
+	display: flex;
+	flex-direction: column;
+	background-color: var(--dark);
+	border-radius: 12px;
+	position: relative;
+	&-header {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 24px 0;
+	}
+	&-title {
+		font-size: 20px;
+		line-height: 24px;
+		color: var(--white);
+		text-transform: uppercase;
+		user-select: none;
+	}
+	&-main {
+		
+	}
+}

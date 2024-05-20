@@ -1,0 +1,45 @@
+.slider {
+	background-color: var(--dark);
+	border-radius: 12px;
+	&-root {
+		padding-bottom: 56px !important;
+	}
+	&-navigationButton {
+		position: absolute;
+		z-index: 100;
+		display: flex;
+		height: auto;
+		padding: 8px 4px;
+		cursor: pointer;
+	}
+	&-prevButton {
+		left: 16px;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	&-nextButton {
+		right: 16px;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	&-bulletButton {
+		width: 8px;
+		height: 8px;
+		background-color: var(--shadow);
+		border-radius: 100%;
+		cursor: pointer;
+	}
+	&-bulletActiveButton {
+		background-color: var(--pink);
+	}
+	&-pagination {
+		position: absolute;
+		left: 50% !important;
+		bottom: 24px !important;
+		transform: translateX(-50%) !important;
+		display: flex;
+		gap: 8px;
+		width: auto !important;
+		height: auto;
+	}
+}

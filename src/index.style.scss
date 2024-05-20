@@ -3,6 +3,9 @@
 * {
 	font-family: 'Rubik', sans-serif;
 	font-weight: 700;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 *,
 *::after,
