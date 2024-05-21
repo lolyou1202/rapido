@@ -4,13 +4,6 @@ export type EditionId = number
 export type EditionDate = string
 export type EditionTime = string
 export type EditionParticipatingTickets = number
-export type EditionWiningTickets = number
-export type EditionWiningCombination = {
-	combination: EditionCombination
-	count: number
-}
-export type EditionDroppedNums = { [key in FieldVariant]: number[] }
-
 export type EditionCombination =
 	| '8 + 1'
 	| '8'
@@ -21,13 +14,16 @@ export type EditionCombination =
 	| '5 + 1'
 	| '5'
 	| '4 + 1'
+export type EditionWiningTickets = number
+export type EditionWiningCombination = { [key in EditionCombination]: number }
+export type EditionDroppedNums = { [key in FieldVariant]: number[] }
 
 export type Edition = {
 	idEdition: EditionId
 	date: EditionDate
 	time: EditionTime
 	participatingTickets: EditionParticipatingTickets
-	winingTickets: EditionWiningTickets
-	winingCombinations: EditionWiningCombination[]
+	numWiningTickets: EditionWiningTickets
 	droppedNums: EditionDroppedNums
+	winingCombinations: EditionWiningCombination
 }

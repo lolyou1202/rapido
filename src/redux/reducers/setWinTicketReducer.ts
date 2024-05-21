@@ -1,15 +1,15 @@
 import { TicketId } from '../../types/ticketTypes'
 import { InitialState, gameSlice } from '../slices/gameSlice'
 
-export const randomFillTicketReducer = ({
+export const setWinTicketReducer = ({
 	state,
 	idTicket,
 }: {
 	state: InitialState
 	idTicket: TicketId
 }) => {
-	gameSlice.caseReducers.randomFillTicket(state, {
-		type: 'game/randomFillTicket',
-		payload: { idTicket: idTicket },
+	gameSlice.caseReducers.setWinTicket(state, {
+		type: 'game/setWinTicket',
+		payload: { idTicket },
 	})
 }

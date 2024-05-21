@@ -1,4 +1,4 @@
-import { InitialState, ticketSlice } from '../slices/ticketSlice'
+import { InitialState, gameSlice } from '../slices/gameSlice'
 
 export const addTicketsReducer = ({
 	state,
@@ -7,8 +7,8 @@ export const addTicketsReducer = ({
 	state: InitialState
 	countToAdd: number
 }) => {
-	ticketSlice.caseReducers.addTickets(state, {
-		type: 'ticket/addTickets',
+	gameSlice.caseReducers.addTickets(state, {
+		type: 'game/addTickets',
 		payload: { countToAdd },
 	})
 }

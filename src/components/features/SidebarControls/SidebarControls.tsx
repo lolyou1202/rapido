@@ -10,7 +10,7 @@ import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
 import {
 	clearAllTickets,
 	randomFillSeveralTickets,
-} from '../../../redux/slices/ticketSlice'
+} from '../../../redux/slices/gameSlice'
 import {
 	NUM_MAX_FILL_TICKETS,
 	NUM_MIN_FILL_TICKETS,

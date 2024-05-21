@@ -4,19 +4,19 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks/useAppRedux'
 import { Ticket } from '../../components/ui/Ticket/Ticket/Ticket'
 import { DefaultButton } from '../../components/ui/Button/DefaultButton/DefaultButton'
 import { Add } from '../../components/icons/Add'
-import { addTickets } from '../../redux/slices/ticketSlice'
 import { SidebarControls } from '../../components/features/SidebarControls/SidebarControls'
 import { Edition } from '../../components/features/Edition/Edition'
-import { setGameStage } from '../../redux/slices/gameSlice'
-import { createEdition } from '../../redux/slices/editionSlice'
+import { findCorrectTickets } from '../../hooks/findCorrectTickets'
+import { addTickets, clearAllTickets, createEdition, setGameStage } from '../../redux/slices/gameSlice'
 
 const { white } = colorTokens
 
 export const Tickets = () => {
-	const ticketsList = useAppSelector(state => state.ticket.ticketsList)
-	const gameStage = useAppSelector(state => state.game.gameStage)
+	const { ticketsList, gameStage } = useAppSelector(state => state.game)
 
 	const dispatch = useAppDispatch()
+
+	const { correctTicketIdList } = findCorrectTickets({ ticketsList })
 
 	const handleClickAddTicketsButton = () => {
 		dispatch(addTickets({ countToAdd: 'default' }))
@@ -27,6 +27,7 @@ export const Tickets = () => {
 	}
 	const handleClickReplayButton = () => {
 		dispatch(setGameStage({ gameStage: 'fillTickets' }))
+		dispatch(clearAllTickets())
 	}
 
 	return (
@@ -34,7 +35,7 @@ export const Tickets = () => {
 			<span>
 				<div className='game-ticketList'>
 					{ticketsList.map(ticket => (
-						<Ticket key={ticket.idTicket} ticketState={ticket} />
+						<Ticket key={ticket.idTicket} gameStage={gameStage} ticketState={ticket} />
 					))}
 				</div>
 				<DefaultButton
@@ -51,6 +52,7 @@ export const Tickets = () => {
 							<SidebarControls ticketsList={ticketsList} />
 							<DefaultButton
 								action
+								disabled={correctTicketIdList.length < 1}
 								label='Выпустить тираж'
 								onClick={handleClickIssueEditionButton}
 							/>

@@ -2,25 +2,39 @@ import './Edition.style.scss'
 import { useState } from 'react'
 import { SidebarContainer } from '../../ui/SidebarContainer/SidebarContainer'
 import { DefaultButton } from '../../ui/Button/DefaultButton/DefaultButton'
-import { EditionDroppedNums } from './EditionDroppedNums/EditionDroppedNums'
-import { EditionWiningCobinations } from './EditionWiningCobinations/EditionWiningCobinations'
+import { useAppSelector } from '../../../redux/hooks/useAppRedux'
+import { EditionDroppedNumsBlock } from './EditionBlock/EditionDroppedNumsBlock'
+import { EditionWiningCobinationsBlock } from './EditionBlock/EditionWiningCobinationsBlock'
 
 export const Edition = () => {
+	const lastEdition = useAppSelector(state => state.game.editionsList[0])
+	
+	const {
+		idEdition,
+		numWiningTickets,
+		participatingTickets,
+		winingCombinations,
+		droppedNums,
+	} = lastEdition
+
 	const [showField, setShowField] = useState<
 		'droppedNums' | 'winingCobinations'
 	>('droppedNums')
 
 	return (
 		<SidebarContainer
-			title='Тираж №423531'
+			title={`Тираж №${idEdition}`}
 			classNameContainerRoot='sidebar-edition'
 			classNameContainerContent='edition-content'
 		>
 			{showField === 'droppedNums' && (
 				<>
-					<EditionDroppedNums />
+					<EditionDroppedNumsBlock
+						numWiningTickets={numWiningTickets}
+						participatingTickets={participatingTickets}
+						droppedNums={droppedNums}
+					/>
 					<DefaultButton
-						action={false}
 						label='Выигранные комбинации'
 						onClick={() => setShowField('winingCobinations')}
 					/>
@@ -28,9 +42,10 @@ export const Edition = () => {
 			)}
 			{showField === 'winingCobinations' && (
 				<>
-					<EditionWiningCobinations />
+					<EditionWiningCobinationsBlock
+						winingCombinations={winingCombinations}
+					/>
 					<DefaultButton
-						action={false}
 						label='Выпавшие числа'
 						onClick={() => setShowField('droppedNums')}
 					/>

@@ -1,5 +1,5 @@
 import { TicketId } from '../../types/ticketTypes'
-import { InitialState, ticketSlice } from '../slices/ticketSlice'
+import { InitialState, gameSlice } from '../slices/gameSlice'
 
 export const clearTicketReducer = ({
 	state,
@@ -8,8 +8,8 @@ export const clearTicketReducer = ({
 	state: InitialState
 	idTicket: TicketId
 }) => {
-	ticketSlice.caseReducers.clearTicket(state, {
-		type: 'ticket/clearTicket',
+	gameSlice.caseReducers.clearTicket(state, {
+		type: 'game/clearTicket',
 		payload: { idTicket: idTicket },
 	})
 }

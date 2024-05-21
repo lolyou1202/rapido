@@ -1,5 +1,5 @@
 import { TicketId } from '../../types/ticketTypes'
-import { InitialState, ticketSlice } from '../slices/ticketSlice'
+import { InitialState, gameSlice } from '../slices/gameSlice'
 
 export const correctTicketReducer = ({
 	state,
@@ -8,8 +8,8 @@ export const correctTicketReducer = ({
 	state: InitialState
 	idTicket: TicketId
 }) => {
-	ticketSlice.caseReducers.setCorrectTicket(state, {
-		type: 'ticket/setCorrectedField',
+	gameSlice.caseReducers.setCorrectTicket(state, {
+		type: 'game/setCorrectedField',
 		payload: { idTicket },
 	})
 }

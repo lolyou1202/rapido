@@ -12,7 +12,7 @@ import {
 	deleteTicket,
 	randomFillTicket,
 	setVariantCell,
-} from '../../../../redux/slices/ticketSlice'
+} from '../../../../redux/slices/gameSlice'
 import { TicketField } from '../TicketField/TicketField'
 import { DefaultButton } from '../../Button/DefaultButton/DefaultButton'
 import { Cross } from '../../../icons/Cross'
@@ -24,10 +24,17 @@ import {
 } from '../../../../constants/settings'
 import { colorTokens } from '../../../../constants/colorTokens'
 import { isSelectedCellsInField } from '../../../../hooks/isSelectedCellsInField'
+import { GameStage } from '../../../../types/gameTypes'
 
 const { white } = colorTokens
 
-export const Ticket = ({ ticketState }: { ticketState: TicketState }) => {
+export const Ticket = ({
+	gameStage,
+	ticketState,
+}: {
+	gameStage: GameStage
+	ticketState: TicketState
+}) => {
 	const { idTicket, isCorrectTicket, isWinTicket, fieldsTicket } = ticketState
 
 	const dispatch = useAppDispatch()
@@ -64,7 +71,13 @@ export const Ticket = ({ ticketState }: { ticketState: TicketState }) => {
 		<div className={ticketCN}>
 			<span>
 				<div className='ticket-head'>
-					<p>Заполните билет</p>
+					<p>
+						{gameStage === 'fillTickets'
+							? 'Заполните билет'
+							: isWinTicket
+							? 'Победный билет'
+							: 'Неудачный билет'}
+					</p>
 					<span onClick={handleClickDeleteButton}>
 						<Cross />
 					</span>
