@@ -64,6 +64,7 @@ export const Ticket = ({
 	})
 	const ticketCN = classNames('ticket', {
 		action: isCorrectTicket,
+		disabled: gameStage === 'viewResults',
 		winner: isWinTicket,
 	})
 
@@ -71,16 +72,26 @@ export const Ticket = ({
 		<div className={ticketCN}>
 			<span>
 				<div className='ticket-head'>
-					<p>
-						{gameStage === 'fillTickets'
-							? 'Заполните билет'
-							: isWinTicket
-							? 'Победный билет'
-							: 'Неудачный билет'}
+					<p className='ticket-title'>
+						{!isCorrectTicket && 'Заполните билет'}
+						{gameStage === 'fillTickets' &&
+							isCorrectTicket &&
+							'Билет заполнен'}
+						{gameStage === 'viewResults' &&
+							isCorrectTicket &&
+							isWinTicket &&
+							'Победный билет'}
+						{gameStage === 'viewResults' &&
+							isCorrectTicket &&
+							!isWinTicket &&
+							'Неудачный билет'}
 					</p>
-					<span onClick={handleClickDeleteButton}>
+					<button
+						className='ticket-cross'
+						onClick={handleClickDeleteButton}
+					>
 						<Cross />
-					</span>
+					</button>
 				</div>
 				<div className='ticket-main'>
 					<p className='ticket-rule'>
@@ -97,19 +108,26 @@ export const Ticket = ({
 						<TicketField
 							key={field.variantField}
 							{...field}
-							onClickCell={handleClickCell({ idTicket })}
+							onClickCell={
+								gameStage === 'fillTickets'
+									? handleClickCell({ idTicket })
+									: undefined
+							}
 						/>
 					))}
 					<div className='ticket-buttons'>
 						<DefaultButton
 							action={false}
+							disabled={gameStage === 'viewResults'}
 							label='Случайно'
 							icon={<Dice color={white} />}
 							onClick={handleClickRandomButton}
 						/>
 						<DefaultButton
 							action={false}
-							disabled={!isSelectedCells}
+							disabled={
+								!isSelectedCells || gameStage === 'viewResults'
+							}
 							label='Очистить'
 							icon={<Clear color={white} />}
 							onClick={handleClickClearButton}

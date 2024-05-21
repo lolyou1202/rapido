@@ -24,7 +24,6 @@ import { randomFillTicketReducer } from '../reducers/randomFillTicketReducer'
 import { generateDefaultTicketsIdList } from '../../hooks/generateDefaultTicketsIdList'
 import {
 	Edition,
-	EditionDroppedNums,
 	EditionWiningCombination,
 	EditionWiningTickets,
 } from '../../types/editionTypes'
@@ -32,6 +31,9 @@ import { findCorrectTickets } from '../../hooks/findCorrectTickets'
 import { findWinCombinationTicket } from '../../hooks/findWinCombinationTicket'
 import { GameStage } from '../../types/gameTypes'
 import { setWinTicketReducer } from '../reducers/setWinTicketReducer'
+import { generateNumsWithFirstField } from '../../hooks/generateNumsWithFirstField'
+import { generateNumsWithSecondField } from '../../hooks/generateNumsWithSecondField'
+import { generateIdEdition } from '../../hooks/generateIdEdition'
 
 export interface InitialState {
 	ticketsList: TicketState[]
@@ -60,7 +62,9 @@ export const gameSlice = createSlice({
 				ticket => ticket.idTicket === idTicket
 			)!
 
-			Object.values(ticket.fieldsTicket).forEach(field => {
+			const ticketFieldsList = Object.values(ticket.fieldsTicket)
+
+			ticketFieldsList.forEach(field => {
 				const selectedCells = field.cellsListField.reduce(
 					(selectedCells, curentCell) => {
 						if (curentCell.variantCell === 'coin') {
@@ -84,7 +88,7 @@ export const gameSlice = createSlice({
 				}
 			})
 
-			const isCorrectTicket = Object.values(ticket.fieldsTicket).reduce(
+			const isCorrectTicket = ticketFieldsList.reduce(
 				(isCorrectField, field) => {
 					return field.isCorrectField && isCorrectField
 				},
@@ -131,7 +135,9 @@ export const gameSlice = createSlice({
 				ticket => ticket.idTicket === idTicket
 			)!
 
-			Object.values(ticket.fieldsTicket).forEach(field => {
+			const ticketFieldsList = Object.values(ticket.fieldsTicket)
+
+			ticketFieldsList.forEach(field => {
 				field.cellsListField.map(cell => (cell.variantCell = 'default'))
 				field.isCorrectField = false
 				field.numSelectedCellsField = 0
@@ -149,7 +155,9 @@ export const gameSlice = createSlice({
 				ticket => ticket.idTicket === idTicket
 			)!
 
-			Object.values(ticket.fieldsTicket).forEach(field => {
+			const ticketFieldsList = Object.values(ticket.fieldsTicket)
+
+			ticketFieldsList.forEach(field => {
 				switch (field.variantField) {
 					case 'first':
 						const randomNumsListLargeField = generateRandomNums({
@@ -268,28 +276,13 @@ export const gameSlice = createSlice({
 		},
 		createEdition: state => {
 			const ticketsList = state.ticketsList
-			
-			const [idEdition] = generateRandomNums({
-				min: 100000,
-				max: 999999,
-				numberRandom: 1,
-				currentList: state.editionsList.map(
-					edition => edition.idEdition
-				),
-			})
-			const randomNumsListFirstField = generateRandomNums({
-				min: 1,
-				max: NUM_CELLS_FIRST_FIELD,
-				numberRandom: NUM_SELECTED_CELLS_FIRST_FIELD,
-			})
-			const randomNumsListSecondField = generateRandomNums({
-				min: 1,
-				max: NUM_CELLS_SECOND_FIELD,
-				numberRandom: NUM_SELECTED_CELLS_SECOND_FIELD,
-			})
+			const editionsList = state.editionsList
+
+			const idEdition = generateIdEdition({ editionsList })
+
 			const droppedNums = {
-				first: randomNumsListFirstField,
-				second: randomNumsListSecondField,
+				first: generateNumsWithFirstField(),
+				second: generateNumsWithSecondField(),
 			}
 
 			let winingCombinations: EditionWiningCombination = {
@@ -332,13 +325,14 @@ export const gameSlice = createSlice({
 						state,
 						idTicket: ticket.idTicket,
 					})
+
 					winingCombinations[winCombination] =
 						winingCombinations[winCombination] + 1
 					numWiningTickets = numWiningTickets + 1
 				}
 			})
 
-			state.editionsList.unshift({
+			editionsList.unshift({
 				idEdition,
 				date: '',
 				time: '',

@@ -17,32 +17,6 @@
 		height: 66px;
 		border-bottom: 2px dashed var(--shadow);
 		transition: all 0.2s ease-in-out;
-		p {
-			font-size: 14px;
-			line-height: 16px;
-			color: var(--white);
-			text-transform: uppercase;
-			user-select: none;
-		}
-		span {
-			display: flex;
-			position: absolute;
-			top: 50%;
-			right: 24px;
-			transform: translateY(-50%);
-			opacity: 0;
-			cursor: pointer;
-			transition: all 0.2s ease-in-out;
-			svg {
-				stroke: var(--shadow);
-				transition: all 0.2s ease-in-out;
-			}
-			&:hover {
-				svg {
-					stroke: var(--white);
-				}
-			}
-		}
 		&::after {
 			content: '';
 			position: absolute;
@@ -68,6 +42,34 @@
 			background-color: var(--dark);
 			border-radius: 100%;
 			transition: all 0.2s ease-in-out;
+		}
+	}
+	&-title {
+		font-size: 14px;
+		line-height: 16px;
+		color: var(--white);
+		text-transform: uppercase;
+		user-select: none;
+	}
+	&-cross {
+		display: flex;
+		position: absolute;
+		top: 50%;
+		right: 24px;
+		transform: translateY(-50%);
+		opacity: 0;
+		background-color: transparent;
+		border: none;
+		cursor: pointer;
+		transition: all 0.2s ease-in-out;
+		svg {
+			stroke: var(--shadow);
+			transition: all 0.2s ease-in-out;
+		}
+		&:hover {
+			svg {
+				stroke: var(--white);
+			}
 		}
 	}
 	& > span {
@@ -108,15 +110,15 @@
 	&:hover {
 		background-color: var(--shadow);
 		.ticket-head {
-			span {
-				opacity: 1;
-			}
 			&::after {
 				background-color: var(--shadow);
 			}
 			&::before {
 				background-color: var(--shadow);
 			}
+		}
+		.ticket-cross {
+			opacity: 1;
 		}
 	}
 	&.action {
@@ -128,6 +130,16 @@
 			}
 			&::before {
 				background-color: var(--pink);
+			}
+		}
+	}
+	&.disabled {
+		button {
+			pointer-events: none;
+		}
+		&:hover {
+			.ticket-cross {
+				opacity: 0;
 			}
 		}
 	}

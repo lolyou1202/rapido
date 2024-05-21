@@ -7,7 +7,12 @@ import { Add } from '../../components/icons/Add'
 import { SidebarControls } from '../../components/features/SidebarControls/SidebarControls'
 import { Edition } from '../../components/features/Edition/Edition'
 import { findCorrectTickets } from '../../hooks/findCorrectTickets'
-import { addTickets, clearAllTickets, createEdition, setGameStage } from '../../redux/slices/gameSlice'
+import {
+	addTickets,
+	clearAllTickets,
+	createEdition,
+	setGameStage,
+} from '../../redux/slices/gameSlice'
 
 const { white } = colorTokens
 
@@ -23,7 +28,7 @@ export const Tickets = () => {
 	}
 	const handleClickIssueEditionButton = () => {
 		dispatch(setGameStage({ gameStage: 'viewResults' }))
-		dispatch(createEdition({ ticketsList }))
+		dispatch(createEdition())
 	}
 	const handleClickReplayButton = () => {
 		dispatch(setGameStage({ gameStage: 'fillTickets' }))
@@ -35,7 +40,11 @@ export const Tickets = () => {
 			<span>
 				<div className='game-ticketList'>
 					{ticketsList.map(ticket => (
-						<Ticket key={ticket.idTicket} gameStage={gameStage} ticketState={ticket} />
+						<Ticket
+							key={ticket.idTicket}
+							gameStage={gameStage}
+							ticketState={ticket}
+						/>
 					))}
 				</div>
 				<DefaultButton
