@@ -1,9 +1,10 @@
 .rules {
 	display: flex;
 	flex-direction: column;
+	position: relative;
+	height: calc(100vh - 80px - 16px);
 	background-color: var(--dark);
 	border-radius: 12px;
-	position: relative;
 	&-header {
 		display: flex;
 		align-items: center;
@@ -18,6 +19,6 @@
 		user-select: none;
 	}
 	&-main {
-		
+		height: 100%;
 	}
 }

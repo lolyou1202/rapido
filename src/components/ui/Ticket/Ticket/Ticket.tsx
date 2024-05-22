@@ -32,7 +32,7 @@ export const Ticket = ({
 	gameStage,
 	ticketState,
 }: {
-	gameStage: GameStage
+	gameStage?: GameStage
 	ticketState: TicketState
 }) => {
 	const { idTicket, isCorrectTicket, isWinTicket, fieldsTicket } = ticketState

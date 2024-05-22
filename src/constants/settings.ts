@@ -1,4 +1,4 @@
-export const NUM_DEFAULT_TICKET_IN_LIST = 4
+export const NUM_DEFAULT_TICKET_IN_LIST = 6
 
 export const NUM_CELLS_FIRST_FIELD = 20
 export const NUM_CELLS_SECOND_FIELD = 4

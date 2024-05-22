@@ -29,18 +29,23 @@ export const Header = () => {
 
 	return (
 		<div className='header'>
-			{headerButtons.map(button => {
-				const { name, icon, label } = button
-				return (
-					<HeaderButton
-						key={name}
-						action={location.pathname === `/${name}`}
-						icon={icon}
-						label={label}
-						onClick={() => navigate(`/${name}`)}
-					/>
-				)
-			})}
+			<span>
+				{headerButtons.map(button => {
+					const { name, icon, label } = button
+					return (
+						<HeaderButton
+							key={name}
+							action={location.pathname === `/${name}`}
+							icon={icon}
+							label={label}
+							onClick={() => navigate(`/${name}`)}
+						/>
+					)
+				})}
+			</span>
+			<span className='header-logo'>
+				<h2>Rapido</h2>
+			</span>
 		</div>
 	)
 }

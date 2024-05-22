@@ -1,8 +1,17 @@
 import './Rules.style.scss'
 import { Slider } from '../../components/ui/Slider/Slider'
-import { SliderRulesStep1 } from '../../components/ui/Slider/Slides/SliderRulesStep1'
+import { SliderRulesSlide } from '../../components/ui/Slider/Slides/SliderRulesSlide'
+import { Ticket } from '../../components/ui/Ticket/Ticket/Ticket'
+import { useAppSelector } from '../../redux/hooks/useAppRedux'
+import { DefaultButton } from '../../components/ui/Button/DefaultButton/DefaultButton'
+import { useNavigate } from 'react-router-dom'
+import { SidebarControls } from '../../components/features/SidebarControls/SidebarControls'
 
 export const Rules = () => {
+	const ticket = useAppSelector(state => state.game.gameRulesBlocks.ticket)
+
+	const navigate = useNavigate()
+
 	return (
 		<div className='rules'>
 			<span className='rules-header'>
@@ -10,7 +19,55 @@ export const Rules = () => {
 			</span>
 			<span className='rules-main'>
 				<Slider
-					sliderList={[<SliderRulesStep1 />, <SliderRulesStep1 />]}
+					sliderList={[
+						<SliderRulesSlide
+							numSlide={1}
+							titleSlide='Выберите числа в билете'
+							descriptionSlide='8 чисел в первом поле и 1 число во втором. При помощи функции СЛУЧАЙНО билет автоматически заполнится случайным образом'
+							demoSlide={<Ticket ticketState={ticket} />}
+							buttonSlide={
+								<DefaultButton
+									action
+									label='Выбрать числа'
+									onClick={() => navigate('/tickets')}
+								/>
+							}
+						/>,
+						<SliderRulesSlide
+							numSlide={2}
+							titleSlide='Заполните несколько билетов'
+							descriptionSlide='Заполните самостоятельно или выберите нужное количество билетов, которые это сделают автоматически, нажав на кнопку ЗАПОЛНИТЬ'
+							demoSlide={<SidebarControls ticketsList={[]} />}
+							buttonSlide={
+								<DefaultButton
+									action
+									label='Заполнить билет'
+									onClick={() => navigate('/tickets')}
+								/>
+							}
+						/>,
+						<SliderRulesSlide
+							numSlide={3}
+							titleSlide='Выпустите тиражв'
+							descriptionSlide='Если ваши билеты готовы к игре, то нажмите на кнопку ВЫПУСТИТЬ ТИРАЖ и проверяйте какие из них смогли выиграть'
+							demoSlide={
+								<div className='game-sidebar'>
+									<SidebarControls ticketsList={[]} />
+									<DefaultButton
+										action
+										label='Выпустить тираж'
+									/>
+								</div>
+							}
+							buttonSlide={
+								<DefaultButton
+									action
+									label='Выпустить тираж'
+									onClick={() => navigate('/tickets')}
+								/>
+							}
+						/>,
+					]}
 				/>
 			</span>
 		</div>

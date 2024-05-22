@@ -13,7 +13,7 @@ const { white } = colorTokens
 
 export const Slider = ({ sliderList }: { sliderList: React.ReactNode[] }) => {
 	return (
-		<div className='slider-wrapper'>
+		<div style={{height: '100%'}}>
 			<DefaultButton
 				action={false}
 				className='slider-navigationButton slider-prevButton'
@@ -43,9 +43,10 @@ export const Slider = ({ sliderList }: { sliderList: React.ReactNode[] }) => {
 				spaceBetween={16}
 				modules={[Navigation, Pagination]}
 				className='slider-root'
+				wrapperClass='slider-wrapper'
 			>
 				{sliderList.map((slide, index) => (
-					<SwiperSlide key={index}>{slide}</SwiperSlide>
+					<SwiperSlide className='slider-slide' key={index}>{slide}</SwiperSlide>
 				))}
 			</Swiper>
 		</div>

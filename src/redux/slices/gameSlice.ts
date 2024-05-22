@@ -34,10 +34,15 @@ import { setWinTicketReducer } from '../reducers/setWinTicketReducer'
 import { generateNumsWithFirstField } from '../../hooks/generateNumsWithFirstField'
 import { generateNumsWithSecondField } from '../../hooks/generateNumsWithSecondField'
 import { generateIdEdition } from '../../hooks/generateIdEdition'
+import moment from 'moment'
 
 export interface InitialState {
 	ticketsList: TicketState[]
 	editionsList: Edition[]
+	gameRulesBlocks: {
+		ticket: TicketState
+		controls: {}
+	}
 	gameStage: GameStage
 }
 
@@ -46,6 +51,10 @@ const initialState: InitialState = {
 		generateEmptyTicket({ idTicket: id })
 	),
 	editionsList: [],
+	gameRulesBlocks: {
+		ticket: generateEmptyTicket({ idTicket: 1111 }),
+		controls: {},
+	},
 	gameStage: 'fillTickets',
 }
 
@@ -283,18 +292,21 @@ export const gameSlice = createSlice({
 			const droppedNums = {
 				first: generateNumsWithFirstField(),
 				second: generateNumsWithSecondField(),
-			}
+			}	
+			const now = moment()
+			const date = now.format('LL')
+			const time = now.format('LTS')
 
 			let winingCombinations: EditionWiningCombination = {
-				'8 + 1': 0,
-				'8': 0,
-				'7 + 1': 0,
-				'7': 0,
-				'6 + 1': 0,
-				'6': 0,
-				'5 + 1': 0,
-				'5': 0,
-				'4 + 1': 0,
+				'8 | 1': 0,
+				'8 | 0': 0,
+				'7 | 1': 0,
+				'7 | 0': 0,
+				'6 | 1': 0,
+				'6 | 0': 0,
+				'5 | 1': 0,
+				'5 | 0': 0,
+				'4 | 1': 0,
 			}
 			let numWiningTickets: EditionWiningTickets = 0
 
@@ -334,8 +346,8 @@ export const gameSlice = createSlice({
 
 			editionsList.unshift({
 				idEdition,
-				date: '',
-				time: '',
+				date,
+				time,
 				participatingTickets: correctTicketList.length,
 				numWiningTickets,
 				droppedNums,

@@ -4,6 +4,13 @@
 	&-root {
 		padding-bottom: 56px !important;
 		width: calc(100% - 64px - 64px);
+		height: 100%;
+	}
+	&-wrapper {
+		align-items: center;
+	}
+	&-slide {
+		height: auto !important;
 	}
 	&-navigationButton {
 		position: absolute;

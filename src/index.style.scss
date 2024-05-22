@@ -37,7 +37,14 @@ body {
 	background-color: var(--black);
 }
 .app {
-	width: 1104px;
+	width: 1136px;
+	padding: 0 16px;
 	display: flex;
 	flex-direction: column;
+}
+
+@media (max-width: 1135px) {
+	.app {
+		width: 100vw;
+	}
 }

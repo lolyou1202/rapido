@@ -13,6 +13,7 @@
 	&.default {
 		border: 2px dashed var(--gray);
 		&:hover {
+			border: 2px dashed var(--light);
 			background-color: var(--shadow);
 		}
 	}
