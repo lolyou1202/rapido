@@ -13,6 +13,9 @@ export const Archive = () => {
 	const [frequentlyNumsVariant, setFrequentlyNumsVariant] = useState<
 		'lastTen' | 'allGame'
 	>('lastTen')
+	const [indexSelectedEdition, SetIndexSelectedEdition] = useState<
+		null | number
+	>(null)
 
 	return (
 		<div className='archive-grid'>

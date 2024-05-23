@@ -30,7 +30,7 @@ export const ArchiveTable = ({ editionsList }: { editionsList: Edition[] }) => {
 							<p>{edition.time}</p>
 						</td>
 						<td>
-							<p>#{edition.idEdition}</p>
+							<p>{edition.idEdition}</p>
 						</td>
 						<td>
 							<ul>
