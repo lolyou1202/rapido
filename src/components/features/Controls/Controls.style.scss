@@ -1,0 +1,17 @@
+.controls {
+	&-content {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+	&-buttons {
+		display: flex;
+		gap: 16px;
+		button {
+			width: 100%;
+		}
+	}
+	& + button {
+		width: 100%;
+	}
+}

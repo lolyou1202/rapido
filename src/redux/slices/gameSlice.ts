@@ -35,6 +35,7 @@ import { generateNumsWithFirstField } from '../../hooks/generateNumsWithFirstFie
 import { generateNumsWithSecondField } from '../../hooks/generateNumsWithSecondField'
 import { generateIdEdition } from '../../hooks/generateIdEdition'
 import moment from 'moment'
+import 'moment/dist/locale/ru'
 
 export interface InitialState {
 	ticketsList: TicketState[]
@@ -50,7 +51,30 @@ const initialState: InitialState = {
 	ticketsList: generateDefaultTicketsIdList.map(id =>
 		generateEmptyTicket({ idTicket: id })
 	),
-	editionsList: [],
+	editionsList: [
+		{
+			idEdition: 111111,
+			date: moment().format('LL'),
+			time: moment().format('LTS'),
+			participatingTickets: 10,
+			numWiningTickets: 2,
+			droppedNums: {
+				first: [2, 3, 7, 12, 1, 20, 4, 17],
+				second: [4],
+			},
+			winingCombinations: {
+				'8 | 1': 1,
+				'8 | 0': 0,
+				'7 | 1': 0,
+				'7 | 0': 0,
+				'6 | 1': 0,
+				'6 | 0': 1,
+				'5 | 1': 0,
+				'5 | 0': 0,
+				'4 | 1': 0,
+			},
+		},
+	],
 	gameRulesBlocks: {
 		ticket: generateEmptyTicket({ idTicket: 1111 }),
 		controls: {},
@@ -292,7 +316,7 @@ export const gameSlice = createSlice({
 			const droppedNums = {
 				first: generateNumsWithFirstField(),
 				second: generateNumsWithSecondField(),
-			}	
+			}
 			const now = moment()
 			const date = now.format('LL')
 			const time = now.format('LTS')

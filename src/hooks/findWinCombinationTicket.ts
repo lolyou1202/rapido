@@ -35,27 +35,27 @@ export const findWinCombinationTicket = ({
 	switch (matchCellsFirstField) {
 		case 8:
 			matchCellsSecondField === NUM_SELECTED_CELLS_SECOND_FIELD
-				? (winCombination = `${matchCellsFirstField} + ${NUM_SELECTED_CELLS_SECOND_FIELD}`)
-				: (winCombination = `${matchCellsFirstField}`)
+				? (winCombination = `${matchCellsFirstField} | ${NUM_SELECTED_CELLS_SECOND_FIELD}`)
+				: (winCombination = `${matchCellsFirstField} | 0`)
 			break
 		case 7:
 			matchCellsSecondField === NUM_SELECTED_CELLS_SECOND_FIELD
-				? (winCombination = `${matchCellsFirstField} + ${NUM_SELECTED_CELLS_SECOND_FIELD}`)
-				: (winCombination = `${matchCellsFirstField}`)
+				? (winCombination = `${matchCellsFirstField} | ${NUM_SELECTED_CELLS_SECOND_FIELD}`)
+				: (winCombination = `${matchCellsFirstField} | 0`)
 			break
 		case 6:
 			matchCellsSecondField === NUM_SELECTED_CELLS_SECOND_FIELD
-				? (winCombination = `${matchCellsFirstField} + ${NUM_SELECTED_CELLS_SECOND_FIELD}`)
-				: (winCombination = `${matchCellsFirstField}`)
+				? (winCombination = `${matchCellsFirstField} | ${NUM_SELECTED_CELLS_SECOND_FIELD}`)
+				: (winCombination = `${matchCellsFirstField} | 0`)
 			break
 		case 5:
 			matchCellsSecondField === NUM_SELECTED_CELLS_SECOND_FIELD
-				? (winCombination = `${matchCellsFirstField} + ${NUM_SELECTED_CELLS_SECOND_FIELD}`)
-				: (winCombination = `${matchCellsFirstField}`)
+				? (winCombination = `${matchCellsFirstField} | ${NUM_SELECTED_CELLS_SECOND_FIELD}`)
+				: (winCombination = `${matchCellsFirstField} | 0`)
 			break
 		case 4:
 			matchCellsSecondField === NUM_SELECTED_CELLS_SECOND_FIELD
-				? (winCombination = `${matchCellsFirstField} + ${NUM_SELECTED_CELLS_SECOND_FIELD}`)
+				? (winCombination = `${matchCellsFirstField} | ${NUM_SELECTED_CELLS_SECOND_FIELD}`)
 				: (winCombination = null)
 			break
 	}

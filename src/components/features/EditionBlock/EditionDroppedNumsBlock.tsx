@@ -1,11 +1,11 @@
-import { EditionField } from '../EditionField/EditionField'
-import { TicketField } from '../../../ui/Ticket/TicketField/TicketField'
-import { SidebarDescriptionRow } from '../../../ui/SidebarDescriptionRow/SidebarDescriptionRow'
 import {
 	EditionDroppedNums,
 	EditionParticipatingTickets,
 	EditionWiningTickets,
-} from '../../../../types/editionTypes'
+} from '../../../types/editionTypes'
+import { SidebarDescriptionRow } from '../../ui/SidebarDescriptionRow/SidebarDescriptionRow'
+import { TicketField } from '../../ui/Ticket/TicketField/TicketField'
+import { EditionField } from './EditionField/EditionField'
 
 export const EditionDroppedNumsBlock = ({
 	droppedNums,

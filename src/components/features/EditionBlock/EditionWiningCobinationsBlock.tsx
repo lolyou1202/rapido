@@ -1,6 +1,6 @@
-import { EditionWiningCombination } from '../../../../types/editionTypes'
-import { SidebarDescriptionRow } from '../../../ui/SidebarDescriptionRow/SidebarDescriptionRow'
-import { EditionField } from '../EditionField/EditionField'
+import { EditionWiningCombination } from '../../../types/editionTypes'
+import { SidebarDescriptionRow } from '../../ui/SidebarDescriptionRow/SidebarDescriptionRow'
+import { EditionField } from './EditionField/EditionField'
 
 export const EditionWiningCobinationsBlock = ({
 	winingCombinations,

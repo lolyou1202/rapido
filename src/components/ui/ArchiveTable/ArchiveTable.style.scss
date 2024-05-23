@@ -1,0 +1,53 @@
+.archive-table {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	width: 100%;
+	thead {
+		tr {
+			text-transform: uppercase;
+		}
+	}
+	tbody {
+		tr {
+			cursor: pointer;
+			&:hover {
+				background-color: var(--shadow);
+			}
+		}
+	}
+	tr {
+		display: grid;
+		grid-template-columns: 110px 80px 80px 384px;
+		justify-content: space-between;
+		padding: 8px;
+		border-radius: 8px;
+		font-size: 14px;
+		line-height: 16px;
+		color: var(--white);
+		user-select: none;
+		text-align: left;
+		transition: all 0.2s ease-in-out;
+	}
+	td {
+		display: flex;
+		align-items: center;
+	}
+	ul {
+		display: flex;
+		gap: 12px;
+	}
+	li {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding-right: 2px;
+		width: 32px;
+		height: 32px;
+		border-radius: 100%;
+		border: 2px dashed var(--gray);
+		&.action {
+			border: 2px dashed var(--pink);
+		}
+	}
+}

@@ -1,7 +1,6 @@
-import './SidebarControls.style.scss'
+import './Controls.style.scss'
 import { useState } from 'react'
 import { DefaultButton } from '../../ui/Button/DefaultButton/DefaultButton'
-import { SidebarContainer } from '../../ui/SidebarContainer/SidebarContainer'
 import { SidebarControlRow } from '../../ui/SidebarControlRow/SidebarControlRow'
 import { SidebarDescriptionRow } from '../../ui/SidebarDescriptionRow/SidebarDescriptionRow'
 import { TicketState } from '../../../types/ticketTypes'
@@ -15,8 +14,9 @@ import {
 	NUM_MAX_FILL_TICKETS,
 	NUM_MIN_FILL_TICKETS,
 } from '../../../constants/settings'
+import { ContainerBox } from '../../ui/Container/ContainerBox/ContainerBox'
 
-export const SidebarControls = ({
+export const Controls = ({
 	ticketsList,
 }: {
 	ticketsList: TicketState[]
@@ -42,10 +42,7 @@ export const SidebarControls = ({
 	}
 
 	return (
-		<SidebarContainer
-			classNameContainerRoot='sidebar-controls'
-			classNameContainerContent='controls-content'
-		>
+		<ContainerBox classNameContainerContent='controls-content'>
 			<SidebarControlRow
 				description='Случайно заполнить'
 				countToFill={countToFill}
@@ -58,7 +55,7 @@ export const SidebarControls = ({
 				description='Заполненных билетов'
 				count={numCorrectTicket}
 			/>
-			<div className='sidebar__container-buttons'>
+			<div className='controls-buttons'>
 				<DefaultButton
 					action={false}
 					label='Заполнить'
@@ -71,6 +68,6 @@ export const SidebarControls = ({
 					onClick={handleClickClearAllTicketsButton}
 				/>
 			</div>
-		</SidebarContainer>
+		</ContainerBox>
 	)
 }

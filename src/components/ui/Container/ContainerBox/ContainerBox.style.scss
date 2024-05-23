@@ -1,0 +1,21 @@
+.containerBox {
+	&-root {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		padding: 16px;
+		background-color: var(--dark);
+		border-radius: 12px;
+		&:has(.containerBox-title) {
+			padding: 24px 16px 16px 16px;
+			gap: 24px;
+		}
+	}
+	&-title {
+		text-align: center;
+		text-transform: uppercase;
+		font-size: 16px;
+		line-height: 16px;
+		color: var(--white);
+	}
+}

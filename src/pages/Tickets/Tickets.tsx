@@ -4,8 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks/useAppRedux'
 import { Ticket } from '../../components/ui/Ticket/Ticket/Ticket'
 import { DefaultButton } from '../../components/ui/Button/DefaultButton/DefaultButton'
 import { Add } from '../../components/icons/Add'
-import { SidebarControls } from '../../components/features/SidebarControls/SidebarControls'
-import { Edition } from '../../components/features/Edition/Edition'
+import { Controls } from '../../components/features/Controls/Controls'
 import { findCorrectTickets } from '../../hooks/findCorrectTickets'
 import {
 	addTickets,
@@ -13,11 +12,14 @@ import {
 	createEdition,
 	setGameStage,
 } from '../../redux/slices/gameSlice'
+import { EditionBlock } from '../../components/features/EditionBlock/EditionBlock'
 
 const { white } = colorTokens
 
 export const Tickets = () => {
 	const { ticketsList, gameStage } = useAppSelector(state => state.game)
+
+	const lastEdition = useAppSelector(state => state.game.editionsList[0])
 
 	const dispatch = useAppDispatch()
 
@@ -58,7 +60,7 @@ export const Tickets = () => {
 				<div className='game-sidebar'>
 					{gameStage === 'fillTickets' && (
 						<>
-							<SidebarControls ticketsList={ticketsList} />
+							<Controls ticketsList={ticketsList} />
 							<DefaultButton
 								action
 								disabled={correctTicketIdList.length < 1}
@@ -69,7 +71,7 @@ export const Tickets = () => {
 					)}
 					{gameStage === 'viewResults' && (
 						<>
-							<Edition />
+							<EditionBlock edition={lastEdition} />
 							<DefaultButton
 								action
 								label='Играть заново'

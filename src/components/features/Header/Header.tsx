@@ -29,6 +29,9 @@ export const Header = () => {
 
 	return (
 		<div className='header'>
+			<span className='header-logo'>
+				<h2>Rapido</h2>
+			</span>
 			<span>
 				{headerButtons.map(button => {
 					const { name, icon, label } = button
@@ -42,9 +45,6 @@ export const Header = () => {
 						/>
 					)
 				})}
-			</span>
-			<span className='header-logo'>
-				<h2>Rapido</h2>
 			</span>
 		</div>
 	)

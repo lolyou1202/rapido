@@ -18,10 +18,6 @@ import { DefaultButton } from '../../Button/DefaultButton/DefaultButton'
 import { Cross } from '../../../icons/Cross'
 import { Dice } from '../../../icons/Dice'
 import { Clear } from '../../../icons/Clear'
-import {
-	NUM_SELECTED_CELLS_FIRST_FIELD,
-	NUM_SELECTED_CELLS_SECOND_FIELD,
-} from '../../../../constants/settings'
 import { colorTokens } from '../../../../constants/colorTokens'
 import { isSelectedCellsInField } from '../../../../hooks/isSelectedCellsInField'
 import { GameStage } from '../../../../types/gameTypes'
@@ -94,20 +90,10 @@ export const Ticket = ({
 					</button>
 				</div>
 				<div className='ticket-main'>
-					<p className='ticket-rule'>
-						<span>
-							Выберите {NUM_SELECTED_CELLS_FIRST_FIELD} чисел в
-							первом поле
-						</span>
-						<span>
-							и {NUM_SELECTED_CELLS_SECOND_FIELD} число во втором
-							поле
-						</span>
-					</p>
 					{Object.values(fieldsTicket).map(field => (
 						<TicketField
-							key={field.variantField}
 							{...field}
+							key={field.variantField}
 							onClickCell={
 								gameStage === 'fillTickets'
 									? handleClickCell({ idTicket })
@@ -115,24 +101,30 @@ export const Ticket = ({
 							}
 						/>
 					))}
-					<div className='ticket-buttons'>
-						<DefaultButton
-							action={false}
-							disabled={gameStage === 'viewResults'}
-							label='Случайно'
-							icon={<Dice color={white} />}
-							onClick={handleClickRandomButton}
-						/>
-						<DefaultButton
-							action={false}
-							disabled={
-								!isSelectedCells || gameStage === 'viewResults'
-							}
-							label='Очистить'
-							icon={<Clear color={white} />}
-							onClick={handleClickClearButton}
-						/>
+					<div className='ticket__holes'>
+						<span className='ticket__holes-leftTop'></span>
+						<span className='ticket__holes-rightTop'></span>
+						<span className='ticket__holes-rightBottom'></span>
+						<span className='ticket__holes-leftBottom'></span>
 					</div>
+				</div>
+				<div className='ticket-footer'>
+					<DefaultButton
+						action={false}
+						disabled={gameStage === 'viewResults'}
+						label='Случайно'
+						icon={<Dice color={white} />}
+						onClick={handleClickRandomButton}
+					/>
+					<DefaultButton
+						action={false}
+						disabled={
+							!isSelectedCells || gameStage === 'viewResults'
+						}
+						label='Очистить'
+						icon={<Clear color={white} />}
+						onClick={handleClickClearButton}
+					/>
 				</div>
 			</span>
 		</div>

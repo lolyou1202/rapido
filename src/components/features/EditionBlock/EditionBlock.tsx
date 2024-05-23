@@ -1,15 +1,13 @@
-import './Edition.style.scss'
+import './EditionBlock.style.scss'
 import { useState } from 'react'
-import { SidebarContainer } from '../../ui/SidebarContainer/SidebarContainer'
 import { DefaultButton } from '../../ui/Button/DefaultButton/DefaultButton'
-import { useAppSelector } from '../../../redux/hooks/useAppRedux'
-import { EditionDroppedNumsBlock } from './EditionBlock/EditionDroppedNumsBlock'
-import { EditionWiningCobinationsBlock } from './EditionBlock/EditionWiningCobinationsBlock'
 import { SidebarDescriptionRow } from '../../ui/SidebarDescriptionRow/SidebarDescriptionRow'
+import { ContainerBox } from '../../ui/Container/ContainerBox/ContainerBox'
+import { Edition } from '../../../types/editionTypes'
+import { EditionDroppedNumsBlock } from './EditionDroppedNumsBlock'
+import { EditionWiningCobinationsBlock } from './EditionWiningCobinationsBlock'
 
-export const Edition = () => {
-	const lastEdition = useAppSelector(state => state.game.editionsList[0])
-
+export const EditionBlock = ({ edition }: { edition: Edition }) => {
 	const {
 		idEdition,
 		date,
@@ -18,14 +16,14 @@ export const Edition = () => {
 		participatingTickets,
 		winingCombinations,
 		droppedNums,
-	} = lastEdition
+	} = edition
 
 	const [showField, setShowField] = useState<
 		'droppedNums' | 'winingCobinations'
 	>('droppedNums')
 
 	return (
-		<SidebarContainer
+		<ContainerBox
 			title={`Тираж №${idEdition}`}
 			classNameContainerRoot='sidebar-edition'
 			classNameContainerContent='edition-content'
@@ -63,6 +61,6 @@ export const Edition = () => {
 					</>
 				)}
 			</span>
-		</SidebarContainer>
+		</ContainerBox>
 	)
 }
