@@ -311,7 +311,7 @@ export const gameSlice = createSlice({
 			const ticketsList = state.ticketsList
 			const editionsList = state.editionsList
 
-			const idEdition = generateIdEdition({ editionsList })
+			const [idEdition] = generateIdEdition({ editionsList })
 
 			const droppedNums = {
 				first: generateNumsWithFirstField(),

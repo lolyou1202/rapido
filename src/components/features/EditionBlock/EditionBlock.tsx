@@ -6,8 +6,18 @@ import { ContainerBox } from '../../ui/Container/ContainerBox/ContainerBox'
 import { Edition } from '../../../types/editionTypes'
 import { EditionDroppedNumsBlock } from './EditionDroppedNumsBlock'
 import { EditionWiningCobinationsBlock } from './EditionWiningCobinationsBlock'
+import { ArrowBoldLeft } from '../../icons/ArrowBoldLeft'
 
-export const EditionBlock = ({ edition }: { edition: Edition }) => {
+export const EditionBlock = ({ edition }: { edition: Edition | null }) => {
+	if (!edition) {
+		return (
+			<ContainerBox classNameContainerContent='edition-empty'>
+				<ArrowBoldLeft />
+				<p>Выберите тираж</p>
+			</ContainerBox>
+		)
+	}
+	
 	const {
 		idEdition,
 		date,
@@ -25,7 +35,6 @@ export const EditionBlock = ({ edition }: { edition: Edition }) => {
 	return (
 		<ContainerBox
 			title={`Тираж №${idEdition}`}
-			classNameContainerRoot='sidebar-edition'
 			classNameContainerContent='edition-content'
 		>
 			<span>

@@ -1,52 +1,62 @@
-import { Edition } from '../../../types/editionTypes'
 import './ArchiveTable.style.scss'
+import { Edition } from '../../../types/editionTypes'
+import { ContainerBox } from '../Container/ContainerBox/ContainerBox'
 
-export const ArchiveTable = ({ editionsList }: { editionsList: Edition[] }) => {
+export const ArchiveTable = ({
+	editionsList,
+	handleClickTableRow,
+}: {
+	editionsList: Edition[]
+	handleClickTableRow: (indexRow: number) => void
+}) => {
 	return (
-		<table className='archive-table'>
-			<thead>
-				<tr>
-					<th>
-						<p>Дата</p>
-					</th>
-					<th>
-						<p>Время</p>
-					</th>
-					<th>
-						<p>Тираж</p>
-					</th>
-					<th>
-						<p>Выпавшие числа</p>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				{editionsList.map(edition => (
-					<tr key={edition.idEdition}>
-						<td>
-							<p>{edition.date}</p>
-						</td>
-						<td>
-							<p>{edition.time}</p>
-						</td>
-						<td>
-							<p>{edition.idEdition}</p>
-						</td>
-						<td>
-							<ul>
-								{edition.droppedNums.first.map(num => (
-									<li key={num} onClick={() => {}}>
-										{num}
-									</li>
-								))}
-								<li className='action' onClick={() => {}}>
-									{edition.droppedNums.second[0]}
-								</li>
-							</ul>
-						</td>
+		<ContainerBox>
+			<table className='archive-table'>
+				<thead>
+					<tr>
+						<th>
+							<p>Дата</p>
+						</th>
+						<th>
+							<p>Время</p>
+						</th>
+						<th>
+							<p>Тираж</p>
+						</th>
+						<th>
+							<p>Выпавшие числа</p>
+						</th>
 					</tr>
-				))}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{editionsList.map((edition, indexRow) => (
+						<tr
+							key={edition.idEdition}
+							onClick={() => handleClickTableRow(indexRow)}
+						>
+							<td>
+								<p>{edition.date}</p>
+							</td>
+							<td>
+								<p>{edition.time}</p>
+							</td>
+							<td>
+								<p>{edition.idEdition}</p>
+							</td>
+							<td>
+								<ul>
+									{edition.droppedNums.first.map(num => (
+										<li key={num}>{num}</li>
+									))}
+									<li className='action'>
+										{edition.droppedNums.second[0]}
+									</li>
+								</ul>
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</ContainerBox>
 	)
 }
