@@ -4,21 +4,20 @@ import { ContainerBox } from '../Container/ContainerBox/ContainerBox'
 
 export const ArchiveTable = ({
 	editionsList,
-	handleClickTableRow,
+	onClickTableRow,
 }: {
 	editionsList: Edition[]
-	handleClickTableRow: (indexRow: number) => void
+	onClickTableRow: (indexRow: number) => void
 }) => {
 	return (
-		<ContainerBox>
+		<ContainerBox
+			classNameContainerContent='archive-table-content'
+		>
 			<table className='archive-table'>
 				<thead>
 					<tr>
 						<th>
 							<p>Дата</p>
-						</th>
-						<th>
-							<p>Время</p>
 						</th>
 						<th>
 							<p>Тираж</p>
@@ -32,13 +31,10 @@ export const ArchiveTable = ({
 					{editionsList.map((edition, indexRow) => (
 						<tr
 							key={edition.idEdition}
-							onClick={() => handleClickTableRow(indexRow)}
+							onClick={() => onClickTableRow(indexRow)}
 						>
 							<td>
 								<p>{edition.date}</p>
-							</td>
-							<td>
-								<p>{edition.time}</p>
 							</td>
 							<td>
 								<p>{edition.idEdition}</p>

@@ -21,7 +21,6 @@ export type EditionDroppedNums = { [key in FieldVariant]: number[] }
 export type Edition = {
 	idEdition: EditionId
 	date: EditionDate
-	time: EditionTime
 	participatingTickets: EditionParticipatingTickets
 	numWiningTickets: EditionWiningTickets
 	droppedNums: EditionDroppedNums

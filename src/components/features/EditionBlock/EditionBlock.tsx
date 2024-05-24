@@ -17,11 +17,10 @@ export const EditionBlock = ({ edition }: { edition: Edition | null }) => {
 			</ContainerBox>
 		)
 	}
-	
+
 	const {
 		idEdition,
 		date,
-		time,
 		numWiningTickets,
 		participatingTickets,
 		winingCombinations,
@@ -39,10 +38,6 @@ export const EditionBlock = ({ edition }: { edition: Edition | null }) => {
 		>
 			<span>
 				<SidebarDescriptionRow description='Дата тиража' count={date} />
-				<SidebarDescriptionRow
-					description='Время публикации'
-					count={time}
-				/>
 			</span>
 			<span>
 				{showField === 'droppedNums' && (
