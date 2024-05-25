@@ -9,6 +9,9 @@
 			background-color: var(--black);
 			border-radius: 16px;
 		}
+		button {
+			pointer-events: none;
+		}
 	}
 	&__step {
 		display: flex;

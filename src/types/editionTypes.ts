@@ -26,3 +26,5 @@ export type Edition = {
 	droppedNums: EditionDroppedNums
 	winingCombinations: EditionWiningCombination
 }
+
+export type FrequentlyNumsDropSwich = 'lastFew' | 'wholeGame'

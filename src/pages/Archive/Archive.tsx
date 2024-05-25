@@ -1,5 +1,5 @@
 import './Archive.style.scss'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { EditionBlock } from '../../components/features/EditionBlock/EditionBlock'
 import { useAppSelector } from '../../redux/hooks/useAppRedux'
 import { ArchiveTable } from '../../components/ui/ArchiveTable/ArchiveTable'
@@ -7,82 +7,79 @@ import { FrequentlyNumsSwich } from '../../components/ui/FrequentlyNumsSwich/Fre
 import { FrequentlyNumsList } from '../../components/ui/FrequentlyNumsList/FrequentlyNumsList'
 import { findFrequentlyNums } from '../../hooks/findFrequentlyNums'
 import { FieldVariant } from '../../types/ticketTypes'
+import { FrequentlyNumsDropSwich } from '../../types/editionTypes'
 
 export const Archive = () => {
 	const editionsList = useAppSelector(state => state.game.editionsList)
 
 	const [selectedEdition, setSelectedEdition] = useState<null | number>(null)
 
-	const frequentlyNumsList = findFrequentlyNums({ editionsList })
+	const [frequentlyNumsVariant, setFrequentlyNumsVariant] =
+		useState<FrequentlyNumsDropSwich>('lastFew')
 
-	const [selectedFrequentlyNum, setSelectedFrequentlyNum] = useState({
-		first: frequentlyNumsList.first.map(item => {
-			return {
-				...item,
-				active: false,
-			}
-		}),
-		second: frequentlyNumsList.second.map(item => {
-			return {
-				...item,
-				active: false,
-			}
-		}),
+	const frequentlyNumsList = useMemo(() => {
+		return findFrequentlyNums({
+			editionsList,
+			frequentlySwich: frequentlyNumsVariant,
+		})
+	}, [editionsList, frequentlyNumsVariant])
+
+	const [selectedFrequentlyNum, setSelectedFrequentlyNum] = useState<{
+		variantField: FieldVariant
+		indexNum: number
+	}>({
+		variantField: 'first',
+		indexNum: 0,
 	})
 
 	const handleClickTableRow = (indexRow: number) => {
 		setSelectedEdition(indexRow)
 	}
+	const handleChangeFrequentlyNumsVariant = (
+		newVariant: FrequentlyNumsDropSwich
+	) => {
+		setFrequentlyNumsVariant(newVariant)
+	}
 	const handleClickFrequentlyNum = ({
 		variantField,
-		num,
+		indexNum,
 	}: {
 		variantField: FieldVariant
-		num: number
+		indexNum: number
 	}) => {
-		setSelectedFrequentlyNum(prevState => {
-			switch (variantField) {
-				case 'first':
-					return {
-						first: [
-							...prevState.first.map(field => ({
-								...field,
-								active:
-									field.num === num
-										? (field.active = true)
-										: (field.active = false),
-							})),
-						],
-						second: {
-							...prevState.second,
-							active: false,
-						},
-					}
-				case 'second':
-					return {
-						first: [
-							...prevState.first.map(field => ({
-								...field,
-								active: false,
-							})),
-						],
-						second: {
-							...prevState.second,
-							active: true,
-						},
-					}
-			}
-		})
+		setSelectedFrequentlyNum({ variantField, indexNum })
+	}
+
+	const frequentlyNumsPercent =
+		frequentlyNumsList[selectedFrequentlyNum.variantField][
+			selectedFrequentlyNum.indexNum
+		].percentEditions
+	const frequentlyNumsLastTime =
+		frequentlyNumsList[selectedFrequentlyNum.variantField][
+			selectedFrequentlyNum.indexNum
+		].lastTime
+	const frequentlyNum = {
+		variantField: selectedFrequentlyNum.variantField,
+		num: frequentlyNumsList[selectedFrequentlyNum.variantField][
+			selectedFrequentlyNum.indexNum
+		].num,
 	}
 
 	return (
 		<div className='archive-grid'>
 			<FrequentlyNumsList
-				frequentlyNumsList={selectedFrequentlyNum}
+				selectedFrequentlyNum={selectedFrequentlyNum}
+				frequentlyNumsList={frequentlyNumsList}
 				onClickFrequentlyNum={handleClickFrequentlyNum}
 			/>
-			<FrequentlyNumsSwich />
+			<FrequentlyNumsSwich
+				variant={frequentlyNumsVariant}
+				percent={frequentlyNumsPercent}
+				lastTime={frequentlyNumsLastTime}
+				onClickVariant={handleChangeFrequentlyNumsVariant}
+			/>
 			<ArchiveTable
+				frequentlyNum={frequentlyNum}
 				editionsList={editionsList}
 				onClickTableRow={handleClickTableRow}
 			/>

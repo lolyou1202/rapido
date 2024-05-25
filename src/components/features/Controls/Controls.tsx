@@ -38,7 +38,6 @@ export const Controls = ({
 	}
 	const handleClickFillTicketsButton = () => {
 		dispatch(randomFillSeveralTickets({ countToFill }))
-		setCountToFill(1)
 	}
 
 	return (

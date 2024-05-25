@@ -47,9 +47,14 @@
 		width: 32px;
 		height: 32px;
 		border-radius: 100%;
-		border: 2px dashed var(--gray);
-		&.action {
+		&.first {
+			border: 2px dashed var(--gray);
+		}
+		&.second {
 			border: 2px dashed var(--pink);
+		}
+		&.action {
+			background-color: var(--shadow);
 		}
 	}
 	&-content {

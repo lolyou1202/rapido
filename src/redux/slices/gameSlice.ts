@@ -18,7 +18,6 @@ import {
 } from '../../types/ticketTypes'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { correctTicketReducer } from '../reducers/correctTicketReducer'
-import { clearTicketReducer } from '../reducers/clearTicketReducer'
 import { addTicketsReducer } from '../reducers/addTicketsReducer'
 import { randomFillTicketReducer } from '../reducers/randomFillTicketReducer'
 import { generateDefaultTicketsIdList } from '../../hooks/generateDefaultTicketsIdList'
@@ -611,12 +610,9 @@ export const gameSlice = createSlice({
 			state.ticketsList.push(...newEmptyTikets)
 		},
 		clearAllTickets: state => {
-			state.ticketsList.forEach(ticket => {
-				clearTicketReducer({
-					state,
-					idTicket: ticket.idTicket,
-				})
-			})
+			state.ticketsList = generateDefaultTicketsIdList.map(id =>
+				generateEmptyTicket({ idTicket: id })
+			)
 		},
 		randomFillSeveralTickets: (
 			state,

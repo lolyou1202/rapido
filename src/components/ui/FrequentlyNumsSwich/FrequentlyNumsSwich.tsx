@@ -1,27 +1,53 @@
 import './FrequentlyNumsSwich.stule.scss'
+import { FrequentlyNumsDropSwich } from '../../../types/editionTypes'
 import { ContainerBox } from '../Container/ContainerBox/ContainerBox'
 import { DefaultButton } from '../Button/DefaultButton/DefaultButton'
-import { useState } from 'react'
+import { NUM_LAST_FEW_EDITIONS } from '../../../constants/settings'
 
-export const FrequentlyNumsSwich = () => {
-	const [frequentlyNumsVariant, setFrequentlyNumsVariant] = useState<
-		'lastTen' | 'allGame'
-	>('lastTen')
+export const FrequentlyNumsSwich = ({
+	variant,
+	percent,
+	lastTime,
+	onClickVariant,
+}: {
+	percent: number
+	lastTime: number
+	variant: FrequentlyNumsDropSwich
+	onClickVariant: (newVariant: FrequentlyNumsDropSwich) => void
+}) => {
+	const wording = () => {
+		let stringNumber = String(lastTime).slice(-2)
+
+		if (stringNumber.length === 1) {
+			stringNumber = `0${stringNumber}`
+		}
+		if (Number(stringNumber[1]) === 1 && Number(stringNumber[0]) !== 1) {
+			return `${lastTime} тираж`
+		}
+		if (
+			Number(stringNumber[1]) > 1 &&
+			Number(stringNumber[1]) < 5 &&
+			Number(stringNumber[0]) !== 1
+		) {
+			return `${lastTime} тиража`
+		}
+		return `${lastTime} тиражей`
+	}
 	return (
 		<ContainerBox classNameContainerContent='frequentlyNums-swich'>
 			<span>
-				<p>в 70% тиражей</p>
-				<p>последний раз — 0 тиражей назад</p>
+				<p>в {percent}% тиражей</p>
+				<p>последний раз — {wording()} назад</p>
 			</span>
 			<DefaultButton
-				action={frequentlyNumsVariant === 'lastTen'}
-				label='В последних 10 тиражах'
-				onClick={() => setFrequentlyNumsVariant('lastTen')}
+				action={variant === 'lastFew'}
+				label={`В последних ${NUM_LAST_FEW_EDITIONS} тиражах`}
+				onClick={() => onClickVariant('lastFew')}
 			/>
 			<DefaultButton
-				action={frequentlyNumsVariant === 'allGame'}
+				action={variant === 'wholeGame'}
 				label='За всё время игры'
-				onClick={() => setFrequentlyNumsVariant('allGame')}
+				onClick={() => onClickVariant('wholeGame')}
 			/>
 		</ContainerBox>
 	)

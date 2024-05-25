@@ -5,22 +5,23 @@ import { ContainerBox } from '../Container/ContainerBox/ContainerBox'
 import { CircleDashedButton } from '../Button/CircleDashedButton/CircleDashedButton'
 
 export const FrequentlyNumsList = ({
+	selectedFrequentlyNum,
 	frequentlyNumsList,
 	onClickFrequentlyNum,
 }: {
+	selectedFrequentlyNum: { variantField: FieldVariant; indexNum: number }
 	frequentlyNumsList: {
 		[key in FieldVariant]: {
-			active: boolean
 			num: number
 			count: number
 		}[]
 	}
 	onClickFrequentlyNum: ({
 		variantField,
-		num,
+		indexNum,
 	}: {
 		variantField: FieldVariant
-		num: number
+		indexNum: number
 	}) => void
 }) => {
 	return (
@@ -30,15 +31,22 @@ export const FrequentlyNumsList = ({
 			classNameContainerContent='frequentlyNums-list-content'
 		>
 			{Object.entries(frequentlyNumsList).map(
-				([key, valueField], index) => {
+				([key, valueField], indexField) => {
 					const variantField = key as FieldVariant
 					return (
-						<div key={index} className='frequentlyNums-list-field'>
-							<p>{`Поле ${index + 1}`}</p>
+						<div
+							key={indexField}
+							className='frequentlyNums-list-field'
+						>
+							<p>{`Поле ${indexField + 1}`}</p>
 							<ul>
-								{valueField.map(num => {
+								{valueField.map((num, indexNum) => {
 									const liCN = classNames({
-										selected: num.active,
+										selected:
+											selectedFrequentlyNum.indexNum ===
+												indexNum &&
+											variantField ===
+												selectedFrequentlyNum.variantField,
 									})
 									return (
 										<li
@@ -46,7 +54,7 @@ export const FrequentlyNumsList = ({
 											className={liCN}
 											onClick={() =>
 												onClickFrequentlyNum({
-													num: num.num,
+													indexNum,
 													variantField,
 												})
 											}
