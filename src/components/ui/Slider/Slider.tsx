@@ -13,7 +13,7 @@ const { white } = colorTokens
 
 export const Slider = ({ sliderList }: { sliderList: React.ReactNode[] }) => {
 	return (
-		<div style={{height: '100%'}}>
+		<div style={{ height: '100%' }}>
 			<DefaultButton
 				action={false}
 				className='slider-navigationButton slider-prevButton'
@@ -39,6 +39,7 @@ export const Slider = ({ sliderList }: { sliderList: React.ReactNode[] }) => {
 					bulletActiveClass: 'slider-bulletActiveButton',
 				}}
 				loop={false}
+				allowTouchMove={false}
 				slidesPerView={1}
 				spaceBetween={16}
 				modules={[Navigation, Pagination]}
@@ -46,7 +47,9 @@ export const Slider = ({ sliderList }: { sliderList: React.ReactNode[] }) => {
 				wrapperClass='slider-wrapper'
 			>
 				{sliderList.map((slide, index) => (
-					<SwiperSlide className='slider-slide' key={index}>{slide}</SwiperSlide>
+					<SwiperSlide className='slider-slide' key={index}>
+						{slide}
+					</SwiperSlide>
 				))}
 			</Swiper>
 		</div>

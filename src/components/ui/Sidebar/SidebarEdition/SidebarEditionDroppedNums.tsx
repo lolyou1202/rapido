@@ -2,12 +2,12 @@ import {
 	EditionDroppedNums,
 	EditionParticipatingTickets,
 	EditionWiningTickets,
-} from '../../../types/editionTypes'
-import { SidebarDescriptionRow } from '../../ui/SidebarDescriptionRow/SidebarDescriptionRow'
-import { TicketField } from '../../ui/Ticket/TicketField/TicketField'
-import { EditionField } from './EditionField/EditionField'
+} from '../../../../types/editionTypes'
+import { DescriptionRow } from '../DescriptionRow/DescriptionRow'
+import { TicketField } from '../../Ticket/TicketField/TicketField'
+import { SidebarField } from '../SidebarField/SidebarField'
 
-export const EditionDroppedNumsBlock = ({
+export const SidebarEditionDroppedNums = ({
 	droppedNums,
 	numWiningTickets,
 	participatingTickets,
@@ -18,7 +18,7 @@ export const EditionDroppedNumsBlock = ({
 }) => {
 	const { first: numsFirstField, second: numsSecondField } = droppedNums
 	return (
-		<EditionField title='Выпавшие числа'>
+		<SidebarField title='Выпавшие числа'>
 			<TicketField
 				variantField='first'
 				labelField='Поле 1'
@@ -35,14 +35,14 @@ export const EditionDroppedNumsBlock = ({
 					variantCell: 'coin',
 				}))}
 			/>
-			<SidebarDescriptionRow
+			<DescriptionRow
 				description='Участвующие билеты'
 				count={participatingTickets}
 			/>
-			<SidebarDescriptionRow
+			<DescriptionRow
 				description='Победные билеты'
 				count={numWiningTickets}
 			/>
-		</EditionField>
+		</SidebarField>
 	)
 }

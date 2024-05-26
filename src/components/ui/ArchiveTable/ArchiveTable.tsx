@@ -1,6 +1,6 @@
 import './ArchiveTable.style.scss'
 import { Edition, EditionDroppedNums } from '../../../types/editionTypes'
-import { ContainerBox } from '../Container/ContainerBox/ContainerBox'
+import { SidebarContainer } from '../Sidebar/SidebarContainer/SidebarContainer'
 import { FieldVariant } from '../../../types/ticketTypes'
 import { ArchiveTableDroppedNumsList } from './ArchiveTableDroppedNumsList'
 
@@ -27,7 +27,7 @@ export const ArchiveTable = ({
 			)
 		})
 	return (
-		<ContainerBox classNameContainerContent='archive-table-content'>
+		<SidebarContainer classNameContainerContent='archive-table-content'>
 			<table className='archive-table'>
 				<thead>
 					<tr>
@@ -64,6 +64,6 @@ export const ArchiveTable = ({
 					})}
 				</tbody>
 			</table>
-		</ContainerBox>
+		</SidebarContainer>
 	)
 }

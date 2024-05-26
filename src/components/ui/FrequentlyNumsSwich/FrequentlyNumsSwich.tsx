@@ -1,6 +1,6 @@
 import './FrequentlyNumsSwich.stule.scss'
 import { FrequentlyNumsDropSwich } from '../../../types/editionTypes'
-import { ContainerBox } from '../Container/ContainerBox/ContainerBox'
+import { SidebarContainer } from '../Sidebar/SidebarContainer/SidebarContainer'
 import { DefaultButton } from '../Button/DefaultButton/DefaultButton'
 import { NUM_LAST_FEW_EDITIONS } from '../../../constants/settings'
 
@@ -34,7 +34,7 @@ export const FrequentlyNumsSwich = ({
 		return `${lastTime} тиражей`
 	}
 	return (
-		<ContainerBox classNameContainerContent='frequentlyNums-swich'>
+		<SidebarContainer classNameContainerContent='frequentlyNums-swich'>
 			<span>
 				<p>в {percent}% тиражей</p>
 				<p>последний раз — {wording()} назад</p>
@@ -49,6 +49,6 @@ export const FrequentlyNumsSwich = ({
 				label='За всё время игры'
 				onClick={() => onClickVariant('wholeGame')}
 			/>
-		</ContainerBox>
+		</SidebarContainer>
 	)
 }

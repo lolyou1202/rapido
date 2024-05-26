@@ -1,6 +1,6 @@
 import './Archive.style.scss'
 import { useMemo, useState } from 'react'
-import { EditionBlock } from '../../components/features/EditionBlock/EditionBlock'
+import { SidebarEdition } from '../../components/ui/Sidebar/SidebarEdition/SidebarEdition'
 import { useAppSelector } from '../../redux/hooks/useAppRedux'
 import { ArchiveTable } from '../../components/ui/ArchiveTable/ArchiveTable'
 import { FrequentlyNumsSwich } from '../../components/ui/FrequentlyNumsSwich/FrequentlyNumsSwich'
@@ -84,7 +84,7 @@ export const Archive = () => {
 				onClickTableRow={handleClickTableRow}
 			/>
 			<span>
-				<EditionBlock
+				<SidebarEdition
 					edition={
 						selectedEdition === null
 							? selectedEdition

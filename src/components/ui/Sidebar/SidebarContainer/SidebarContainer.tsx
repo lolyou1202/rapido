@@ -1,7 +1,7 @@
-import './ContainerBox.style.scss'
+import './SidebarContainer.style.scss'
 import classNames from 'classnames'
 
-export const ContainerBox = ({
+export const SidebarContainer = ({
 	title,
 	children,
 	classNameContainerRoot,
@@ -13,16 +13,16 @@ export const ContainerBox = ({
 	children?: React.ReactNode
 }) => {
 	const containerRootCN = classNames(
-		'containerBox-root',
+		'sidebarContainer-root',
 		classNameContainerRoot
 	)
 	const containerContentCN = classNames(
-		'containerBox-content',
+		'sidebarContainer-content',
 		classNameContainerContent
 	)
 	return (
 		<div className={containerRootCN}>
-			{title && <p className='containerBox-title'>{title}</p>}
+			{title && <p className='sidebarContainer-title'>{title}</p>}
 			<div className={containerContentCN}>{children}</div>
 		</div>
 	)

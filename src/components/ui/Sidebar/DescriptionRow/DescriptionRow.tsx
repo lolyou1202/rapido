@@ -1,6 +1,6 @@
-import './SidebarDescriptionRow.style.scss'
+import './DescriptionRow.style.scss'
 
-export const SidebarDescriptionRow = ({
+export const DescriptionRow = ({
 	description,
 	count,
 }: {
@@ -8,7 +8,7 @@ export const SidebarDescriptionRow = ({
 	count: string | number
 }) => {
 	return (
-		<div className='sidebar-descriptionRow'>
+		<div className='descriptionRow'>
 			<p>{description}</p>
 			<span></span>
 			<p>{count}</p>

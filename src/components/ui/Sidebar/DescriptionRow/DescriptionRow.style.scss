@@ -1,4 +1,4 @@
-.sidebar-descriptionRow {
+.descriptionRow {
 	display: flex;
 	width: 100%;
 	p {
@@ -19,7 +19,7 @@
 		width: 100%;
 		overflow: hidden;
 		&::after {
-			content: '.....................................................';
+			content: '.............................................................';
 			position: absolute;
 			bottom: 0;
 			left: 0;

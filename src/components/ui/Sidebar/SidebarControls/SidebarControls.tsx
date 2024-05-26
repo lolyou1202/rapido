@@ -1,22 +1,24 @@
-import './Controls.style.scss'
+import './SidebarControls.style.scss'
 import { useState } from 'react'
-import { DefaultButton } from '../../ui/Button/DefaultButton/DefaultButton'
-import { SidebarControlRow } from '../../ui/SidebarControlRow/SidebarControlRow'
-import { SidebarDescriptionRow } from '../../ui/SidebarDescriptionRow/SidebarDescriptionRow'
-import { TicketState } from '../../../types/ticketTypes'
-import { getNumCorrectTickets } from '../../../hooks/numCorrectTickets'
-import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
+import { useAppDispatch } from '../../../../redux/hooks/useAppRedux'
+import { getNumCorrectTickets } from '../../../../hooks/numCorrectTickets'
+import { TicketState } from '../../../../types/ticketTypes'
+import { SidebarContainer } from '../SidebarContainer/SidebarContainer'
+import { CounterRow } from '../CounterRow/CounterRow'
+import { DescriptionRow } from '../DescriptionRow/DescriptionRow'
+import { DefaultButton } from '../../Button/DefaultButton/DefaultButton'
 import {
 	clearAllTickets,
 	randomFillSeveralTickets,
-} from '../../../redux/slices/gameSlice'
+} from '../../../../redux/slices/gameSlice'
 import {
 	NUM_MAX_FILL_TICKETS,
 	NUM_MIN_FILL_TICKETS,
-} from '../../../constants/settings'
-import { ContainerBox } from '../../ui/Container/ContainerBox/ContainerBox'
+} from '../../../../constants/settings'
+import { SidebarModifier } from '../SidebarModifier/SidebarModifier'
 
-export const Controls = ({
+
+export const SidebarControls = ({
 	ticketsList,
 }: {
 	ticketsList: TicketState[]
@@ -41,8 +43,12 @@ export const Controls = ({
 	}
 
 	return (
-		<ContainerBox classNameContainerContent='controls-content'>
-			<SidebarControlRow
+		<SidebarContainer
+			title='Панель управления'
+			classNameContainerContent='sidebarControls-content'
+		>
+			<SidebarModifier />
+			<CounterRow
 				description='Случайно заполнить'
 				countToFill={countToFill}
 				minAdd={NUM_MIN_FILL_TICKETS}
@@ -50,11 +56,11 @@ export const Controls = ({
 				onClickMinus={handleClickMinus}
 				onClickPlus={handleClickPlus}
 			/>
-			<SidebarDescriptionRow
+			<DescriptionRow
 				description='Заполненных билетов'
 				count={numCorrectTicket}
 			/>
-			<div className='controls-buttons'>
+			<div className='sidebarControls-buttons'>
 				<DefaultButton
 					action={false}
 					label='Заполнить'
@@ -67,6 +73,6 @@ export const Controls = ({
 					onClick={handleClickClearAllTicketsButton}
 				/>
 			</div>
-		</ContainerBox>
+		</SidebarContainer>
 	)
 }

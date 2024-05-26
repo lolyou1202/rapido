@@ -1,0 +1,17 @@
+.sidebarModifire {
+	display: flex;
+	gap: 16px;
+	&-item {
+		pointer-events: all;
+		cursor: pointer;
+		svg {
+			fill: var(--shadow);
+			transition: all 0.2s ease-in-out;
+		}
+		&:hover {
+			svg {
+				fill: var(--gray);
+			}
+		}
+	}
+}

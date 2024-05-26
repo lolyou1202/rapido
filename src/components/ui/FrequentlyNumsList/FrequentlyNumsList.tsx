@@ -1,7 +1,7 @@
 import './FrequentlyNumsList.style.scss'
 import classNames from 'classnames'
 import { FieldVariant } from '../../../types/ticketTypes'
-import { ContainerBox } from '../Container/ContainerBox/ContainerBox'
+import { SidebarContainer } from '../Sidebar/SidebarContainer/SidebarContainer'
 import { CircleDashedButton } from '../Button/CircleDashedButton/CircleDashedButton'
 
 export const FrequentlyNumsList = ({
@@ -25,7 +25,7 @@ export const FrequentlyNumsList = ({
 	}) => void
 }) => {
 	return (
-		<ContainerBox
+		<SidebarContainer
 			title='Часто выпадающие числа'
 			classNameContainerRoot='frequentlyNums-list-root'
 			classNameContainerContent='frequentlyNums-list-content'
@@ -72,6 +72,6 @@ export const FrequentlyNumsList = ({
 					)
 				}
 			)}
-		</ContainerBox>
+		</SidebarContainer>
 	)
 }

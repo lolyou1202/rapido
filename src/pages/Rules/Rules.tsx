@@ -5,7 +5,7 @@ import { Ticket } from '../../components/ui/Ticket/Ticket/Ticket'
 import { useAppSelector } from '../../redux/hooks/useAppRedux'
 import { DefaultButton } from '../../components/ui/Button/DefaultButton/DefaultButton'
 import { useNavigate } from 'react-router-dom'
-import { Controls } from '../../components/features/Controls/Controls'
+import { SidebarControls } from '../../components/ui/Sidebar/SidebarControls/SidebarControls'
 
 export const Rules = () => {
 	const ticket = useAppSelector(state => state.game.gameRulesBlocks.ticket)
@@ -37,7 +37,7 @@ export const Rules = () => {
 							numSlide={2}
 							titleSlide='Заполните несколько билетов'
 							descriptionSlide='Заполните самостоятельно или выберите нужное количество билетов, которые это сделают автоматически, нажав на кнопку ЗАПОЛНИТЬ'
-							demoSlide={<Controls ticketsList={[]} />}
+							demoSlide={<SidebarControls ticketsList={[]} />}
 							buttonSlide={
 								<DefaultButton
 									action
@@ -52,7 +52,7 @@ export const Rules = () => {
 							descriptionSlide='Если ваши билеты готовы к игре, то нажмите на кнопку ВЫПУСТИТЬ ТИРАЖ и проверяйте какие из них смогли выиграть'
 							demoSlide={
 								<div className='game-sidebar'>
-									<Controls ticketsList={[]} />
+									<SidebarControls ticketsList={[]} />
 									<DefaultButton
 										action
 										label='Выпустить тираж'

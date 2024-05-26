@@ -1,4 +1,4 @@
-.containerBox {
+.sidebarContainer {
 	&-root {
 		display: flex;
 		flex-direction: column;
@@ -6,7 +6,7 @@
 		padding: 16px;
 		background-color: var(--dark);
 		border-radius: 12px;
-		&:has(.containerBox-title) {
+		&:has(.sidebarContainer-title) {
 			padding: 24px 16px 16px 16px;
 			gap: 24px;
 		}

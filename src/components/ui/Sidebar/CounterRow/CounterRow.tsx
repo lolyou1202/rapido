@@ -1,12 +1,12 @@
-import './SidebarControlRow.style.scss'
-import { colorTokens } from '../../../constants/colorTokens'
-import { DefaultButton } from '../Button/DefaultButton/DefaultButton'
-import { Minus } from '../../icons/Minus'
-import { Plus } from '../../icons/Plus'
+import './CounterRow.style.scss'
+import { colorTokens } from '../../../../constants/colorTokens'
+import { DefaultButton } from '../../Button/DefaultButton/DefaultButton'
+import { Minus } from '../../../icons/Minus'
+import { Plus } from '../../../icons/Plus'
 
 const { white } = colorTokens
 
-export const SidebarControlRow = ({
+export const CounterRow = ({
 	description,
 	countToFill,
 	minAdd,
@@ -22,7 +22,7 @@ export const SidebarControlRow = ({
 	onClickPlus: () => void
 }) => {
 	return (
-		<div className='sidebar-controlRow'>
+		<div className='counterRow'>
 			<p>{description}</p>
 			<span>
 				<DefaultButton
