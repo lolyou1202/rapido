@@ -1,14 +1,32 @@
 .tickets {
 	&-layout {
 		position: relative;
-		display: grid;
-		grid-template-columns: 2fr 1fr;
+		display: flex;
 		gap: 16px;
+		padding-bottom: 16px;
 		& > span {
 			display: flex;
 			flex-direction: column;
 			gap: 16px;
-			padding-bottom: 16px;
+			width: 100%;
+			backdrop-filter: blur(10px);
+			&::after {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0;
+				z-index: -1;
+				width: 100%;
+				height: 100%;
+				background-color: var(--black);
+				backdrop-filter: blur(10px);
+				opacity: 0.7;
+			}
+		}
+		& > span:nth-child(2) {
+			position: sticky;
+			top: 80px;
+			z-index: 100;
 		}
 	}
 	&-ticketList {
@@ -16,11 +34,14 @@
 		grid-template-columns: repeat(2, 1fr);
 		gap: 16px;
 	}
-	&-sidebar {
-		position: sticky;
-		top: 80px;
-		display: flex;
-		flex-direction: column;
-		gap: 16px;
+}
+
+@media (max-width: 1135px) {
+	.tickets-layout {
+		flex-direction: column-reverse;
+		gap: 0;
+		& > span:nth-child(2) {
+			padding-bottom: 16px;
+		}
 	}
 }

@@ -6,7 +6,7 @@
 	background-color: var(--dark);
 	border-radius: 12px;
 	overflow: hidden;
-	transition: all 0.2s ease-in-out;
+	transition: background-color 0.2s ease-in-out;
 	& > span {
 		border: 2px solid var(--dark);
 		border-radius: 12px;
@@ -145,5 +145,11 @@
 			bottom: 0;
 			transform: translate(-50%, 50%);
 		}
+	}
+}
+
+@media (max-width: 1135px) {
+	.ticket {
+		width: 100%;
 	}
 }

@@ -1,7 +1,20 @@
 .sidebarModifire {
 	display: flex;
-	gap: 16px;
+	align-items: center;
+	justify-content: space-between;
+	& > p {
+		user-select: none;
+		font-size: 14px;
+		line-height: 16px;
+		color: var(--white);
+	}
+	& > div {
+		display: flex;
+		gap: 16px;
+	}
 	&-item {
+		display: flex;
+		height: 32px;
 		pointer-events: all;
 		cursor: pointer;
 		svg {

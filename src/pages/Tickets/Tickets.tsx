@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks/useAppRedux'
 import { Ticket } from '../../components/ui/Ticket/Ticket/Ticket'
 import { DefaultButton } from '../../components/ui/Button/DefaultButton/DefaultButton'
 import { Add } from '../../components/icons/Add'
-import { SidebarControls } from '../../components/ui/Sidebar/SidebarControls/SidebarControls'
 import { findCorrectTickets } from '../../hooks/findCorrectTickets'
 import {
 	addTickets,
@@ -12,7 +11,8 @@ import {
 	createEdition,
 	setGameStage,
 } from '../../redux/slices/gameSlice'
-import { SidebarEdition } from '../../components/ui/Sidebar/SidebarEdition/SidebarEdition'
+import { SidebarFillTickets } from '../../components/ui/Sidebar/SidebarFillTickets/SidebarFillTickets'
+import { SidebarViewResults } from '../../components/ui/Sidebar/SidebarViewResults/SidebarViewResults'
 
 const { white } = colorTokens
 
@@ -57,29 +57,21 @@ export const Tickets = () => {
 				/>
 			</span>
 			<span>
-				<div className='tickets-sidebar'>
-					{gameStage === 'fillTickets' && (
-						<>
-							<SidebarControls ticketsList={ticketsList} />
-							<DefaultButton
-								action
-								disabled={correctTicketIdList.length < 1}
-								label='Выпустить тираж'
-								onClick={handleClickIssueEditionButton}
-							/>
-						</>
-					)}
-					{gameStage === 'viewResults' && (
-						<>
-							<SidebarEdition edition={lastEdition} />
-							<DefaultButton
-								action
-								label='Играть заново'
-								onClick={handleClickReplayButton}
-							/>
-						</>
-					)}
-				</div>
+				{gameStage === 'fillTickets' && (
+					<SidebarFillTickets
+						ticketsList={ticketsList}
+						correctTicketIdList={correctTicketIdList}
+						onClickIssueEditionButton={
+							handleClickIssueEditionButton
+						}
+					/>
+				)}
+				{gameStage === 'viewResults' && (
+					<SidebarViewResults
+						lastEdition={lastEdition}
+						onClickReplayButton={handleClickReplayButton}
+					/>
+				)}
 			</span>
 		</div>
 	)

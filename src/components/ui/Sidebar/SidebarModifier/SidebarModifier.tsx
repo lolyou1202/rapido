@@ -1,5 +1,4 @@
 import './SidebarModifier.style.scss'
-import { SidebarField } from '../SidebarField/SidebarField'
 import { Random } from '../../../icons/Random'
 import { EvenNumbers } from '../../../icons/EvenNumbers'
 import { OddNumbers } from '../../../icons/OddNumbers'
@@ -8,8 +7,9 @@ import { LowerHalf } from '../../../icons/LowerHalf'
 
 export const SidebarModifier = () => {
 	return (
-		<SidebarField title='Модификатор'>
-			<div className='sidebarModifire'>
+		<div className='sidebarModifire'>
+			<p>Модификатор</p>
+			<div>
 				<span className='sidebarModifire-item'>
 					<Random />
 				</span>
@@ -26,6 +26,6 @@ export const SidebarModifier = () => {
 					<LowerHalf />
 				</span>
 			</div>
-		</SidebarField>
+		</div>
 	)
 }
