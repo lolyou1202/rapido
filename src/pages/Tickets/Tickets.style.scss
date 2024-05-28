@@ -9,19 +9,6 @@
 			flex-direction: column;
 			gap: 16px;
 			width: 100%;
-			backdrop-filter: blur(10px);
-			&::after {
-				content: '';
-				position: absolute;
-				left: 0;
-				top: 0;
-				z-index: -1;
-				width: 100%;
-				height: 100%;
-				background-color: var(--black);
-				backdrop-filter: blur(10px);
-				opacity: 0.7;
-			}
 		}
 		& > span:nth-child(2) {
 			position: sticky;
@@ -36,12 +23,67 @@
 	}
 }
 
-@media (max-width: 1135px) {
+.sidebarTicketsGrid {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	position: sticky;
+	top: 80px;
+}
+
+.drawerContainer {
+	padding: 16px;
+	background-color: transparent;
+}
+
+.MuiBackdrop-root {
+	background-color: rgba($color: #0b0a12, $alpha: 0.5) !important;
+}
+.MuiDrawer-paperAnchorBottom {
+	background-color: transparent !important;
+}
+
+.bottomBar {
+	position: fixed;
+	left: 0px;
+	bottom: 0;
+	z-index: 100;
+	display: none;
+	gap: 16px;
+	padding: 16px;
+	width: 100vw;
+	backdrop-filter: blur(10px);
+	&::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: -1;
+		width: 100%;
+		height: 100%;
+		background-color: var(--black);
+		backdrop-filter: blur(10px);
+		opacity: 0.6;
+	}
+	& > button {
+		width: 100%;
+		border-radius: 12px;
+	}
+}
+
+@media (max-width: 1167px) {
+	.tickets-ticketList {
+		grid-template-columns: 1fr;
+	}
+}
+@media (max-width: 751px) {
 	.tickets-layout {
-		flex-direction: column-reverse;
-		gap: 0;
+		padding-bottom: 80px;
 		& > span:nth-child(2) {
-			padding-bottom: 16px;
+			display: none;
 		}
+	}
+	.bottomBar {
+		display: flex;
 	}
 }

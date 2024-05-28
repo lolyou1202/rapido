@@ -4,19 +4,19 @@ import { SidebarEdition } from '../SidebarEdition/SidebarEdition'
 
 export const SidebarViewResults = ({
 	lastEdition,
-	onClickReplayButton
+	onClickReplayButton,
 }: {
 	lastEdition: Edition
 	onClickReplayButton: () => void
 }) => {
 	return (
-		<div className='sidebarTicketsGrid'>
+		<>
 			<SidebarEdition edition={lastEdition} />
 			<DefaultButton
 				action
 				label='Играть заново'
 				onClick={onClickReplayButton}
 			/>
-		</div>
+		</>
 	)
 }

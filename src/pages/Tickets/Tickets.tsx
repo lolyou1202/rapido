@@ -1,6 +1,7 @@
 import './Tickets.style.scss'
 import { colorTokens } from '../../constants/colorTokens'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/useAppRedux'
+import { useState } from 'react'
 import { Ticket } from '../../components/ui/Ticket/Ticket/Ticket'
 import { DefaultButton } from '../../components/ui/Button/DefaultButton/DefaultButton'
 import { Add } from '../../components/icons/Add'
@@ -13,6 +14,10 @@ import {
 } from '../../redux/slices/gameSlice'
 import { SidebarFillTickets } from '../../components/ui/Sidebar/SidebarFillTickets/SidebarFillTickets'
 import { SidebarViewResults } from '../../components/ui/Sidebar/SidebarViewResults/SidebarViewResults'
+import { Drawer } from '@mui/material'
+import { SidebarControls } from '../../components/ui/Sidebar/SidebarControls/SidebarControls'
+import { getNumCorrectTickets } from '../../hooks/numCorrectTickets'
+import { SidebarEdition } from '../../components/ui/Sidebar/SidebarEdition/SidebarEdition'
 
 const { white } = colorTokens
 
@@ -21,9 +26,13 @@ export const Tickets = () => {
 
 	const lastEdition = useAppSelector(state => state.game.editionsList[0])
 
+	const [isOpenDrawer, setOpenDrawer] = useState(false)
+
 	const dispatch = useAppDispatch()
 
 	const { correctTicketIdList } = findCorrectTickets({ ticketsList })
+
+	const numCorrectTicket = getNumCorrectTickets({ ticketsList })
 
 	const handleClickAddTicketsButton = () => {
 		dispatch(addTickets({ countToAdd: 'default' }))
@@ -36,43 +45,98 @@ export const Tickets = () => {
 		dispatch(setGameStage({ gameStage: 'fillTickets' }))
 		dispatch(clearAllTickets())
 	}
+	const toggleDrawer = () => {
+		setOpenDrawer(prevState => !prevState)
+	}
 
 	return (
-		<div className='tickets-layout'>
-			<span>
-				<div className='tickets-ticketList'>
-					{ticketsList.map(ticket => (
-						<Ticket
-							key={ticket.idTicket}
-							gameStage={gameStage}
-							ticketState={ticket}
-						/>
-					))}
-				</div>
-				<DefaultButton
-					action={false}
-					label='Добавить билеты'
-					icon={<Add color={white} />}
-					onClick={handleClickAddTicketsButton}
-				/>
-			</span>
-			<span>
-				{gameStage === 'fillTickets' && (
-					<SidebarFillTickets
-						ticketsList={ticketsList}
-						correctTicketIdList={correctTicketIdList}
-						onClickIssueEditionButton={
-							handleClickIssueEditionButton
-						}
+		<>
+			<div className='tickets-layout'>
+				<span>
+					<div className='tickets-ticketList'>
+						{ticketsList.map(ticket => (
+							<Ticket
+								key={ticket.idTicket}
+								gameStage={gameStage}
+								ticketState={ticket}
+							/>
+						))}
+					</div>
+					<DefaultButton
+						action={false}
+						label='Добавить билеты'
+						icon={<Add color={white} />}
+						onClick={handleClickAddTicketsButton}
 					/>
+				</span>
+				<span>
+					<div className='sidebarTicketsGrid'>
+						{gameStage === 'fillTickets' && (
+							<SidebarFillTickets
+								numCorrectTicket={numCorrectTicket}
+								correctTicketIdList={correctTicketIdList}
+								onClickIssueEditionButton={
+									handleClickIssueEditionButton
+								}
+							/>
+						)}
+						{gameStage === 'viewResults' && (
+							<SidebarViewResults
+								lastEdition={lastEdition}
+								onClickReplayButton={handleClickReplayButton}
+							/>
+						)}
+					</div>
+				</span>
+			</div>
+			<aside className='bottomBar'>
+				{gameStage === 'fillTickets' && (
+					<>
+						<DefaultButton
+							label='Панель управления'
+							onClick={toggleDrawer}
+						/>
+						<DefaultButton
+							action
+							disabled={correctTicketIdList.length < 1}
+							label='Выпустить тираж'
+							onClick={() => {}}
+						/>
+					</>
 				)}
 				{gameStage === 'viewResults' && (
-					<SidebarViewResults
-						lastEdition={lastEdition}
-						onClickReplayButton={handleClickReplayButton}
-					/>
+					<>
+						<DefaultButton
+							label={`Тираж №${lastEdition.idEdition}`}
+							onClick={toggleDrawer}
+						/>
+						<DefaultButton
+							action
+							disabled={correctTicketIdList.length < 1}
+							label='Играть заново'
+							onClick={() => {}}
+						/>
+					</>
 				)}
-			</span>
-		</div>
+				<Drawer
+					open={isOpenDrawer}
+					onClose={toggleDrawer}
+					anchor='bottom'
+				>
+					<div className='drawerContainer'>
+						<div className='sidebarTicketsGrid'>
+							{gameStage === 'fillTickets' && (
+								<SidebarControls
+									numCorrectTicket={numCorrectTicket}
+								/>
+							)}
+							{gameStage === 'viewResults' && (
+								<SidebarEdition edition={lastEdition} />
+							)}
+						</div>
+					</div>
+				</Drawer>
+			</aside>
+		</>
 	)
 }

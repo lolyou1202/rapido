@@ -17,18 +17,33 @@
 		height: 100%;
 		background-color: var(--black);
 		backdrop-filter: blur(10px);
-		opacity: 0.7;
+		opacity: 0.6;
 	}
-	& > span {
+	&-nav {
 		display: flex;
 		gap: 16px;
 	}
 	&-logo {
-		h2 {
-			font-size: 24px;
-			line-height: 24px;
-			color: var(--white);
-			text-transform: uppercase;
+		font-size: 24px;
+		line-height: 24px;
+		color: var(--white);
+		text-transform: uppercase;
+		cursor: pointer;
+	}
+	&-burger {
+		display: none;
+		stroke: var(--white);
+		cursor: pointer;
+	}
+}
+
+@media (max-width: 751px) {
+	.header {
+		&-nav {
+			display: none;
+		}
+		&-burger {
+			display: flex;
 		}
 	}
 }

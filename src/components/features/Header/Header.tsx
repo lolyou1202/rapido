@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { Ticket } from '../../icons/Ticket'
 import { Folder } from '../../icons/Folder'
 import { Rules } from '../../icons/Rules'
+import { Burger } from '../../icons/Burger'
 
 const headerButtons = [
 	{
@@ -29,10 +30,8 @@ export const Header = () => {
 
 	return (
 		<div className='header'>
-			<span className='header-logo'>
-				<h2>Rapido</h2>
-			</span>
-			<span>
+			<h2 className='header-logo'>Rapido</h2>
+			<span className='header-nav'>
 				{headerButtons.map(button => {
 					const { name, icon, label } = button
 					return (
@@ -46,6 +45,7 @@ export const Header = () => {
 					)
 				})}
 			</span>
+			<Burger className='header-burger' />
 		</div>
 	)
 }
