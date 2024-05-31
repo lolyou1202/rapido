@@ -12,8 +12,6 @@ import {
 	createEdition,
 	setGameStage,
 } from '../../redux/slices/gameSlice'
-import { SidebarFillTickets } from '../../components/ui/Sidebar/SidebarFillTickets/SidebarFillTickets'
-import { SidebarViewResults } from '../../components/ui/Sidebar/SidebarViewResults/SidebarViewResults'
 import { Controls } from '../../components/features/Controls/Controls'
 import { getNumCorrectTickets } from '../../hooks/numCorrectTickets'
 import { SidebarEdition } from '../../components/ui/Sidebar/SidebarEdition/SidebarEdition'
@@ -73,19 +71,25 @@ export const Tickets = () => {
 				<span>
 					<div className='sidebarTicketsGrid'>
 						{gameStage === 'fillTickets' && (
-							<SidebarFillTickets
-								numCorrectTicket={numCorrectTicket}
-								correctTicketIdList={correctTicketIdList}
-								onClickIssueEditionButton={
-									handleClickIssueEditionButton
-								}
-							/>
+							<>
+								<Controls numCorrectTicket={numCorrectTicket} />
+								<DefaultButton
+									action
+									disabled={correctTicketIdList.length < 1}
+									label='Выпустить тираж'
+									onClick={handleClickIssueEditionButton}
+								/>
+							</>
 						)}
 						{gameStage === 'viewResults' && (
-							<SidebarViewResults
-								lastEdition={lastEdition}
-								onClickReplayButton={handleClickReplayButton}
-							/>
+							<>
+								<SidebarEdition edition={lastEdition} />
+								<DefaultButton
+									action
+									label='Играть заново'
+									onClick={handleClickReplayButton}
+								/>
+							</>
 						)}
 					</div>
 				</span>

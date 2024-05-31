@@ -1,8 +1,8 @@
 import './FrequentlyNumsList.style.scss'
 import classNames from 'classnames'
 import { FieldVariant } from '../../../types/ticketTypes'
-import { SidebarContainer } from '../Sidebar/SidebarContainer/SidebarContainer'
 import { CircleDashedButton } from '../Button/CircleDashedButton/CircleDashedButton'
+import { Layout } from '../Layout/Layout'
 
 export const FrequentlyNumsList = ({
 	selectedFrequentlyNum,
@@ -25,10 +25,10 @@ export const FrequentlyNumsList = ({
 	}) => void
 }) => {
 	return (
-		<SidebarContainer
+		<Layout
 			title='Часто выпадающие числа'
-			classNameContainerRoot='frequentlyNums-list-root'
-			classNameContainerContent='frequentlyNums-list-content'
+			classNameLayoutRoot='frequentlyNums-list-root'
+			classNameLayoutContent='frequentlyNums-list-content'
 		>
 			{Object.entries(frequentlyNumsList).map(
 				([key, valueField], indexField) => {
@@ -72,6 +72,6 @@ export const FrequentlyNumsList = ({
 					)
 				}
 			)}
-		</SidebarContainer>
+		</Layout>
 	)
 }

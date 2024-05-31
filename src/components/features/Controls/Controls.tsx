@@ -1,4 +1,4 @@
-import './SidebarControls.style.scss'
+import './Controls.style.scss'
 import {
 	NUM_MAX_FILL_TICKETS,
 	NUM_MIN_FILL_TICKETS,

@@ -1,8 +1,8 @@
 import './SidebarEdition.style.scss'
 import { useState } from 'react'
+import { Layout } from '../../Layout/Layout'
 import { DefaultButton } from '../../Button/DefaultButton/DefaultButton'
 import { DescriptionRow } from '../DescriptionRow/DescriptionRow'
-import { SidebarContainer } from '../SidebarContainer/SidebarContainer'
 import { Edition } from '../../../../types/editionTypes'
 import { SidebarEditionDroppedNums } from './SidebarEditionDroppedNums'
 import { SidebarEditionWiningCobinations } from './SidebarEditionWiningCobinations'
@@ -11,10 +11,10 @@ import { ArrowBoldLeft } from '../../../icons/ArrowBoldLeft'
 export const SidebarEdition = ({ edition }: { edition: Edition | null }) => {
 	if (!edition) {
 		return (
-			<SidebarContainer classNameContainerContent='sidebarEdition-empty'>
+			<Layout classNameLayoutContent='sidebarEdition-empty'>
 				<ArrowBoldLeft />
 				<p>Выберите тираж</p>
-			</SidebarContainer>
+			</Layout>
 		)
 	}
 
@@ -32,9 +32,9 @@ export const SidebarEdition = ({ edition }: { edition: Edition | null }) => {
 	>('droppedNums')
 
 	return (
-		<SidebarContainer
+		<Layout
 			title={`Тираж №${idEdition}`}
-			classNameContainerContent='sidebarEdition-content'
+			classNameLayoutContent='sidebarEdition-content'
 		>
 			<span>
 				<DescriptionRow description='Дата тиража' count={date} />
@@ -65,6 +65,6 @@ export const SidebarEdition = ({ edition }: { edition: Edition | null }) => {
 					</>
 				)}
 			</span>
-		</SidebarContainer>
+		</Layout>
 	)
 }
