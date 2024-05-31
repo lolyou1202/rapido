@@ -9,11 +9,11 @@ import {
 	clearAllTickets,
 	randomFillSeveralTickets,
 } from '../../../redux/slices/gameSlice'
-import { Layout } from '../Layout/Layout'
-import { CounterRow } from '../Sidebar/CounterRow/CounterRow'
-import { DescriptionRow } from '../Sidebar/DescriptionRow/DescriptionRow'
-import { DefaultButton } from '../Button/DefaultButton/DefaultButton'
-import { Modifier } from '../Modifier/Modifier'
+import { Layout } from '../../ui/Layout/Layout'
+import { CounterRow } from '../../ui/Sidebar/CounterRow/CounterRow'
+import { DescriptionRow } from '../../ui/Sidebar/DescriptionRow/DescriptionRow'
+import { DefaultButton } from '../../ui/Button/DefaultButton/DefaultButton'
+import { Modifier } from '../../ui/Modifier/Modifier'
 
 export const Controls = ({
 	numCorrectTicket,
@@ -41,8 +41,8 @@ export const Controls = ({
 	return (
 		<Layout
 			title='Панель управления'
-			classNameLayoutRoot='sidebarControls'
-			classNameLayoutContent='sidebarControls-content'
+			classNameLayoutRoot='controls'
+			classNameLayoutContent='controls-content'
 		>
 			<Modifier />
 			<CounterRow
@@ -57,7 +57,7 @@ export const Controls = ({
 				description='Заполненных билетов'
 				count={numCorrectTicket}
 			/>
-			<div className='sidebarControls-buttons'>
+			<div className='controls-buttons'>
 				<DefaultButton
 					action={false}
 					label='Заполнить'

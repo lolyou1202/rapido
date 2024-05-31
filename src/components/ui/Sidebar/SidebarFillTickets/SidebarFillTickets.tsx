@@ -1,4 +1,4 @@
-import { SidebarControls } from '../SidebarControls/SidebarControls'
+import { SidebarControls } from '../../../features/Controls/Controls'
 import { DefaultButton } from '../../Button/DefaultButton/DefaultButton'
 
 export const SidebarFillTickets = ({

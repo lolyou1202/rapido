@@ -43,6 +43,13 @@ body {
 	flex-direction: column;
 }
 
+.MuiBackdrop-root {
+	background-color: rgba($color: #0b0a12, $alpha: 0.5) !important;
+}
+.MuiDrawer-paperAnchorBottom {
+	background-color: transparent !important;
+}
+
 @media (max-width: 1167px) {
 	.app {
 		width: 100vw;

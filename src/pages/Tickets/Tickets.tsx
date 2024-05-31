@@ -14,10 +14,11 @@ import {
 } from '../../redux/slices/gameSlice'
 import { SidebarFillTickets } from '../../components/ui/Sidebar/SidebarFillTickets/SidebarFillTickets'
 import { SidebarViewResults } from '../../components/ui/Sidebar/SidebarViewResults/SidebarViewResults'
-import { Drawer } from '@mui/material'
-import { SidebarControls } from '../../components/ui/Sidebar/SidebarControls/SidebarControls'
+import { Controls } from '../../components/features/Controls/Controls'
 import { getNumCorrectTickets } from '../../hooks/numCorrectTickets'
 import { SidebarEdition } from '../../components/ui/Sidebar/SidebarEdition/SidebarEdition'
+import { BottomBar } from '../../components/ui/BottomBar/BottomBar'
+import { BottomDrawer } from '../../components/ui/BottomDrawer/BottomDrawer'
 
 const { white } = colorTokens
 
@@ -89,7 +90,7 @@ export const Tickets = () => {
 					</div>
 				</span>
 			</div>
-			<aside className='bottomBar'>
+			<BottomBar>
 				{gameStage === 'fillTickets' && (
 					<>
 						<DefaultButton
@@ -118,25 +119,18 @@ export const Tickets = () => {
 						/>
 					</>
 				)}
-				<Drawer
-					open={isOpenDrawer}
-					onClose={toggleDrawer}
-					anchor='bottom'
-				>
-					<div className='drawerContainer'>
-						<div className='sidebarTicketsGrid'>
-							{gameStage === 'fillTickets' && (
-								<SidebarControls
-									numCorrectTicket={numCorrectTicket}
-								/>
-							)}
-							{gameStage === 'viewResults' && (
-								<SidebarEdition edition={lastEdition} />
-							)}
-						</div>
-					</div>
-				</Drawer>
-			</aside>
+			</BottomBar>
+			<BottomDrawer
+				isOpenDrawer={isOpenDrawer}
+				toggleDrawer={toggleDrawer}
+			>
+				{gameStage === 'fillTickets' && (
+					<Controls numCorrectTicket={numCorrectTicket} />
+				)}
+				{gameStage === 'viewResults' && (
+					<SidebarEdition edition={lastEdition} />
+				)}
+			</BottomDrawer>
 		</>
 	)
 }
