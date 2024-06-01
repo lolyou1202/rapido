@@ -1,6 +1,6 @@
 import './Archive.style.scss'
 import { useMemo, useState } from 'react'
-import { SidebarEdition } from '../../components/ui/Sidebar/SidebarEdition/SidebarEdition'
+import { EditionInfo } from '../../components/ui/EditionInfo/EditionInfo'
 import { useAppSelector } from '../../redux/hooks/useAppRedux'
 import { ArchiveTable } from '../../components/ui/ArchiveTable/ArchiveTable'
 import { FrequentlyNumsSwich } from '../../components/ui/FrequentlyNumsSwich/FrequentlyNumsSwich'
@@ -8,6 +8,7 @@ import { FrequentlyNumsList } from '../../components/ui/FrequentlyNumsList/Frequ
 import { findFrequentlyNums } from '../../hooks/findFrequentlyNums'
 import { FieldVariant } from '../../types/ticketTypes'
 import { FrequentlyNumsDropSwich } from '../../types/editionTypes'
+import { EditionInfoEmpty } from '../../components/ui/EditionInfo/EditionInfoEmpty'
 
 export const Archive = () => {
 	const editionsList = useAppSelector(state => state.game.editionsList)
@@ -84,13 +85,11 @@ export const Archive = () => {
 				onClickTableRow={handleClickTableRow}
 			/>
 			<span>
-				<SidebarEdition
-					edition={
-						selectedEdition === null
-							? selectedEdition
-							: editionsList[selectedEdition]
-					}
-				/>
+				{selectedEdition === null ? (
+					<EditionInfoEmpty />
+				) : (
+					<EditionInfo edition={editionsList[selectedEdition]} />
+				)}
 			</span>
 		</div>
 	)

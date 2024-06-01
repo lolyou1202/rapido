@@ -14,9 +14,10 @@ import {
 } from '../../redux/slices/gameSlice'
 import { Controls } from '../../components/features/Controls/Controls'
 import { getNumCorrectTickets } from '../../hooks/numCorrectTickets'
-import { SidebarEdition } from '../../components/ui/Sidebar/SidebarEdition/SidebarEdition'
+import { EditionInfo } from '../../components/ui/EditionInfo/EditionInfo'
 import { BottomBar } from '../../components/ui/BottomBar/BottomBar'
 import { BottomDrawer } from '../../components/ui/BottomDrawer/BottomDrawer'
+import { Sidebar } from '../../components/ui/Sidebar/Sidebar'
 
 const { white } = colorTokens
 
@@ -69,7 +70,7 @@ export const Tickets = () => {
 					/>
 				</span>
 				<span>
-					<div className='sidebarTicketsGrid'>
+					<Sidebar>
 						{gameStage === 'fillTickets' && (
 							<>
 								<Controls numCorrectTicket={numCorrectTicket} />
@@ -83,7 +84,7 @@ export const Tickets = () => {
 						)}
 						{gameStage === 'viewResults' && (
 							<>
-								<SidebarEdition edition={lastEdition} />
+								<EditionInfo edition={lastEdition} />
 								<DefaultButton
 									action
 									label='Играть заново'
@@ -91,7 +92,7 @@ export const Tickets = () => {
 								/>
 							</>
 						)}
-					</div>
+					</Sidebar>
 				</span>
 			</div>
 			<BottomBar>
@@ -105,7 +106,7 @@ export const Tickets = () => {
 							action
 							disabled={correctTicketIdList.length < 1}
 							label='Выпустить тираж'
-							onClick={() => {}}
+							onClick={handleClickIssueEditionButton}
 						/>
 					</>
 				)}
@@ -119,7 +120,7 @@ export const Tickets = () => {
 							action
 							disabled={correctTicketIdList.length < 1}
 							label='Играть заново'
-							onClick={() => {}}
+							onClick={handleClickReplayButton}
 						/>
 					</>
 				)}
@@ -132,7 +133,7 @@ export const Tickets = () => {
 					<Controls numCorrectTicket={numCorrectTicket} />
 				)}
 				{gameStage === 'viewResults' && (
-					<SidebarEdition edition={lastEdition} />
+					<EditionInfo edition={lastEdition} />
 				)}
 			</BottomDrawer>
 		</>

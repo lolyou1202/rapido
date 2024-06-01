@@ -10,37 +10,12 @@
 			gap: 16px;
 			width: 100%;
 		}
-		& > span:nth-child(2) {
-			position: sticky;
-			top: 80px;
-			z-index: 100;
-		}
 	}
 	&-ticketList {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		gap: 16px;
 	}
-}
-
-.sidebarTicketsGrid {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
-	position: sticky;
-	top: 80px;
-}
-
-.drawerContainer {
-	padding: 16px;
-	background-color: transparent;
-}
-
-.MuiBackdrop-root {
-	background-color: rgba($color: #0b0a12, $alpha: 0.5) !important;
-}
-.MuiDrawer-paperAnchorBottom {
-	background-color: transparent !important;
 }
 
 @media (max-width: 1167px) {
@@ -54,8 +29,5 @@
 		& > span:nth-child(2) {
 			display: none;
 		}
-	}
-	.bottomBar {
-		display: flex;
 	}
 }

@@ -10,10 +10,10 @@ import {
 	randomFillSeveralTickets,
 } from '../../../redux/slices/gameSlice'
 import { Layout } from '../../ui/Layout/Layout'
-import { CounterRow } from '../../ui/Sidebar/CounterRow/CounterRow'
-import { DescriptionRow } from '../../ui/Sidebar/DescriptionRow/DescriptionRow'
+import { DescriptionRow } from '../../ui/DescriptionRow/DescriptionRow'
 import { DefaultButton } from '../../ui/Button/DefaultButton/DefaultButton'
 import { Modifier } from '../../ui/Modifier/Modifier'
+import { CounterRow } from '../../ui/CounterRow/CounterRow'
 
 export const Controls = ({
 	numCorrectTicket,

@@ -1,8 +1,9 @@
+import { colorTokens } from '../../../constants/colorTokens'
+import { Minus } from '../../icons/Minus'
+import { Plus } from '../../icons/Plus'
+import { DefaultButton } from '../Button/DefaultButton/DefaultButton'
 import './CounterRow.style.scss'
-import { colorTokens } from '../../../../constants/colorTokens'
-import { DefaultButton } from '../../Button/DefaultButton/DefaultButton'
-import { Minus } from '../../../icons/Minus'
-import { Plus } from '../../../icons/Plus'
+
 
 const { white } = colorTokens
 

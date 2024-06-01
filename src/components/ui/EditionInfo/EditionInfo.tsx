@@ -1,23 +1,13 @@
-import './SidebarEdition.style.scss'
+import './EditionInfo.style.scss'
 import { useState } from 'react'
-import { Layout } from '../../Layout/Layout'
-import { DefaultButton } from '../../Button/DefaultButton/DefaultButton'
+import { Layout } from '../Layout/Layout'
+import { DefaultButton } from '../Button/DefaultButton/DefaultButton'
 import { DescriptionRow } from '../DescriptionRow/DescriptionRow'
-import { Edition } from '../../../../types/editionTypes'
-import { SidebarEditionDroppedNums } from './SidebarEditionDroppedNums'
-import { SidebarEditionWiningCobinations } from './SidebarEditionWiningCobinations'
-import { ArrowBoldLeft } from '../../../icons/ArrowBoldLeft'
+import { Edition } from '../../../types/editionTypes'
+import { EditionInfoDroppedNums } from './EditionInfoDroppedNums'
+import { EditionInfoWiningCobinations } from './EditionInfoWiningCobinations'
 
-export const SidebarEdition = ({ edition }: { edition: Edition | null }) => {
-	if (!edition) {
-		return (
-			<Layout classNameLayoutContent='sidebarEdition-empty'>
-				<ArrowBoldLeft />
-				<p>Выберите тираж</p>
-			</Layout>
-		)
-	}
-
+export const EditionInfo = ({ edition }: { edition: Edition }) => {
 	const {
 		idEdition,
 		date,
@@ -34,15 +24,13 @@ export const SidebarEdition = ({ edition }: { edition: Edition | null }) => {
 	return (
 		<Layout
 			title={`Тираж №${idEdition}`}
-			classNameLayoutContent='sidebarEdition-content'
+			classNameLayoutContent='editionInfo-content'
 		>
-			<span>
-				<DescriptionRow description='Дата тиража' count={date} />
-			</span>
+			<DescriptionRow description='Дата тиража' count={date} />
 			<span>
 				{showField === 'droppedNums' && (
 					<>
-						<SidebarEditionDroppedNums
+						<EditionInfoDroppedNums
 							numWiningTickets={numWiningTickets}
 							participatingTickets={participatingTickets}
 							droppedNums={droppedNums}
@@ -55,7 +43,7 @@ export const SidebarEdition = ({ edition }: { edition: Edition | null }) => {
 				)}
 				{showField === 'winingCobinations' && (
 					<>
-						<SidebarEditionWiningCobinations
+						<EditionInfoWiningCobinations
 							winingCombinations={winingCombinations}
 						/>
 						<DefaultButton

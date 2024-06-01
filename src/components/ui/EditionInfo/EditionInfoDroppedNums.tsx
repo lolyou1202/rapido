@@ -2,12 +2,12 @@ import {
 	EditionDroppedNums,
 	EditionParticipatingTickets,
 	EditionWiningTickets,
-} from '../../../../types/editionTypes'
+} from '../../../types/editionTypes'
 import { DescriptionRow } from '../DescriptionRow/DescriptionRow'
-import { TicketField } from '../../Ticket/TicketField/TicketField'
+import { TicketField } from '../Ticket/TicketField/TicketField'
 import { SidebarField } from '../SidebarField/SidebarField'
 
-export const SidebarEditionDroppedNums = ({
+export const EditionInfoDroppedNums = ({
 	droppedNums,
 	numWiningTickets,
 	participatingTickets,
