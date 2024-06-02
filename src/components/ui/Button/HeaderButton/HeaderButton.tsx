@@ -10,7 +10,7 @@ export const HeaderButton = ({
 	action: boolean
 	icon: React.ReactNode
 	label: string
-	onClick: () => void
+	onClick?: () => void
 }) => {
 	const headerButtonCN = classNames('headerButton', { action: action })
 	return (

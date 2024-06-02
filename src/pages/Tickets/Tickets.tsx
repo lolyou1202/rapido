@@ -16,7 +16,7 @@ import { Controls } from '../../components/features/Controls/Controls'
 import { getNumCorrectTickets } from '../../hooks/numCorrectTickets'
 import { EditionInfo } from '../../components/ui/EditionInfo/EditionInfo'
 import { BottomBar } from '../../components/ui/BottomBar/BottomBar'
-import { BottomDrawer } from '../../components/ui/BottomDrawer/BottomDrawer'
+import { MobileDrawer } from '../../components/ui/MobileDrawer/MobileDrawer'
 import { Sidebar } from '../../components/ui/Sidebar/Sidebar'
 
 const { white } = colorTokens
@@ -125,9 +125,10 @@ export const Tickets = () => {
 					</>
 				)}
 			</BottomBar>
-			<BottomDrawer
-				isOpenDrawer={isOpenDrawer}
-				toggleDrawer={toggleDrawer}
+			<MobileDrawer
+				anchor='bottom'
+				open={isOpenDrawer}
+				onClose={toggleDrawer}
 			>
 				{gameStage === 'fillTickets' && (
 					<Controls numCorrectTicket={numCorrectTicket} />
@@ -135,7 +136,7 @@ export const Tickets = () => {
 				{gameStage === 'viewResults' && (
 					<EditionInfo edition={lastEdition} />
 				)}
-			</BottomDrawer>
+			</MobileDrawer>
 		</>
 	)
 }

@@ -20,14 +20,31 @@
 		opacity: 0.6;
 	}
 	&-nav {
-		display: flex;
-		gap: 16px;
+		&.mobile {
+			display: none;
+			background-color: var(--dark);
+			border-radius: 12px;
+			padding: 24px;
+			ul {
+				flex-direction: column;
+				gap: 24px;
+			}
+		}
+		ul {
+			display: flex;
+			gap: 16px;
+			list-style: none;
+		}
+		li {
+			cursor: pointer;
+		}
 	}
 	&-logo {
 		font-size: 24px;
 		line-height: 24px;
 		color: var(--white);
 		text-transform: uppercase;
+		user-select: none;
 		cursor: pointer;
 	}
 	&-burger {
@@ -40,7 +57,12 @@
 @media (max-width: 751px) {
 	.header {
 		&-nav {
-			display: none;
+			&.desktop {
+				display: none;
+			}
+			&.mobile {
+				display: block;
+			}
 		}
 		&-burger {
 			display: flex;

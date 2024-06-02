@@ -41,13 +41,7 @@ body {
 	padding: 0 16px;
 	display: flex;
 	flex-direction: column;
-}
-
-.MuiBackdrop-root {
-	background-color: rgba($color: #0b0a12, $alpha: 0.5) !important;
-}
-.MuiDrawer-paperAnchorBottom {
-	background-color: transparent !important;
+	scroll-behavior: smooth
 }
 
 @media (max-width: 1167px) {
