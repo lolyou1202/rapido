@@ -43,17 +43,33 @@
 	}
 }
 
+@media (max-width: 1167px) {
+	.drawerContainer {
+		.ticket__field {
+			&-grid {
+				grid-template-columns: repeat(8, 48px);
+			}
+		}
+	}
+}
 @media (max-width: 751px) {
 	.ticket__field {
 		&-grid {
-			grid-template-columns: repeat(7, 48px);
+			grid-template-columns: repeat(7, 48px) !important;
 		}
 	}
 }
 @media (max-width: 500px) {
 	.ticket__field {
 		&-grid {
-			grid-template-columns: repeat(5, 48px);
+			grid-template-columns: repeat(5, 48px) !important;
+		}
+	}
+}
+@media (max-width: 368px) {
+	.ticket__field {
+		&-grid {
+			grid-template-columns: repeat(4, 48px) !important;
 		}
 	}
 }

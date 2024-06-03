@@ -1,8 +1,6 @@
-import './FrequentlyNumsSwich.stule.scss'
 import { FrequentlyNumsDropSwich } from '../../../types/editionTypes'
 import { DefaultButton } from '../Button/DefaultButton/DefaultButton'
 import { NUM_LAST_FEW_EDITIONS } from '../../../constants/settings'
-import { Layout } from '../Layout/Layout'
 
 export const FrequentlyNumsSwich = ({
 	variant,
@@ -34,21 +32,23 @@ export const FrequentlyNumsSwich = ({
 		return `${lastTime} тиражей`
 	}
 	return (
-		<Layout classNameLayoutContent='frequentlyNums-swich'>
+		<>
 			<span>
-				<p>в {percent}% тиражей</p>
+				<p>в {percent}% тиражей,</p>
 				<p>последний раз — {wording()} назад</p>
 			</span>
-			<DefaultButton
-				action={variant === 'lastFew'}
-				label={`В последних ${NUM_LAST_FEW_EDITIONS} тиражах`}
-				onClick={() => onClickVariant('lastFew')}
-			/>
-			<DefaultButton
-				action={variant === 'wholeGame'}
-				label='За всё время игры'
-				onClick={() => onClickVariant('wholeGame')}
-			/>
-		</Layout>
+			<div>
+				<DefaultButton
+					action={variant === 'lastFew'}
+					label={`В последних ${NUM_LAST_FEW_EDITIONS} тиражах`}
+					onClick={() => onClickVariant('lastFew')}
+				/>
+				<DefaultButton
+					action={variant === 'wholeGame'}
+					label='За всё время игры'
+					onClick={() => onClickVariant('wholeGame')}
+				/>
+			</div>
+		</>
 	)
 }

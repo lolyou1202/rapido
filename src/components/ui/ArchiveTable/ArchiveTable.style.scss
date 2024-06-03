@@ -1,17 +1,22 @@
 .archive-table {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
+	display: grid;
 	width: 100%;
 	height: 100%;
 	overflow: scroll;
 	thead {
+		position: sticky;
+		top: 64px;
+		padding: 16px;
+		background-color: var(--dark);
+		border-radius: 12px;
 		tr {
+			align-items: center;
 			text-transform: uppercase;
 		}
 	}
 	tbody {
 		overflow: scroll;
+		padding: 0px 16px 16px 16px;
 		tr {
 			cursor: pointer;
 			&:hover {
@@ -21,7 +26,7 @@
 	}
 	tr {
 		display: grid;
-		grid-template-columns: 160px 80px 384px;
+		grid-template-columns: 80px 160px 384px;
 		justify-content: space-between;
 		padding: 8px;
 		border-radius: 8px;
@@ -57,7 +62,45 @@
 			background-color: var(--shadow);
 		}
 	}
+	&-root {
+		padding: 0;
+	}
 	&-content {
 		height: 100%;
+	}
+}
+
+@media (max-width: 1167px) {
+	.archive-table {
+		overflow: unset;
+		thead {
+			top: 80px;
+		}
+	}
+}
+
+@media (max-width: 751px) {
+	.archive-table {
+		thead {
+			top: 64px;
+		}
+	}
+}
+
+@media (max-width: 740px) {
+	.archive-table {
+		tr {
+			grid-template-columns: 80px 120px 384px;
+		}
+	}
+}
+@media (max-width: 680px) {
+	.archive-table {
+		tr {
+			grid-template-columns: 80px 120px 1fr;
+		}
+		ul {
+			flex-wrap: wrap;
+		}
 	}
 }

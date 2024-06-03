@@ -27,15 +27,18 @@ export const ArchiveTable = ({
 			)
 		})
 	return (
-		<Layout classNameLayoutContent='archive-table-content'>
+		<Layout
+			classNameLayoutRoot='archive-table-root'
+			classNameLayoutContent='archive-table-content'
+		>
 			<table className='archive-table'>
 				<thead>
 					<tr>
 						<th>
-							<p>Дата</p>
+							<p>Тираж</p>
 						</th>
 						<th>
-							<p>Тираж</p>
+							<p>Дата</p>
 						</th>
 						<th>
 							<p>Выпавшие числа</p>
@@ -51,10 +54,10 @@ export const ArchiveTable = ({
 								onClick={() => onClickTableRow(indexRow)}
 							>
 								<td>
-									<p>{date}</p>
+									<p>{idEdition}</p>
 								</td>
 								<td>
-									<p>{idEdition}</p>
+									<p>{date}</p>
 								</td>
 								<td>
 									<ul>{droppedNumsBlock(droppedNums)}</ul>

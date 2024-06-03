@@ -19,22 +19,24 @@ export const EditionInfoDroppedNums = ({
 	const { first: numsFirstField, second: numsSecondField } = droppedNums
 	return (
 		<SidebarField title='Выпавшие числа'>
-			<TicketField
-				variantField='first'
-				labelField='Поле 1'
-				cellsListField={numsFirstField.map(num => ({
-					numCell: num,
-					variantCell: 'coin',
-				}))}
-			/>
-			<TicketField
-				variantField='second'
-				labelField='Поле 1'
-				cellsListField={numsSecondField.map(num => ({
-					numCell: num,
-					variantCell: 'coin',
-				}))}
-			/>
+			<span className='editionInfo-fieldList'>
+				<TicketField
+					variantField='first'
+					labelField='Поле 1'
+					cellsListField={numsFirstField.map(num => ({
+						numCell: num,
+						variantCell: 'coin',
+					}))}
+				/>
+				<TicketField
+					variantField='second'
+					labelField='Поле 2'
+					cellsListField={numsSecondField.map(num => ({
+						numCell: num,
+						variantCell: 'coin',
+					}))}
+				/>
+			</span>
 			<DescriptionRow
 				description='Участвующие билеты'
 				count={participatingTickets}

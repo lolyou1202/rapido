@@ -9,6 +9,11 @@
 			gap: 16px;
 		}
 	}
+	&-fieldList {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
 	&-empty {
 		display: flex;
 		flex-direction: column;
@@ -25,6 +30,28 @@
 			color: var(--gray);
 			text-transform: uppercase;
 			user-select: none;
+		}
+	}
+}
+@media (max-width: 1167px) {
+	.drawerContainer {
+		.editionInfo {
+			&-fieldList {
+				flex-direction: row;
+				.ticket__field:nth-child(1) {
+					width: 100%;
+				}
+				.ticket__field:nth-child(2) {
+					.ticket__field {
+						&-header {
+							gap: 0;
+						}
+						&-grid {
+							grid-template-columns: auto;
+						}
+					}
+				}
+			}
 		}
 	}
 }

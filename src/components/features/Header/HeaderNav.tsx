@@ -47,9 +47,11 @@ export const HeaderNav = ({
 				{headerButtons.map(button => {
 					const { name, icon, label } = button
 					return (
-						<li onClick={() => onClick({ name, variant })}>
+						<li
+							key={name}
+							onClick={() => onClick({ name, variant })}
+						>
 							<HeaderButton
-								key={name}
 								action={location.pathname === `/${name}`}
 								icon={icon}
 								label={label}

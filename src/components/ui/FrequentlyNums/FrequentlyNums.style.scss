@@ -1,0 +1,149 @@
+.frequentlyNums {
+	&-list {
+		display: flex;
+		justify-content: space-between;
+		&-root {
+			padding: 24px 16px !important;
+		}
+		&-content {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+		&-field {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			p {
+				font-size: 14px;
+				line-height: 16px;
+				color: var(--white);
+				user-select: none;
+			}
+			ul {
+				display: flex;
+				gap: 32px;
+				width: 100%;
+			}
+			li {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 8px;
+				&:not(.selected) {
+					button {
+						filter: grayscale(1);
+					}
+				}
+			}
+		}
+	}
+	&-swich {
+		&-content {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			& > span {
+				display: flex;
+				flex-direction: column;
+				flex-shrink: 0;
+			}
+			& > div {
+				display: flex;
+				flex-direction: column;
+				gap: 16px;
+				width: 100%;
+			}
+			p {
+				font-size: 14px;
+				line-height: 16px;
+				color: var(--white);
+				user-select: none;
+			}
+		}
+	}
+}
+
+@media (max-width: 1167px) {
+	.frequentlyNums {
+		&-list {
+			gap: 128px;
+			&-field {
+				width: 100%;
+				&:nth-child(2) {
+					width: auto;
+				}
+				ul {
+					justify-content: space-between;
+				}
+			}
+		}
+		&-swich {
+			&-content {
+				flex-direction: row;
+				button {
+					width: 100%;
+				}
+				& > div {
+					flex-direction: row;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 919px) {
+	.frequentlyNums {
+		&-list {
+			gap: 32px;
+			&-field {
+				ul {
+					justify-content: flex-start;
+					flex-wrap: wrap;
+				}
+			}
+		}
+		&-swich {
+			&-content {
+				flex-direction: row;
+				& > div {
+					width: 100%;
+					flex-direction: column;
+				}
+			}
+		}
+	}
+}
+@media (max-width: 579px) {
+	.frequentlyNums {
+		&-list {
+			gap: 32px;
+			&-field {
+				ul {
+					gap: 16px;
+				}
+			}
+		}
+		&-swich {
+			&-content {
+				flex-direction: column;
+				& > span {
+					flex-direction: row;
+					gap: 4px;
+				}
+			}
+		}
+	}
+}
+@media (max-width: 439px) {
+	.frequentlyNums {
+		&-swich {
+			&-content {
+				& > span {
+					flex-direction: column;
+					gap: 0px;
+				}
+			}
+		}
+	}
+}
