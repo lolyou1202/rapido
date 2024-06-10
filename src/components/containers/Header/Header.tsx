@@ -1,8 +1,9 @@
 import './Header.style.scss'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { HeaderNav } from './HeaderNav'
-import { Burger } from '../../icons/Burger'
+import { Logo } from '../../ui/Logo/Logo'
+import { HeaderNav } from '../../ui/HeaderNav/HeaderNav'
+import { HeaderBurger } from '../../ui/Button/HeaderBurger/HeaderBurger'
 import { MobileDrawer } from '../../ui/MobileDrawer/MobileDrawer'
 
 export type NavigationVariant = 'desktop' | 'mobile'
@@ -30,14 +31,10 @@ export const Header = () => {
 	}
 
 	return (
-		<div className='header'>
-			<h2 className='header-logo' onClick={handleClickLogo}>
-				Rapido
-			</h2>
+		<header className='header'>
+			<Logo onClick={handleClickLogo} />
 			<HeaderNav variant='desktop' onClick={handleClickNavButton} />
-			<span className='header-burger' onClick={toggleDrawer}>
-				<Burger />
-			</span>
+			<HeaderBurger onClick={toggleDrawer} />
 			<MobileDrawer
 				anchor='right'
 				open={isOpenDrawer}
@@ -45,6 +42,6 @@ export const Header = () => {
 			>
 				<HeaderNav variant='mobile' onClick={handleClickNavButton} />
 			</MobileDrawer>
-		</div>
+		</header>
 	)
 }

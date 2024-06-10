@@ -5,20 +5,24 @@ import {
 } from '../../../constants/settings'
 import { useState } from 'react'
 import { useAppDispatch } from '../../../redux/hooks/useAppRedux'
+import { Modifire } from '../../../types/ticketTypes'
 import {
 	clearAllTickets,
 	randomFillSeveralTickets,
+	setModifier,
 } from '../../../redux/slices/gameSlice'
 import { Layout } from '../../ui/Layout/Layout'
+import { Modifier } from '../../ui/Modifier/Modifier'
 import { DescriptionRow } from '../../ui/DescriptionRow/DescriptionRow'
 import { DefaultButton } from '../../ui/Button/DefaultButton/DefaultButton'
-import { Modifier } from '../../ui/Modifier/Modifier'
 import { CounterRow } from '../../ui/CounterRow/CounterRow'
 
 export const Controls = ({
 	numCorrectTicket,
+	curentModifier,
 }: {
 	numCorrectTicket: number
+	curentModifier: Modifire
 }) => {
 	const [countToFill, setCountToFill] = useState(1)
 
@@ -37,6 +41,9 @@ export const Controls = ({
 	const handleClickFillTicketsButton = () => {
 		dispatch(randomFillSeveralTickets({ countToFill }))
 	}
+	const handleClickModifier = (newModifier: Modifire) => {
+		dispatch(setModifier({ newModifier }))
+	}
 
 	return (
 		<Layout
@@ -44,7 +51,10 @@ export const Controls = ({
 			classNameLayoutRoot='controls'
 			classNameLayoutContent='controls-content'
 		>
-			<Modifier />
+			<Modifier
+				curentModifier={curentModifier}
+				onClickModifier={handleClickModifier}
+			/>
 			<CounterRow
 				description='Случайно заполнить'
 				countToFill={countToFill}
@@ -57,7 +67,7 @@ export const Controls = ({
 				description='Заполненных билетов'
 				count={numCorrectTicket}
 			/>
-			<div className='controls-buttons'>
+			<span className='controls-buttons'>
 				<DefaultButton
 					action={false}
 					label='Заполнить'
@@ -69,7 +79,7 @@ export const Controls = ({
 					label='Очистить все'
 					onClick={handleClickClearAllTicketsButton}
 				/>
-			</div>
+			</span>
 		</Layout>
 	)
 }

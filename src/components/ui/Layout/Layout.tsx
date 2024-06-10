@@ -15,9 +15,9 @@ export const Layout = ({
 	const layoutRootCN = classNames('layout-root', classNameLayoutRoot)
 	const layoutContentCN = classNames('layout-content', classNameLayoutContent)
 	return (
-		<div className={layoutRootCN}>
+		<article className={layoutRootCN}>
 			{title && <p className='layout-title'>{title}</p>}
 			<div className={layoutContentCN}>{children}</div>
-		</div>
+		</article>
 	)
 }

@@ -1,6 +1,6 @@
-import './SliderRules.style.scss'
+import './RulesSlide.style.scss'
 
-export const SliderRulesSlide = ({
+export const RulesSlide = ({
 	numSlide,
 	titleSlide,
 	descriptionSlide,
@@ -14,17 +14,17 @@ export const SliderRulesSlide = ({
 	buttonSlide?: React.ReactNode
 }) => {
 	return (
-		<div className='sliderRules'>
-			<div className='sliderRules-demo'>
-				<span style={{ width: '400px' }}>{demoSlide}</span>
+		<div className='rulesSlide'>
+			<div className='rulesSlide-demo'>
+				<span>{demoSlide}</span>
 			</div>
-			<div className='sliderRules__step'>
+			<div className='rulesSlide__step'>
 				<span>
-					<span className='sliderRules__step-title'>
+					<span className='rulesSlide__step-title'>
 						<p>{numSlide}.</p>
 						<p>{titleSlide}</p>
 					</span>
-					<p className='sliderRules__step-description'>
+					<p className='rulesSlide__step-description'>
 						{descriptionSlide}
 					</p>
 					{buttonSlide}

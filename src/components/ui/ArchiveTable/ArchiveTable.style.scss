@@ -1,14 +1,15 @@
 .archive-table {
 	display: grid;
+	grid-template-rows: auto 1fr;
 	width: 100%;
 	height: 100%;
 	overflow: scroll;
 	thead {
 		position: sticky;
-		top: 64px;
 		padding: 16px;
 		background-color: var(--dark);
-		border-radius: 12px;
+		border-bottom: 2px dashed var(--shadow);
+		border-radius: 12px 12px 0 0;
 		tr {
 			align-items: center;
 			text-transform: uppercase;
@@ -16,7 +17,7 @@
 	}
 	tbody {
 		overflow: scroll;
-		padding: 0px 16px 16px 16px;
+		padding: 16px;
 		tr {
 			cursor: pointer;
 			&:hover {
@@ -74,7 +75,7 @@
 	.archive-table {
 		overflow: unset;
 		thead {
-			top: 80px;
+			top: 79px;
 		}
 	}
 }
@@ -82,7 +83,7 @@
 @media (max-width: 751px) {
 	.archive-table {
 		thead {
-			top: 64px;
+			top: 63px;
 		}
 	}
 }

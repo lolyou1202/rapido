@@ -1,10 +1,11 @@
+import './HeaderNav.style.scss'
 import classNames from 'classnames'
-import { NavigationVariant } from './Header'
+import { NavigationVariant } from '../../containers/Header/Header'
 import { useLocation } from 'react-router-dom'
 import { Folder } from '../../icons/Folder'
 import { Rules } from '../../icons/Rules'
 import { Ticket } from '../../icons/Ticket'
-import { HeaderButton } from '../../ui/Button/HeaderButton/HeaderButton'
+import { HeaderButton } from '../Button/HeaderButton/HeaderButton'
 
 const headerButtons = [
 	{

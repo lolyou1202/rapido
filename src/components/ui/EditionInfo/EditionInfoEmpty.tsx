@@ -1,5 +1,5 @@
-import { ArrowBoldLeft } from '../../icons/ArrowBoldLeft'
 import { Layout } from '../Layout/Layout'
+import { ArrowBoldLeft } from '../../icons/ArrowBoldLeft'
 
 export const EditionInfoEmpty = () => {
 	return (

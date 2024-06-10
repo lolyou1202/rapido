@@ -30,6 +30,9 @@
 		button {
 			width: 100%;
 		}
+		svg {
+			fill: var(--white);
+		}
 	}
 	&-title {
 		font-size: 14px;

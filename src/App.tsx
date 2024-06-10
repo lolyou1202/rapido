@@ -1,10 +1,10 @@
-import { Header } from './components/features/Header/Header'
+import { Header } from './components/containers/Header/Header'
 
 function App({ page }: { page: React.ReactNode }) {
 	return (
 		<div className='app'>
 			<Header />
-			<div className='main'>{page}</div>
+			<main className='main'>{page}</main>
 		</div>
 	)
 }

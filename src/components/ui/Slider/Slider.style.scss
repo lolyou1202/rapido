@@ -1,6 +1,5 @@
 .slider {
-	background-color: var(--dark);
-	border-radius: 12px;
+	height: 100%;
 	&-root {
 		padding-bottom: 56px !important;
 		width: calc(100% - 64px - 64px);
@@ -49,5 +48,14 @@
 		gap: 8px;
 		width: auto !important;
 		height: auto;
+	}
+}
+
+@media (max-width: 967px) {
+	.swiper-horizontal {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		margin: 0 !important;
 	}
 }

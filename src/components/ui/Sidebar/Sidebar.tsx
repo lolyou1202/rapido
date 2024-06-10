@@ -9,5 +9,5 @@ export const Sidebar = ({
 	children?: React.ReactNode
 }) => {
 	const siedebarCN = classNames('sidebar', classNameSidebar)
-	return <div className={siedebarCN}>{children}</div>
+	return <aside className={siedebarCN}>{children}</aside>
 }

@@ -13,7 +13,7 @@ const { white } = colorTokens
 
 export const Slider = ({ sliderList }: { sliderList: React.ReactNode[] }) => {
 	return (
-		<div style={{ height: '100%' }}>
+		<div className='slider'>
 			<DefaultButton
 				action={false}
 				className='slider-navigationButton slider-prevButton'

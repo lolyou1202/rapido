@@ -5,6 +5,7 @@
 	height: calc(100vh - 80px - 16px);
 	background-color: var(--dark);
 	border-radius: 12px;
+	margin-bottom: 16px;
 	&-header {
 		display: flex;
 		align-items: center;
@@ -20,5 +21,11 @@
 	}
 	&-main {
 		height: 100%;
+	}
+}
+
+@media (max-width: 967px) {
+	.rules {
+		height: auto;
 	}
 }

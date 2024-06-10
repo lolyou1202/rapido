@@ -2,7 +2,7 @@ import './Tickets.style.scss'
 import { colorTokens } from '../../constants/colorTokens'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/useAppRedux'
 import { useEffect, useState } from 'react'
-import { Ticket } from '../../components/ui/Ticket/Ticket/Ticket'
+import { Ticket } from '../../components/containers/Ticket/Ticket'
 import { DefaultButton } from '../../components/ui/Button/DefaultButton/DefaultButton'
 import { Add } from '../../components/icons/Add'
 import { findCorrectTickets } from '../../hooks/findCorrectTickets'
@@ -12,7 +12,7 @@ import {
 	createEdition,
 	setGameStage,
 } from '../../redux/slices/gameSlice'
-import { Controls } from '../../components/features/Controls/Controls'
+import { Controls } from '../../components/containers/Controls/Controls'
 import { getNumCorrectTickets } from '../../hooks/numCorrectTickets'
 import { EditionInfo } from '../../components/ui/EditionInfo/EditionInfo'
 import { BottomBar } from '../../components/ui/BottomBar/BottomBar'
@@ -23,7 +23,9 @@ import { useWindowSize } from '../../hooks/useWindowSize'
 const { white } = colorTokens
 
 export const Tickets = () => {
-	const { ticketsList, gameStage } = useAppSelector(state => state.game)
+	const { ticketsList, gameStage, modifier } = useAppSelector(
+		state => state.game
+	)
 
 	const lastEdition = useAppSelector(state => state.game.editionsList[0])
 
@@ -57,13 +59,12 @@ export const Tickets = () => {
 
 	return (
 		<>
-			<div className='tickets-layout'>
+			<section className='tickets-layout'>
 				<span>
 					<div className='tickets-ticketList'>
 						{ticketsList.map(ticket => (
 							<Ticket
 								key={ticket.idTicket}
-								gameStage={gameStage}
 								ticketState={ticket}
 							/>
 						))}
@@ -79,7 +80,10 @@ export const Tickets = () => {
 					<Sidebar>
 						{gameStage === 'fillTickets' && (
 							<>
-								<Controls numCorrectTicket={numCorrectTicket} />
+								<Controls
+									numCorrectTicket={numCorrectTicket}
+									curentModifier={modifier}
+								/>
 								<DefaultButton
 									action
 									disabled={correctTicketIdList.length < 1}
@@ -100,7 +104,7 @@ export const Tickets = () => {
 						)}
 					</Sidebar>
 				</span>
-			</div>
+			</section>
 			<BottomBar>
 				{gameStage === 'fillTickets' && (
 					<>
@@ -137,7 +141,10 @@ export const Tickets = () => {
 				onClose={toggleDrawer}
 			>
 				{gameStage === 'fillTickets' && (
-					<Controls numCorrectTicket={numCorrectTicket} />
+					<Controls
+						numCorrectTicket={numCorrectTicket}
+						curentModifier={modifier}
+					/>
 				)}
 				{gameStage === 'viewResults' && (
 					<EditionInfo edition={lastEdition} />

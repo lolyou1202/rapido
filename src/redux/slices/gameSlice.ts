@@ -13,6 +13,7 @@ import {
 	CellNum,
 	FieldState,
 	FieldVariant,
+	Modifire,
 	TicketId,
 	TicketState,
 } from '../../types/ticketTypes'
@@ -38,10 +39,10 @@ import 'moment/dist/locale/ru'
 
 export interface InitialState {
 	ticketsList: TicketState[]
+	modifier: Modifire
 	editionsList: Edition[]
 	gameRulesBlocks: {
 		ticket: TicketState
-		controls: {}
 	}
 	gameStage: GameStage
 }
@@ -50,6 +51,7 @@ const initialState: InitialState = {
 	ticketsList: generateDefaultTicketsIdList.map(id =>
 		generateEmptyTicket({ idTicket: id })
 	),
+	modifier: 'random',
 	editionsList: [
 		{
 			idEdition: 339371,
@@ -432,7 +434,6 @@ const initialState: InitialState = {
 	],
 	gameRulesBlocks: {
 		ticket: generateEmptyTicket({ idTicket: 1111 }),
-		controls: {},
 	},
 	gameStage: 'fillTickets',
 }
@@ -513,6 +514,13 @@ export const gameSlice = createSlice({
 			}
 
 			correctTicketReducer({ state, idTicket })
+		},
+		setModifier: (
+			state,
+			{ payload }: PayloadAction<{ newModifier: Modifire }>
+		) => {
+			const { newModifier } = payload
+			state.modifier = newModifier
 		},
 		clearTicket: (
 			state,
@@ -742,6 +750,7 @@ const { actions, reducer } = gameSlice
 export const {
 	setVariantCell,
 	setCorrectTicket,
+	setModifier,
 	clearTicket,
 	randomFillTicket,
 	deleteTicket,

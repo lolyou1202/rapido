@@ -32,3 +32,10 @@ export type TicketState = {
 	isCorrectTicket: TicketCorrect
 	fieldsTicket: TicketFields
 }
+
+export type Modifire =
+	| 'random'
+	| 'evenNumbers'
+	| 'oddNumbers'
+	| 'upperHalf'
+	| 'lowerHalf'

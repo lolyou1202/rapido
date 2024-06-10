@@ -16,7 +16,7 @@ export const HeaderButton = ({
 	return (
 		<button className={headerButtonCN} onClick={onClick}>
 			<span className='headerButton-icon'>{icon}</span>
-			<p className='headerButton-label'>{label}</p>
+			<span className='headerButton-label'>{label}</span>
 		</button>
 	)
 }

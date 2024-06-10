@@ -4,7 +4,7 @@ import {
 	EditionWiningTickets,
 } from '../../../types/editionTypes'
 import { DescriptionRow } from '../DescriptionRow/DescriptionRow'
-import { TicketField } from '../Ticket/TicketField/TicketField'
+import { TicketField } from '../TicketField/TicketField'
 import { SidebarField } from '../SidebarField/SidebarField'
 
 export const EditionInfoDroppedNums = ({

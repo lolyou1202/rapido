@@ -7,12 +7,12 @@ import {
 	FieldLabel,
 	FieldNumSelectedCells,
 	FieldVariant,
-} from '../../../../types/ticketTypes'
-import { Check } from '../../../icons/Check'
-import { Cross } from '../../../icons/Cross'
-import { CircleDashedButton } from '../../Button/CircleDashedButton/CircleDashedButton'
+} from '../../../types/ticketTypes'
+import { Check } from '../../icons/Check'
+import { Cross } from '../../icons/Cross'
+import { CircleDashedButton } from '../Button/CircleDashedButton/CircleDashedButton'
 import { ProgressBar } from '../ProgressBar/ProgressBar'
-import { NUM_SELECTED_CELLS_FIRST_FIELD } from '../../../../constants/settings'
+import { NUM_SELECTED_CELLS_FIRST_FIELD } from '../../../constants/settings'
 
 export const TicketField = ({
 	variantField,
@@ -72,22 +72,25 @@ export const TicketField = ({
 					: undefined}
 			</div>
 			<div className='ticket__field-grid'>
-				{cellsListField.map(cell => (
-					<CircleDashedButton
-						key={cell.numCell}
-						label={`${cell.numCell}`}
-						variant={cell.variantCell}
-						onClick={
-							onClickCell
-								? () =>
-										onClickCell({
-											numCell: cell.numCell - 1,
-											variantField,
-										})
-								: undefined
-						}
-					/>
-				))}
+				{cellsListField.map(cell => {
+					const { numCell, variantCell } = cell
+					return (
+						<CircleDashedButton
+							key={numCell}
+							label={`${numCell}`}
+							variant={variantCell}
+							onClick={
+								onClickCell
+									? () =>
+											onClickCell({
+												numCell: numCell - 1,
+												variantField,
+											})
+									: undefined
+							}
+						/>
+					)
+				})}
 			</div>
 		</div>
 	)

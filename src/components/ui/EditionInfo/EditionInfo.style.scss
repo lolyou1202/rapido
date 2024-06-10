@@ -35,20 +35,17 @@
 }
 @media (max-width: 1167px) {
 	.drawerContainer {
-		.editionInfo {
-			&-fieldList {
-				flex-direction: row;
-				.ticket__field:nth-child(1) {
-					width: 100%;
-				}
-				.ticket__field:nth-child(2) {
-					.ticket__field {
-						&-header {
-							gap: 0;
-						}
-						&-grid {
-							grid-template-columns: auto;
-						}
+		.editionInfo-fieldList {
+			.ticket__field:nth-child(1) {
+				width: 100%;
+			}
+			.ticket__field:nth-child(2) {
+				.ticket__field {
+					&-header {
+						gap: 0;
+					}
+					&-grid {
+						grid-template-columns: auto;
 					}
 				}
 			}

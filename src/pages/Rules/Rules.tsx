@@ -1,17 +1,47 @@
 import './Rules.style.scss'
 import { Slider } from '../../components/ui/Slider/Slider'
-import { SliderRulesSlide } from '../../components/ui/Slider/Slides/SliderRulesSlide'
-import { Ticket } from '../../components/ui/Ticket/Ticket/Ticket'
-import { useAppSelector } from '../../redux/hooks/useAppRedux'
+import { RulesSlide } from '../../components/ui/Slider/Slides/RulesSlide'
+import { Ticket } from '../../components/containers/Ticket/Ticket'
 import { DefaultButton } from '../../components/ui/Button/DefaultButton/DefaultButton'
 import { useNavigate } from 'react-router-dom'
-import { Controls } from '../../components/features/Controls/Controls'
+import { Controls } from '../../components/containers/Controls/Controls'
+import { generateEmptyTicket } from '../../hooks/generateEmptyTicket'
+
+const slidesInfo = [
+	{
+		title: 'Выберите числа в билете',
+		description:
+			'8 чисел в первом поле и 1 число во втором. При помощи функции СЛУЧАЙНО билет автоматически заполнится случайным образом',
+		demo: <Ticket ticketState={generateEmptyTicket({ idTicket: 1111 })} />,
+		textButton: 'Выбрать числа',
+	},
+	{
+		title: 'Заполните несколько билетов',
+		description:
+			'Заполните самостоятельно или выберите нужное количество билетов, которые это сделают автоматически, нажав на кнопку ЗАПОЛНИТЬ',
+		demo: <Controls numCorrectTicket={4} curentModifier='random' />,
+		textButton: 'Заполнить билет',
+	},
+	{
+		title: 'Выпустите тираж',
+		description:
+			'Если ваши билеты готовы к игре, то нажмите на кнопку ВЫПУСТИТЬ ТИРАЖ и проверяйте какие из них смогли выиграть',
+		demo: (
+			<div className='sidebar'>
+				<Controls numCorrectTicket={4} curentModifier='random' />
+				<DefaultButton
+					action
+					disabled={false}
+					label='Выпустить тираж'
+				/>
+			</div>
+		),
+		textButton: 'Выпустить тираж',
+	},
+]
 
 export const Rules = () => {
-	const ticket = useAppSelector(state => state.game.gameRulesBlocks.ticket)
-
 	const navigate = useNavigate()
-
 	return (
 		<div className='rules'>
 			<span className='rules-header'>
@@ -19,56 +49,24 @@ export const Rules = () => {
 			</span>
 			<span className='rules-main'>
 				<Slider
-					sliderList={[
-						<SliderRulesSlide
-							numSlide={1}
-							titleSlide='Выберите числа в билете'
-							descriptionSlide='8 чисел в первом поле и 1 число во втором. При помощи функции СЛУЧАЙНО билет автоматически заполнится случайным образом'
-							demoSlide={<Ticket ticketState={ticket} />}
-							buttonSlide={
-								<DefaultButton
-									action
-									label='Выбрать числа'
-									onClick={() => navigate('/tickets')}
-								/>
-							}
-						/>,
-						<SliderRulesSlide
-							numSlide={2}
-							titleSlide='Заполните несколько билетов'
-							descriptionSlide='Заполните самостоятельно или выберите нужное количество билетов, которые это сделают автоматически, нажав на кнопку ЗАПОЛНИТЬ'
-							demoSlide={<Controls numCorrectTicket={4} />}
-							buttonSlide={
-								<DefaultButton
-									action
-									label='Заполнить билет'
-									onClick={() => navigate('/tickets')}
-								/>
-							}
-						/>,
-						<SliderRulesSlide
-							numSlide={3}
-							titleSlide='Выпустите тираж'
-							descriptionSlide='Если ваши билеты готовы к игре, то нажмите на кнопку ВЫПУСТИТЬ ТИРАЖ и проверяйте какие из них смогли выиграть'
-							demoSlide={
-								<div className='sidebarTicketsGrid'>
-									<Controls numCorrectTicket={4} />
+					sliderList={slidesInfo.map((slide, index) => {
+						const { title, description, demo, textButton } = slide
+						return (
+							<RulesSlide
+								numSlide={index}
+								titleSlide={title}
+								descriptionSlide={description}
+								demoSlide={demo}
+								buttonSlide={
 									<DefaultButton
 										action
-										disabled={false}
-										label='Выпустить тираж'
+										label={textButton}
+										onClick={() => navigate('/tickets')}
 									/>
-								</div>
-							}
-							buttonSlide={
-								<DefaultButton
-									action
-									label='Выпустить тираж'
-									onClick={() => navigate('/tickets')}
-								/>
-							}
-						/>,
-					]}
+								}
+							/>
+						)
+					})}
 				/>
 			</span>
 		</div>

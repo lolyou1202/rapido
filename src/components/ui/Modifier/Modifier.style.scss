@@ -12,9 +12,11 @@
 		display: flex;
 		gap: 16px;
 	}
-	&-item {
+	&-button {
 		display: flex;
 		height: 32px;
+		background: none;
+		border: none;
 		pointer-events: all;
 		cursor: pointer;
 		svg {
@@ -22,6 +24,11 @@
 			transition: all 0.2s ease-in-out;
 		}
 		&:hover {
+			svg {
+				fill: var(--gray);
+			}
+		}
+		&.active {
 			svg {
 				fill: var(--gray);
 			}

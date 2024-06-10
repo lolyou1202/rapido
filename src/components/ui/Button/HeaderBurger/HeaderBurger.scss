@@ -1,0 +1,13 @@
+.headerBurger {
+	display: none;
+	background: none;
+	border: none;
+	stroke: var(--white);
+	cursor: pointer;
+}
+
+@media (max-width: 751px) {
+	.headerBurger {
+		display: flex !important;
+	}
+}

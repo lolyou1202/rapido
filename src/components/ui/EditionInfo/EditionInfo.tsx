@@ -16,7 +16,7 @@ export const EditionInfo = ({ edition }: { edition: Edition }) => {
 		winingCombinations,
 		droppedNums,
 	} = edition
-
+	
 	const [showField, setShowField] = useState<
 		'droppedNums' | 'winingCobinations'
 	>('droppedNums')
@@ -25,34 +25,32 @@ export const EditionInfo = ({ edition }: { edition: Edition }) => {
 		<Layout
 			title={`Тираж №${idEdition}`}
 			classNameLayoutContent='editionInfo-content'
-		>
+			>
 			<DescriptionRow description='Дата тиража' count={date} />
-			<span>
-				{showField === 'droppedNums' && (
-					<>
-						<EditionInfoDroppedNums
-							numWiningTickets={numWiningTickets}
-							participatingTickets={participatingTickets}
-							droppedNums={droppedNums}
-						/>
-						<DefaultButton
-							label='Выигранные комбинации'
-							onClick={() => setShowField('winingCobinations')}
-						/>
-					</>
-				)}
-				{showField === 'winingCobinations' && (
-					<>
-						<EditionInfoWiningCobinations
-							winingCombinations={winingCombinations}
-						/>
-						<DefaultButton
-							label='Выпавшие числа'
-							onClick={() => setShowField('droppedNums')}
-						/>
-					</>
-				)}
-			</span>
+			{showField === 'droppedNums' && (
+				<span>
+					<EditionInfoDroppedNums
+						numWiningTickets={numWiningTickets}
+						participatingTickets={participatingTickets}
+						droppedNums={droppedNums}
+					/>
+					<DefaultButton
+						label='Выигранные комбинации'
+						onClick={() => setShowField('winingCobinations')}
+					/>
+				</span>
+			)}
+			{showField === 'winingCobinations' && (
+				<span>
+					<EditionInfoWiningCobinations
+						winingCombinations={winingCombinations}
+					/>
+					<DefaultButton
+						label='Выпавшие числа'
+						onClick={() => setShowField('droppedNums')}
+					/>
+				</span>
+			)}
 		</Layout>
 	)
 }

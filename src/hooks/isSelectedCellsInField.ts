@@ -5,7 +5,7 @@ export const isSelectedCellsInField = ({
 }: {
 	fieldsTicket: TicketFields
 }) => {
-	return Object.values(fieldsTicket).reduce((isSelected, field) => {
-		return isSelected || field.numSelectedCellsField > 0
-	}, false)
+	return Object.values(fieldsTicket).some(
+		field => field.numSelectedCellsField > 0
+	)
 }

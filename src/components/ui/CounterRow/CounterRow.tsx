@@ -1,11 +1,7 @@
-import { colorTokens } from '../../../constants/colorTokens'
+import './CounterRow.style.scss'
+import { DefaultButton } from '../Button/DefaultButton/DefaultButton'
 import { Minus } from '../../icons/Minus'
 import { Plus } from '../../icons/Plus'
-import { DefaultButton } from '../Button/DefaultButton/DefaultButton'
-import './CounterRow.style.scss'
-
-
-const { white } = colorTokens
 
 export const CounterRow = ({
 	description,
@@ -29,14 +25,14 @@ export const CounterRow = ({
 				<DefaultButton
 					action={false}
 					disabled={countToFill === minAdd}
-					icon={<Minus color={white} />}
+					icon={<Minus  />}
 					onClick={onClickMinus}
 				/>
 				<p>{countToFill}</p>
 				<DefaultButton
 					action={false}
 					disabled={countToFill === maxAdd}
-					icon={<Plus color={white} />}
+					icon={<Plus  />}
 					onClick={onClickPlus}
 				/>
 			</span>

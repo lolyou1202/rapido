@@ -3,11 +3,10 @@ import classNames from 'classnames'
 
 export const DefaultButton = ({
 	action,
-	disabled,
 	icon,
 	label,
 	className,
-	onClick,
+	...others
 }: {
 	action?: boolean
 	disabled?: boolean
@@ -20,13 +19,9 @@ export const DefaultButton = ({
 		action: action,
 	})
 	return (
-		<button
-			className={defaultButtonCN}
-			disabled={disabled}
-			onClick={onClick}
-		>
+		<button className={defaultButtonCN} {...others}>
 			{icon && <span className='defaultButton-icon'>{icon}</span>}
-			{label && <p className='defaultButton-label'>{label}</p>}
+			{label && <span className='defaultButton-label'>{label}</span>}
 		</button>
 	)
 }
